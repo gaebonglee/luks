@@ -1,0 +1,62 @@
+@import "../common.scss";
+
+table {
+  width: 100%;
+  border: 0;
+  border-spacing: 0;
+  border-collapse: collapse;
+  border-color: white;
+}
+
+tbody {
+  display: table-row-group;
+  vertical-align: middle;
+  border-color: inherit;
+}
+
+tr {
+  display: table-row;
+  vertical-align: inherit;
+  border-color: inherit;
+}
+
+th {
+  padding: 12px 0;
+  color: $black;
+  text-align: left;
+  font-weight: $weight2;
+  width: 150px;
+}
+
+.input_td {
+  vertical-align: top;
+  padding: 10px;
+  color: #666;
+  input[type="text"] {
+    width: 100%;
+    height: 40px;
+    padding: 8px;
+    font-size: 14px;
+    line-height: 13px;
+    font-weight: inherit;
+    color: #353535;
+    border: 1px solid #d7d5d5;
+    border-radius: 0px;
+    outline-style: none;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+}
+
+
+.join_guide {
+  padding-left: 10px;
+  font-size: 14px;
+  vertical-align: middle;
+  p {
+    display: flex;
+  }
+  .conditionWrap {
+    padding-left: 10px;
+  }
+}

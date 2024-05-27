@@ -1,0 +1,46 @@
+@import "../common.scss";
+
+.right_section {
+  width: 100%;
+}
+
+.recentOrder_title {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 10px;
+  border-bottom: 2px solid black;
+  p {
+    font-size: $h3;
+    font-weight: $weight1;
+  }
+}
+
+.recentOrder_title_more {
+  display: flex;
+  align-items: center;
+}
+.recentOrder_category {
+  ul {
+    padding: 10px 0;
+    display: flex;
+    font-size: 14px;
+    .date {
+      width: 110px;
+      text-align: center;
+    }
+    .history {
+      width: calc(100% - 440px);
+      text-align: center;
+    }
+    .num {
+      width: 210px;
+      text-align: center;
+    }
+    .amount {
+      width: 120px;
+      padding-right: 20px;
+      text-align: right;
+    }
+  }
+  border-bottom: 1px solid black;
+}

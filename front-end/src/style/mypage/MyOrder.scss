@@ -1,0 +1,42 @@
+@import "../common.scss";
+
+.myOrder_section {
+  width: 100%;
+}
+
+.myOrder_title {
+  padding-bottom: 10px;
+  border-bottom: 3px solid black;
+  p {
+    font-size: $h3;
+    font-weight: $weight2;
+  }
+}
+
+.myOrder_categry {
+  border-bottom: 2px solid black;
+  ul {
+    padding: 5px 0;
+    display: flex;
+    font-size: 15px;
+  }
+  .productInfo,
+  .deliveryCharge,
+  .process,
+  .review {
+    text-align: center;
+    padding: 10px;
+  }
+  .productInfo {
+    flex: 1 1 0%;
+  }
+  .deliveryCharge {
+    width: min(20%, 140px);
+  }
+  .process {
+    width: min(28%, 200px);
+  }
+  .review {
+    width: min(22%, 223px);
+  }
+}

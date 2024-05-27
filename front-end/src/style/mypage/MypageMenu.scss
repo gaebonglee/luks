@@ -1,0 +1,38 @@
+@import "../common.scss";
+
+.active {
+  font-weight: $weight1;
+}
+
+.left_section {
+  width: 180px;
+  margin-right: 50px;
+}
+.mypageMenu_top {
+  margin-bottom: 38px;
+  p {
+    font-size: $h1;
+    font-weight: $weight2;
+  }
+}
+
+.myOrder,
+.myInfo,
+.myActivity {
+  p {
+    margin-bottom: 8px;
+    font-size: $h4;
+    line-height: 26px;
+    font-weight: 800;
+    color: $black;
+  }
+  ul {
+    margin-bottom: 30px;
+  }
+  a {
+    display: inline-block;
+    padding: 10px 0;
+    font-size: 15px;
+    color: #5d5d5d;
+  }
+}
