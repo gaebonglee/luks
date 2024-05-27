@@ -24,11 +24,13 @@ th {
   padding: 12px 0;
   color: $black;
   text-align: left;
+  font-size: 14px;
   font-weight: $weight2;
-  width: 120px;
+  width: 110px;
 }
 
 .input_td {
+  width: 250px;
   vertical-align: top;
   padding: 10px;
   color: #666;
@@ -55,7 +57,7 @@ th {
 }
 
 .join_guide {
-  font-size: 14px;
+  font-size: 13px;
   vertical-align: middle;
   p {
     display: flex;
@@ -63,7 +65,7 @@ th {
   .conditionWrap {
     padding-left: 10px;
     span {
-      padding-right: 10px;
+      padding-right: 5px;
       a {
         padding-right: 5px;
       }

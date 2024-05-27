@@ -22,16 +22,8 @@ const Join = () => {
                 <td className="join_guide">
                   <p className="id_msg">
                     <div className="conditionWrap">
-                      <span id="id_condition1">
-                        <a>소문자</a>
-                        <FaCheck />
-                      </span>
-                      <span id="id_condition2">
-                        <a>숫자</a>
-                        <FaCheck />
-                      </span>
-                      <span id="id_condition3">
-                        <a>8~16자 이내</a>
+                      <span id="id_condition">
+                        <a>영문 소문자/숫자, 8자~16자</a>
                         <FaCheck />
                       </span>
                     </div>
@@ -53,20 +45,10 @@ const Join = () => {
                   <p className="pw1_msg">
                     <div className="conditionWrap">
                       <span id="pw_condition1">
-                        <a>대소문자</a>
-
-                        <FaCheck />
-                      </span>
-                      <span id="pw_condition2">
-                        <a>숫자</a>
-                        <FaCheck />
-                      </span>
-                      <span id="pw_condition3">
-                        <a>특수문자</a>
-                        <FaCheck />
-                      </span>
-                      <span id="pw_condition4">
-                        <a>8~16자 이내</a>
+                        <a>
+                          영문 대소문자/숫자/특수문자 중 2가지 이상 조함,
+                          8자~16자
+                        </a>
                         <FaCheck />
                       </span>
                     </div>
@@ -83,14 +65,7 @@ const Join = () => {
                   />
                 </td>
                 <td className="join_guide">
-                  <p className="pw2_msg">
-                    <div className="conditionWrap">
-                      <span id="pw_condition5">
-                        <a>비밀번호 일치</a>
-                        <FaCheck />
-                      </span>
-                    </div>
-                  </p>
+                  <p className="pw2_msg"></p>
                 </td>
               </tr>
               <tr>
@@ -105,7 +80,6 @@ const Join = () => {
                   <span id="name_msg"> </span>
                 </td>
               </tr>
-
               <tr>
                 <th scope="row">이메일</th>
                 <td className="input_td">
