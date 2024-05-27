@@ -9,7 +9,7 @@ const Root = () => {
       style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}
     >
       <Header />
-      <div style={{ flexGrow: "1" }}>
+      <div style={{ flexGrow: "1",minHeight: "800px" }}>
         <Outlet />
       </div>
       <Footer />
