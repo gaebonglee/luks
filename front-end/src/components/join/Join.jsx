@@ -1,6 +1,6 @@
 import React from "react";
 import "../../style/join/Join.scss";
-import { IoCheckmarkDone } from "react-icons/io5";
+import { FaCheck } from "react-icons/fa6";
 
 const Join = () => {
   return (
@@ -21,11 +21,19 @@ const Join = () => {
                 </td>
                 <td className="join_guide">
                   <p className="id_msg">
-                    <IoCheckmarkDone />
                     <div className="conditionWrap">
-                      <span id="id_condition1">소문자</span>
-                      <span id="id_condition2">숫자</span>
-                      <span id="id_condition3">8~16자 이내</span>
+                      <span id="id_condition1">
+                        <a>소문자</a>
+                        <FaCheck />
+                      </span>
+                      <span id="id_condition2">
+                        <a>숫자</a>
+                        <FaCheck />
+                      </span>
+                      <span id="id_condition3">
+                        <a>8~16자 이내</a>
+                        <FaCheck />
+                      </span>
                     </div>
                   </p>
                 </td>
@@ -43,12 +51,24 @@ const Join = () => {
                 </td>
                 <td className="join_guide">
                   <p className="pw1_msg">
-                    <IoCheckmarkDone />
                     <div className="conditionWrap">
-                      <span id="pw_condition1">대소문자</span>
-                      <span id="pw_condition2">숫자</span>
-                      <span id="pw_condition3">특수문자</span>
-                      <span id="pw_condition4">8~16자 이내</span>
+                      <span id="pw_condition1">
+                        <a>대소문자</a>
+
+                        <FaCheck />
+                      </span>
+                      <span id="pw_condition2">
+                        <a>숫자</a>
+                        <FaCheck />
+                      </span>
+                      <span id="pw_condition3">
+                        <a>특수문자</a>
+                        <FaCheck />
+                      </span>
+                      <span id="pw_condition4">
+                        <a>8~16자 이내</a>
+                        <FaCheck />
+                      </span>
                     </div>
                   </p>
                 </td>
@@ -64,9 +84,11 @@ const Join = () => {
                 </td>
                 <td className="join_guide">
                   <p className="pw2_msg">
-                    <IoCheckmarkDone />
                     <div className="conditionWrap">
-                      <span id="pw_condition5">비밀번호 일치</span>
+                      <span id="pw_condition5">
+                        <a>비밀번호 일치</a>
+                        <FaCheck />
+                      </span>
                     </div>
                   </p>
                 </td>

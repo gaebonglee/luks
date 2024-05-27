@@ -25,7 +25,7 @@ th {
   color: $black;
   text-align: left;
   font-weight: $weight2;
-  width: 150px;
+  width: 120px;
 }
 
 .input_td {
@@ -46,11 +46,15 @@ th {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
   }
+  input[type="radio"] {
+    margin-right: 5px;
+  }
+  label {
+    margin-right: 15px;
+  }
 }
 
-
 .join_guide {
-  padding-left: 10px;
   font-size: 14px;
   vertical-align: middle;
   p {
@@ -58,5 +62,11 @@ th {
   }
   .conditionWrap {
     padding-left: 10px;
+    span {
+      padding-right: 10px;
+      a {
+        padding-right: 5px;
+      }
+    }
   }
 }
