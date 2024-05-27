@@ -64,33 +64,23 @@ const Header = () => {
                 onMouseEnter={handleMouseEnterLong}
                 onMouseLeave={handleMouseLeave}
               >
-                <a>TOP</a>
+                <Link to={`/category/top`}>TOP</Link>
                 <div className="subCategory">
                   <ul>
                     <li>
-                      <a>
-                        <Link>티셔츠</Link>
-                      </a>
+                      <Link to={`/category/top/티셔츠`}>티셔츠</Link>
                     </li>
                     <li>
-                      <a>
-                        <Link>맨투맨/후드</Link>
-                      </a>
+                      <Link>맨투맨/후드</Link>
                     </li>
                     <li>
-                      <a>
-                        <Link>셔츠</Link>
-                      </a>
+                      <Link>셔츠</Link>
                     </li>
                     <li>
-                      <a>
-                        <Link>블라우스</Link>
-                      </a>
+                      <Link>블라우스</Link>
                     </li>
                     <li>
-                      <a>
-                        <Link>니트</Link>
-                      </a>
+                      <Link>니트</Link>
                     </li>
                   </ul>
                 </div>
@@ -104,29 +94,19 @@ const Header = () => {
                 <div className="subCategory">
                   <ul>
                     <li>
-                      <a>
-                        <Link>데님</Link>
-                      </a>
+                      <Link>데님</Link>
                     </li>
                     <li>
-                      <a>
-                        <Link>팬츠</Link>
-                      </a>
+                      <Link>팬츠</Link>
                     </li>
                     <li>
-                      <a>
-                        <Link>슬랙스</Link>
-                      </a>
+                      <Link>슬랙스</Link>
                     </li>
                     <li>
-                      <a>
-                        <Link>쇼츠</Link>
-                      </a>
+                      <Link>쇼츠</Link>
                     </li>
                     <li>
-                      <a>
-                        <Link>트레이닝 팬츠</Link>
-                      </a>
+                      <Link>트레이닝 팬츠</Link>
                     </li>
                   </ul>
                 </div>
@@ -140,24 +120,16 @@ const Header = () => {
                 <div className="subCategory">
                   <ul>
                     <li>
-                      <a>
-                        <Link>코트</Link>
-                      </a>
+                      <Link>코트</Link>
                     </li>
                     <li>
-                      <a>
-                        <Link>자켓</Link>
-                      </a>
+                      <Link>자켓</Link>
                     </li>
                     <li>
-                      <a>
-                        <Link>가디건</Link>
-                      </a>
+                      <Link>가디건</Link>
                     </li>
                     <li>
-                      <a>
-                        <Link>점퍼</Link>
-                      </a>
+                      <Link>점퍼</Link>
                     </li>
                   </ul>
                 </div>
@@ -171,27 +143,19 @@ const Header = () => {
                 <div className="subCategory">
                   <ul>
                     <li>
-                      <a>
-                        <Link>원피스</Link>
-                      </a>
+                      <Link>원피스</Link>
                     </li>
                     <li>
-                      <a>
-                        <Link>미니 스커트</Link>
-                      </a>
+                      <Link>미니 스커트</Link>
                     </li>
                     <li>
-                      <a>
-                        <Link>미디-롱 스커트</Link>
-                      </a>
+                      <Link>미디-롱 스커트</Link>
                     </li>
                   </ul>
                 </div>
               </li>
               <li className="menu_category_li">
-                <a>
-                  <Link>T-EMPERTURE</Link>
-                </a>
+                <Link>T-EMPERTURE</Link>
               </li>
             </ul>
           </div>

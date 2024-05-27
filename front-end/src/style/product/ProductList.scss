@@ -1,8 +1,8 @@
 @import "../common.scss";
 
 .productList_thumbnailWrap {
-  width: calc(100% - 160px);
-  float: right;
+  width: 100%;
+  padding: $screenPadding;
   margin: 10px 0;
 }
 
@@ -32,12 +32,12 @@
 }
 
 .thumbnail_productName {
-  font-size: 11px;
+  font-size: 14px;
   line-height: 18px;
 }
 
 .thumbnail_productPrice {
-  font-size: 12px;
-  opacity: 0.65;
+  font-size: 13px;
+  color: $gray;
   position: relative;
 }

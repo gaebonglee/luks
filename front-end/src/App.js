@@ -5,8 +5,8 @@ import Home from "./pages/Home";
 import Login from "./components/login/Login";
 import JoinPage from "./pages/JoinPage";
 import Mypage from "./pages/Mypage";
-import ProductList from "./components/product/ProductList";
-import ProductDetail from "./pages/ProductDetail";
+import Category from "./pages/Category";
+import ProductDetail from "./components/product/ProductDetail";
 
 const App = () => {
   return (
@@ -17,7 +17,7 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/join" element={<JoinPage />} />
           <Route path="mypage/*" element={<Mypage />} />
-          <Route path="/product/list" element={<ProductList />} />
+          <Route path="/category/*" element={<Category />} />
           <Route path="/product/detail" element={<ProductDetail />} />
         </Route>
       </Routes>
