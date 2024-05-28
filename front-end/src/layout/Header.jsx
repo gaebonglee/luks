@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import "../style/Header.scss";
 
@@ -108,7 +108,9 @@ const Header = () => {
                       <Link to={`/category/bottom/shorts`}>쇼츠</Link>
                     </li>
                     <li>
-                      <Link to={`/category/bottom/trainningPants`}>트레이닝 팬츠</Link>
+                      <Link to={`/category/bottom/trainningPants`}>
+                        트레이닝 팬츠
+                      </Link>
                     </li>
                   </ul>
                 </div>
@@ -118,7 +120,7 @@ const Header = () => {
                 onMouseEnter={handleMouseEnterNormal}
                 onMouseLeave={handleMouseLeave}
               >
-                 <Link to={`/outer`}>OUTER</Link>
+                <Link to={`/outer`}>OUTER</Link>
                 <div className="subCategory">
                   <ul>
                     <li>
@@ -151,7 +153,9 @@ const Header = () => {
                       <Link to={`/category/ops&sk/miniSkirt`}>미니 스커트</Link>
                     </li>
                     <li>
-                      <Link to={`/category/ops&sk/midiLongSkirt`}>미디-롱 스커트</Link>
+                      <Link to={`/category/ops&sk/midiLongSkirt`}>
+                        미디-롱 스커트
+                      </Link>
                     </li>
                   </ul>
                 </div>

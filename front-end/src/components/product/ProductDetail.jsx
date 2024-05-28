@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import "../../style/product/ProductDetail.scss";
+import { IoIosArrowDown } from "react-icons/io";
 
 const ProductDetail = () => {
   const { productName, productId } = useParams();
@@ -9,6 +10,8 @@ const ProductDetail = () => {
   const [colors, setColors] = useState([]);
   const [sizes, setSizes] = useState([]);
   const [error, setError] = useState(null);
+  const [fabricCareOpen, setFabricCareOpen] = useState(false);
+  const [sizeDetailOpen, setSizeDetailOpen] = useState(false);
 
   useEffect(() => {
     axios
@@ -94,19 +97,50 @@ const ProductDetail = () => {
                 <div className="addToCart_btn">
                   <a>Add to Cart</a>
                 </div>
+                <div className="wishList_btn">
+                  <a>Wish List</a>
+                </div>
               </div>
             </div>
-          </div>
-          <div className="productInfo_wrap2">
             <div className="productInfo_add">
               <div className="productInfo_add_container">
                 <div className="productInfo_add_wrap">
-                  <a>Fabric & Care</a>
-                  <div className="productInfo_Fabric_Care_content"></div>
+                  <div
+                    className="productInfo_title"
+                    onClick={() => setFabricCareOpen(!fabricCareOpen)}
+                  >
+                    <a>Fabric & Care</a>
+                    <a>
+                      <IoIosArrowDown />
+                    </a>
+                  </div>
+
+                  <div
+                    className={`productInfo_Fabric_Care_content ${
+                      fabricCareOpen ? "open" : ""
+                    }`}
+                  >
+                    <p>* Fabric : </p>
+                    <p>* Care : </p>
+                  </div>
                 </div>
                 <div className="productInfo_add_wrap">
-                  <a>Size Detail</a>
-                  <div className="productInfo_Size_Detailcontent"></div>
+                  <div
+                    className="productInfo_title"
+                    onClick={() => setSizeDetailOpen(!sizeDetailOpen)}
+                  >
+                    <a>Size Detail</a>
+                    <a>
+                      <IoIosArrowDown />
+                    </a>
+                  </div>
+                  <div
+                    className={`productInfo_Size_Detailcontent ${
+                      sizeDetailOpen ? "open" : ""
+                    }`}
+                  >
+                    <p>* Size details here</p>
+                  </div>
                 </div>
               </div>
             </div>

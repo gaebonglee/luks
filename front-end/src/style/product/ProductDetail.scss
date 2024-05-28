@@ -99,8 +99,8 @@
   padding: 0 10px;
   font-size: 13px;
   font-family: inherit;
-  border: 1px solid #a9a9a9;
-  color: #666;
+  border: 1px solid $lightgray;
+  color: $gray;
   background: transparent;
 }
 
@@ -112,9 +112,10 @@
 }
 
 .buyNow_btn,
-.addToCart_btn {
+.addToCart_btn,
+.wishList_btn {
   a {
-    width: calc(40% - 10px);
+    width: 30%;
     float: left;
     margin-right: 10px;
     height: 35px;
@@ -123,29 +124,22 @@
     border-radius: 3px;
   }
 }
-.buyNow_btn {
-  a {
-    background: #000;
-    color: #fff;
-  }
+
+.buyNow_btn a {
+  background: #000;
+  color: #fff;
 }
 
-.addToCart_btn {
-  a {
-    background: transparent;
-    color: #000;
-    border: 1px solid $lightgray;
-  }
+.addToCart_btn a,
+.wishList_btn a {
+  background: transparent;
+  color: #000;
+  border: 1px solid $lightgray;
 }
 
-.productInfo_wrap2 {
-  position: absolute;
-  bottom: 0px;
-  right: 0px;
-  width: calc(100% - 20px);
-  padding: 15px 0 10px;
+.productInfo_add {
+  padding: 20px 0;
 }
-
 .productInfo_add_container {
   position: relative;
   height: auto;
@@ -157,24 +151,45 @@
   width: 100%;
   height: auto;
   overflow: hidden;
-  border-top: 1px solid $lightgray;
   padding: 15px 0;
   a {
     display: inline-block;
     padding: 5px 0 0;
     text-decoration: none;
     cursor: pointer;
-    font-size: 13px;
   }
 }
 
-.productInfo_Fabric_Care_content,
-.productInfo_Size_Detailcontent {
-  font-size: 13px;
-  line-height: 1.2;
-  display: none;
-  width: 60%;
-  float: right;
-  padding-left: 20px;
-  border-left: 1px solid #969696;
+.productInfo_add_wrap {
+  position: relative;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  border-bottom: 1px solid $lightgray;
+  padding: 15px 0;
+  .productInfo_title {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  .productInfo_Fabric_Care_content,
+  .productInfo_Size_Detailcontent {
+    font-size: 13px;
+    line-height: 1.2;
+    display: none;
+    width: 100%;
+    float: right;
+
+    overflow: hidden;
+    transition: max-height 0.5s ease-out, padding 0.5s ease-out;
+  }
+  .productInfo_Fabric_Care_content.open,
+  .productInfo_Size_Detailcontent.open {
+    display: block;
+    padding: 10px 0;
+    p {
+      padding: 10px 0;
+    }
+  }
 }
