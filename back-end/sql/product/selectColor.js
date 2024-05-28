@@ -1,7 +1,7 @@
 const connection = require("../../config/db");
 
-function selectProductDetail(productId, callback) {
-  const query = "SELECT * FROM product WHERE product_id = ?";
+function selectColor(productId, callback) {
+  const query = "SELECT * FROM colors WHERE product_id = ?";
   connection.query(query, [productId], (error, results) => {
     if (error) {
       console.error("Database query error:", error);
@@ -13,5 +13,5 @@ function selectProductDetail(productId, callback) {
 }
 
 module.exports = {
-  selectProductDetail,
+  selectColor,
 };

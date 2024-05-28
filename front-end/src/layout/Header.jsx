@@ -128,7 +128,7 @@ const Header = () => {
                       <Link to={`/category/outer/jacket`}>자켓</Link>
                     </li>
                     <li>
-                      <Link> to={`/category/outer/cardigan`}가디건</Link>
+                      <Link to={`/category/outer/cardigan`}>가디건</Link>
                     </li>
                     <li>
                       <Link to={`/category/outer/jumper`}>점퍼</Link>

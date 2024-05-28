@@ -1,17 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import "../../style/product/ProductDetail.scss";
 
 const ProductDetail = () => {
   const { productName, productId } = useParams();
   const [product, setProduct] = useState(null);
+  const [colors, setColors] = useState([]);
+  const [sizes, setSizes] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     axios
-      .get(`http://127.0.0.1:5000/product/${productId}`)
+      .get(`http://127.0.0.1:5000/product/${productName}/${productId}`)
       .then((response) => {
-        setProduct(response.data);
+        setProduct(response.data.product);
+        setColors(response.data.colors);
+        setSizes(response.data.sizes);
       })
       .catch((error) => {
         console.error(
@@ -20,7 +25,7 @@ const ProductDetail = () => {
         );
         setError("There was an error fetching the product details.");
       });
-  }, [productId]);
+  }, [productName, productId]);
 
   if (error) {
     return <div>{error}</div>;
@@ -43,7 +48,9 @@ const ProductDetail = () => {
             <div className="productInfo_top">
               <div className="product_NamePrice">
                 <p className="productName">{product.p_name}</p>
-                <p className="productPrice">{product.p_price}원</p>
+                <p className="productPrice">
+                  {Number(product.p_price).toLocaleString()}원
+                </p>
               </div>
               <div className="product_desc">
                 <p>{product.p_info}</p>
@@ -56,7 +63,11 @@ const ProductDetail = () => {
                   <div className="product_optionValue">
                     <select className="productOption1" id="productOption1">
                       <option value={"*"}>[필수] COLOR 선택</option>
-                      <option value={"**"}>-----------------</option>
+                      {colors.map((color) => (
+                        <option key={color.color_id} value={color.color_name}>
+                          {color.color_name}
+                        </option>
+                      ))}
                     </select>
                   </div>
                 </li>
@@ -65,7 +76,11 @@ const ProductDetail = () => {
                   <div className="product_optionValue">
                     <select className="productOption2" id="productOption2">
                       <option value={"*"}>[필수] SIZE 선택</option>
-                      <option value={"**"}>-----------------</option>
+                      {sizes.map((size) => (
+                        <option key={size.size_id} value={size.size}>
+                          {size.size}
+                        </option>
+                      ))}
                     </select>
                   </div>
                 </li>

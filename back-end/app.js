@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-// const productRouter = require("./routes/product");
+const productRouter = require("./routes/product");
 const categoryRouter = require("./routes/category");
 
 const app = express();
@@ -9,8 +9,9 @@ app.use(cors({ origin: "http://localhost:3000" }));
 app.use(express.json());
 
 // Router 추가
-// app.use("/product", productRouter);
+
 app.use("/category", categoryRouter);
+app.use("/product", productRouter);
 
 // 서버 실행
 const PORT = 5000;

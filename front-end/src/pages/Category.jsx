@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
-import "../style/product/ProductList.scss";
+import "../style/product/Category.scss";
 
 const Category = () => {
   const { category, subcategory } = useParams();
@@ -40,20 +40,26 @@ const Category = () => {
             {products.map((product) => (
               <li key={product.product_id}>
                 <div className="thumbnail_img">
-                  <Link to={`/product/${product.p_name}${product.product_id}`}>
+                  <Link
+                    to={`/product/${encodeURIComponent(product.p_name)}/${
+                      product.product_id
+                    }`}
+                  >
                     <img src={product.p_image_url} alt={product.p_name} />
                   </Link>
                 </div>
                 <div className="thumbnail_info">
                   <p className="thumbnail_productName">
                     <Link
-                      to={`/product/${product.p_name}${product.product_id}`}
+                      to={`/product/${encodeURIComponent(product.p_name)}/${
+                        product.product_id
+                      }`}
                     >
-                      <span>{product.p_name}</span>
+                      <span>{product.p_name.toLowerCase()}</span>
                     </Link>
                   </p>
                   <div className="thumbnail_productPrice">
-                    {product.p_price}원
+                    {product.p_price.toLocaleString()}원
                   </div>
                 </div>
               </li>

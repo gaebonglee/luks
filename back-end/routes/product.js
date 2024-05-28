@@ -1,26 +1,47 @@
-// const express = require("express");
-// const router = express.Router();
-// const { selectProductDetail } = require("../sql/product/selectProductDetail");
+const express = require("express");
+const router = express.Router();
+const { selectProductDetail } = require("../sql/product/selectProductDetail");
+const { selectColor } = require("../sql/product/selectColor");
+const { selectSize } = require("../sql/product/selectSize");
 
-// router.get("/", (req, res) => {
-//   selectProductDetail((error, products) => {
-//     if (error) {
-//       res.status(500).send({ error: "Server error" });
-//     } else {
-//       res.json(products);
-//     }
-//   });
-// });
+router.get("/:productName/:productId", async (req, res) => {
+  const productId = req.params.productId;
+  try {
+    const productDetails = await new Promise((resolve, reject) => {
+      selectProductDetail(productId, (error, results) => {
+        if (error) return reject(error);
+        if (results.length === 0) return resolve(null);
+        resolve(results[0]);
+      });
+    });
 
-// router.get("/:id", (req, res) => {
-//   const productId = req.params.id;
-//   selectProductById(productId, (error, product) => {
-//     if (error) {
-//       res.status(500).send({ error: "Server error" });
-//     } else {
-//       res.json(product);
-//     }
-//   });
-// });
+    if (!productDetails) {
+      return res.status(404).send({ error: "Product not found" });
+    }
 
-// module.exports = router;
+    const colors = await new Promise((resolve, reject) => {
+      selectColor(productId, (error, results) => {
+        if (error) return reject(error);
+        resolve(results);
+      });
+    });
+
+    const sizes = await new Promise((resolve, reject) => {
+      selectSize(productId, (error, results) => {
+        if (error) return reject(error);
+        resolve(results);
+      });
+    });
+
+    res.json({
+      product: productDetails,
+      colors: colors,
+      sizes: sizes,
+    });
+  } catch (error) {
+    console.error("Database query error:", error);
+    res.status(500).send({ error: "Server error" });
+  }
+});
+
+module.exports = router;
