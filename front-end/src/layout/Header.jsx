@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
 import "../style/Header.scss";
 
 //아이콘
@@ -26,6 +25,7 @@ const Header = () => {
   const handleMouseLeave = () => {
     document.getElementById("header").style.height = "130px";
   };
+
   return (
     <header id="header">
       <div className="header_container">
@@ -68,19 +68,21 @@ const Header = () => {
                 <div className="subCategory">
                   <ul>
                     <li>
-                      <Link to={`/category/top/티셔츠`}>티셔츠</Link>
+                      <Link to={`/category/top/t-shirts`}>티셔츠</Link>
                     </li>
                     <li>
-                      <Link>맨투맨/후드</Link>
+                      <Link to={`/category/top/sweatshirt&hoodie`}>
+                        맨투맨/후드
+                      </Link>
                     </li>
                     <li>
-                      <Link>셔츠</Link>
+                      <Link to={`/category/top/shirts`}>셔츠</Link>
                     </li>
                     <li>
-                      <Link>블라우스</Link>
+                      <Link to={`/category/top/blouse`}> 블라우스</Link>
                     </li>
                     <li>
-                      <Link>니트</Link>
+                      <Link to={`/category/top/knit`}>니트</Link>
                     </li>
                   </ul>
                 </div>
@@ -90,23 +92,23 @@ const Header = () => {
                 onMouseEnter={handleMouseEnterLong}
                 onMouseLeave={handleMouseLeave}
               >
-                <a>BOTTOM</a>
+                <Link to={`/category/bottom`}>BOTTOM</Link>
                 <div className="subCategory">
                   <ul>
                     <li>
-                      <Link>데님</Link>
+                      <Link to={`/category/bottom/denim`}>데님</Link>
                     </li>
                     <li>
-                      <Link>팬츠</Link>
+                      <Link to={`/category/bottom/pants`}>팬츠</Link>
                     </li>
                     <li>
-                      <Link>슬랙스</Link>
+                      <Link to={`/category/bottom/slacks`}>슬랙스</Link>
                     </li>
                     <li>
-                      <Link>쇼츠</Link>
+                      <Link to={`/category/bottom/shorts`}>쇼츠</Link>
                     </li>
                     <li>
-                      <Link>트레이닝 팬츠</Link>
+                      <Link to={`/category/bottom/trainningPants`}>트레이닝 팬츠</Link>
                     </li>
                   </ul>
                 </div>
@@ -116,20 +118,20 @@ const Header = () => {
                 onMouseEnter={handleMouseEnterNormal}
                 onMouseLeave={handleMouseLeave}
               >
-                <a>OUTER</a>
+                 <Link to={`/outer`}>OUTER</Link>
                 <div className="subCategory">
                   <ul>
                     <li>
-                      <Link>코트</Link>
+                      <Link to={`/category/outer/coat`}>코트</Link>
                     </li>
                     <li>
-                      <Link>자켓</Link>
+                      <Link to={`/category/outer/jacket`}>자켓</Link>
                     </li>
                     <li>
-                      <Link>가디건</Link>
+                      <Link> to={`/category/outer/cardigan`}가디건</Link>
                     </li>
                     <li>
-                      <Link>점퍼</Link>
+                      <Link to={`/category/outer/jumper`}>점퍼</Link>
                     </li>
                   </ul>
                 </div>
@@ -139,23 +141,23 @@ const Header = () => {
                 onMouseEnter={handleMouseEnterShort}
                 onMouseLeave={handleMouseLeave}
               >
-                <a>OPS/SK</a>
+                <Link to={`/outer`}>OPS/SK</Link>
                 <div className="subCategory">
                   <ul>
                     <li>
-                      <Link>원피스</Link>
+                      <Link to={`/category/ops&sk/ops`}>원피스</Link>
                     </li>
                     <li>
-                      <Link>미니 스커트</Link>
+                      <Link to={`/category/ops&sk/miniSkirt`}>미니 스커트</Link>
                     </li>
                     <li>
-                      <Link>미디-롱 스커트</Link>
+                      <Link to={`/category/ops&sk/midiLongSkirt`}>미디-롱 스커트</Link>
                     </li>
                   </ul>
                 </div>
               </li>
               <li className="menu_category_li">
-                <Link>T-EMPERTURE</Link>
+                <Link to={"/t-emperature"}>T-EMPERTURE</Link>
               </li>
             </ul>
           </div>

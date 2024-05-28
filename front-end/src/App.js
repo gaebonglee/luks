@@ -17,8 +17,15 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/join" element={<JoinPage />} />
           <Route path="mypage/*" element={<Mypage />} />
-          <Route path="/category/*" element={<Category />} />
-          <Route path="/product/detail" element={<ProductDetail />} />
+          <Route path="/category/:category" element={<Category />} />
+          <Route
+            path="/category/:category/:subcategory"
+            element={<Category />}
+          />
+          <Route
+            path="/product/:productName:productId"
+            element={<ProductDetail />}
+          />
         </Route>
       </Routes>
     </Router>
