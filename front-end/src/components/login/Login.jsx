@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "../../style/login.scss";
 
 const login = () => {
@@ -38,7 +39,7 @@ const login = () => {
               <a>비밀번호 찾기</a>
             </li>
             <li>
-              <a>회원가입</a>
+              <Link to={"/join"}>회원가입</Link>
             </li>
           </ul>
         </div>
