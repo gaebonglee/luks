@@ -21,7 +21,7 @@ const JoinId = ({ memberId, idValid, handleIdChange }) => {
             <div className="conditionWrap">
               <span id="id_condition">
                 {!idValid && (
-                  <a className="warning">조건에 맞게 입력해주세요</a>
+                  <a className="warning">조건에 맞게 입력해주세요.</a>
                 )}
                 <a>영문 소문자/숫자, 8자~16자</a>
                 {idValid && <FaCheck />}

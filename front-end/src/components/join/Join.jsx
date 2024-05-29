@@ -15,7 +15,9 @@ const Join = () => {
   const [memberName, setMemberName] = useState("");
   const [memberEmail, setMemberEmail] = useState("");
   const [memberMobileNum, setMemberMobileNum] = useState("");
-  const [memberAddress, setMemberAddress] = useState("");
+  const [postcode, setPostcode] = useState("");
+  const [basicAddress, setBasicAddress] = useState("");
+  const [detailAddress, setDetailAddress] = useState("");
 
   const validateId = (id) => {
     const idRegex = /^[a-z0-9]{8,16}$/;
@@ -71,8 +73,16 @@ const Join = () => {
     setMemberMobileNum(e.target.value);
   };
 
-  const handleAddressChange = (e) => {
-    setMemberAddress(e.target.value);
+  const handlePostcodeChange = (e) => {
+    setPostcode(e.target.value);
+  };
+
+  const handleBasicAddressChange = (e) => {
+    setBasicAddress(e.target.value);
+  };
+
+  const handleDetailAddressChange = (e) => {
+    setDetailAddress(e.target.value);
   };
 
   return (
@@ -103,8 +113,12 @@ const Join = () => {
                 handleMobileNumChange={handleMobileNumChange}
               />
               <JoinAddress
-                memberAddress={memberAddress}
-                handleAddressChange={handleAddressChange}
+                postcode={postcode}
+                basicAddress={basicAddress}
+                detailAddress={detailAddress}
+                handlePostcodeChange={handlePostcodeChange}
+                handleBasicAddressChange={handleBasicAddressChange}
+                handleDetailAddressChange={handleDetailAddressChange}
               />
             </tbody>
           </table>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaCheck } from "react-icons/fa6";
 
 const JoinPw = ({
@@ -9,6 +9,12 @@ const JoinPw = ({
   handlePwChange,
   handlePwConfirmChange,
 }) => {
+  const [pwConfirmTouched, setPwConfirmTouched] = useState(false);
+
+  const handlePwConfirmBlur = () => {
+    setPwConfirmTouched(true);
+  };
+
   return (
     <>
       <tr>
@@ -29,7 +35,7 @@ const JoinPw = ({
             <div className="conditionWrap">
               <span id="pw_condition1">
                 {!pwValid && (
-                  <a className="warning">조건에 맞게 입력해주세요</a>
+                  <a className="warning">조건에 맞게 입력해주세요.</a>
                 )}
                 <a>영문 대소문자/숫자/특수문자 중 2가지 이상 조합, 8자~16자</a>
                 {pwValid && <FaCheck />}
@@ -47,13 +53,14 @@ const JoinPw = ({
             type="text"
             value={memberPwConfirm}
             onChange={handlePwConfirmChange}
+            onBlur={handlePwConfirmBlur}
           />
         </td>
         <td className="join_guide">
           <p className="pw2_msg">
             <div className="conditionWrap">
               <span id="pw_condition2">
-                {!pwMatch && (
+                {pwConfirmTouched && !pwMatch && (
                   <a className="warning">비밀번호가 일치하지 않습니다.</a>
                 )}
               </span>
