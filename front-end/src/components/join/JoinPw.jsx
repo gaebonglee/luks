@@ -22,7 +22,7 @@ const JoinPw = ({
         <td className="input_td">
           <input
             id="member_pw1"
-            name="member_pw1"
+            name="member_pw"
             className="inputTypeText"
             type="text"
             value={memberPw}
@@ -49,6 +49,7 @@ const JoinPw = ({
         <td className="input_td">
           <input
             id="member_pw2"
+            name="member_pw_confirm" 
             className="inputTypeText"
             type="text"
             value={memberPwConfirm}

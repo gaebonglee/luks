@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const productRouter = require("./routes/product");
 const categoryRouter = require("./routes/category");
+const joinRouter = require("./routes/join");
 
 const app = express();
 
@@ -12,6 +13,7 @@ app.use(express.json());
 
 app.use("/category", categoryRouter);
 app.use("/product", productRouter);
+app.use("/join", joinRouter);
 
 // 서버 실행
 const PORT = 5000;
