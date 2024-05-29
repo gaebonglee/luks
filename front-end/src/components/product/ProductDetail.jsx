@@ -9,6 +9,9 @@ const ProductDetail = () => {
   const [product, setProduct] = useState(null);
   const [colors, setColors] = useState([]);
   const [sizes, setSizes] = useState([]);
+  const [fabric, setFabric] = useState(null);
+  const [care, setCare] = useState(null);
+  const [sizeDetails, setSizeDetails] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -18,6 +21,11 @@ const ProductDetail = () => {
         setProduct(response.data.product);
         setColors(response.data.colors);
         setSizes(response.data.sizes);
+        if (response.data.fabricAndCare) {
+          setFabric(response.data.fabricAndCare.fabric);
+          setCare(response.data.fabricAndCare.care);
+        }
+        setSizeDetails(response.data.sizeDetails);
       })
       .catch((error) => {
         console.error(
@@ -100,7 +108,7 @@ const ProductDetail = () => {
                 </div>
               </div>
             </div>
-            <InfoAdd />
+            <InfoAdd fabric={fabric} care={care} sizeDetails={sizeDetails} />
           </div>
         </section>
       </div>

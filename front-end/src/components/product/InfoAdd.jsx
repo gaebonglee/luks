@@ -2,7 +2,7 @@ import React from "react";
 import "../../style/product/InfoAdd.scss";
 import { IoIosArrowDown } from "react-icons/io";
 
-const InfoAdd = () => {
+const InfoAdd = ({ fabric, care, sizeDetails }) => {
   const handleToggle = (id) => {
     const element = document.getElementById(id);
     if (element.style.height) {
@@ -13,6 +13,7 @@ const InfoAdd = () => {
       element.style.opacity = 1;
     }
   };
+
   return (
     <div className="productInfo_add">
       <div className="productInfo_add_container">
@@ -28,8 +29,8 @@ const InfoAdd = () => {
           </div>
 
           <div id="fabricCare" className="productInfo_Fabric_Care_content">
-            <p>* Fabric : </p>
-            <p>* Care : </p>
+            <p>* Fabric: {fabric || "N/A"}</p>
+            <p>* Care: {care || "N/A"}</p>
           </div>
         </div>
         <div className="productInfo_add_wrap">
@@ -43,7 +44,13 @@ const InfoAdd = () => {
             </a>
           </div>
           <div id="sizeDetail" className="productInfo_Size_Detailcontent">
-            <p>* Size details here</p>
+            {sizeDetails.length > 0 ? (
+              sizeDetails.map((size, index) => (
+                <p key={index}>* {size.sizedetail}</p>
+              ))
+            ) : (
+              <p>* No size details available</p>
+            )}
           </div>
         </div>
       </div>

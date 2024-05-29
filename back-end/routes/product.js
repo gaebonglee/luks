@@ -3,6 +3,8 @@ const router = express.Router();
 const { selectProductDetail } = require("../sql/product/selectProductDetail");
 const { selectColor } = require("../sql/product/selectColor");
 const { selectSize } = require("../sql/product/selectSize");
+const { selectFabricAndCare } = require("../sql/product/selectFabricAndCare");
+const { selectSizeDetail } = require("../sql/product/selectSizeDetail");
 
 router.get("/:productName/:productId", async (req, res) => {
   const productId = req.params.productId;
@@ -33,10 +35,26 @@ router.get("/:productName/:productId", async (req, res) => {
       });
     });
 
+    const fabricAndCare = await new Promise((resolve, reject) => {
+      selectFabricAndCare(productId, (error, results) => {
+        if (error) return reject(error);
+        resolve(results[0]);
+      });
+    });
+
+    const sizeDetails = await new Promise((resolve, reject) => {
+      selectSizeDetail(productId, (error, results) => {
+        if (error) return reject(error);
+        resolve(results);
+      });
+    });
+
     res.json({
       product: productDetails,
       colors: colors,
       sizes: sizes,
+      fabricAndCare: fabricAndCare,
+      sizeDetails: sizeDetails,
     });
   } catch (error) {
     console.error("Database query error:", error);
