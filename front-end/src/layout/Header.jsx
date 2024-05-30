@@ -1,29 +1,87 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import Swal from "sweetalert2";
+import HeaderMenu from "./HeaderMenu";
 import "../style/layout/Header.scss";
 
 //아이콘
-import { FiSearch } from "react-icons/fi";
-import { FaRegUser } from "react-icons/fa";
+import { FaRegUser, FaHeart } from "react-icons/fa";
 import { IoBag } from "react-icons/io5";
-import { FaHeart } from "react-icons/fa";
+import { RiLoginBoxFill, RiLogoutBoxFill } from "react-icons/ri";
 
 const Header = () => {
-  //카테고리
-  const handleMouseEnterLong = () => {
-    document.getElementById("header").style.height = "260px";
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/check-session", { withCredentials: true })
+      .then((response) => {
+        if (response.data.loggedIn) {
+          setIsLoggedIn(true);
+        }
+      })
+      .catch((error) => {
+        console.error("Session check error:", error);
+      });
+  }, []);
+
+  const handleLogin = async (member_id, member_pw) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/login",
+        { member_id, member_pw },
+        { withCredentials: true }
+      );
+      if (response.data.success) {
+        setIsLoggedIn(true);
+        Swal.fire({
+          icon: "success",
+          title: "로그인 완료",
+          text: "로그인이 완료되었습니다.",
+        }).then(() => {
+          navigate("/");
+        });
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "로그인 실패",
+          text: "아이디와 비밀번호를 다시 확인해주세요.",
+        });
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      Swal.fire({
+        icon: "error",
+        title: "서버 오류",
+        text: "서버와의 통신 중 문제가 발생했습니다.",
+      });
+    }
   };
 
-  const handleMouseEnterNormal = () => {
-    document.getElementById("header").style.height = "230px";
-  };
-
-  const handleMouseEnterShort = () => {
-    document.getElementById("header").style.height = "210px";
-  };
-
-  const handleMouseLeave = () => {
-    document.getElementById("header").style.height = "130px";
+  const handleLogout = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/logout",
+        {},
+        { withCredentials: true }
+      );
+      if (response.data.success) {
+        setIsLoggedIn(false);
+        Swal.fire({
+          icon: "success",
+          title: "로그아웃 완료",
+          text: "로그아웃이 완료되었습니다.",
+        }).then(() => {
+          navigate("/");
+        });
+      } else {
+        console.error("Logout failed:", response.data.message);
+      }
+    } catch (error) {
+      console.error("Logout error:", error);
+    }
   };
 
   return (
@@ -36,136 +94,45 @@ const Header = () => {
             </Link>
           </div>
           <div className="header_user">
-            <div className="header_search">
-              <FiSearch />
-            </div>
             <div className="header_member">
-              <Link to="/login">
+              <Link to={isLoggedIn ? "/" : "/login"}>
                 <FaRegUser />
+                <p>my page</p>
               </Link>
             </div>
             <div className="header_like">
-              <Link>
+              <Link to={isLoggedIn ? "/" : "/login"}>
                 <FaHeart />
+                <p>my wish</p>
               </Link>
             </div>
             <div className="header_mybag">
-              <Link>
+              <Link to={isLoggedIn ? "/" : "/login"}>
                 <IoBag />
+                <p>my bag</p>
+              </Link>
+            </div>
+            <div className="header_log">
+              <Link
+                to={isLoggedIn ? "/" : "/login"}
+                onClick={isLoggedIn ? handleLogout : null}
+              >
+                {isLoggedIn ? (
+                  <>
+                    <RiLogoutBoxFill />
+                    <p>logout</p>
+                  </>
+                ) : (
+                  <>
+                    <RiLoginBoxFill />
+                    <p>login</p>
+                  </>
+                )}
               </Link>
             </div>
           </div>
         </div>
-        <div className="header_menu_container">
-          <div className="header_menu_padding">
-            <ul className="header_menu_category">
-              <li
-                className="menu_category_li"
-                onMouseEnter={handleMouseEnterLong}
-                onMouseLeave={handleMouseLeave}
-              >
-                <Link to={`/category/top`}>TOP</Link>
-                <div className="subCategory">
-                  <ul>
-                    <li>
-                      <Link to={`/category/top/t-shirts`}>티셔츠</Link>
-                    </li>
-                    <li>
-                      <Link to={`/category/top/sweatshirt&hoodie`}>
-                        맨투맨/후드
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to={`/category/top/shirts`}>셔츠</Link>
-                    </li>
-                    <li>
-                      <Link to={`/category/top/blouse`}> 블라우스</Link>
-                    </li>
-                    <li>
-                      <Link to={`/category/top/knit`}>니트</Link>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-              <li
-                className="menu_category_li"
-                onMouseEnter={handleMouseEnterLong}
-                onMouseLeave={handleMouseLeave}
-              >
-                <Link to={`/category/bottom`}>BOTTOM</Link>
-                <div className="subCategory">
-                  <ul>
-                    <li>
-                      <Link to={`/category/bottom/denim`}>데님</Link>
-                    </li>
-                    <li>
-                      <Link to={`/category/bottom/pants`}>팬츠</Link>
-                    </li>
-                    <li>
-                      <Link to={`/category/bottom/slacks`}>슬랙스</Link>
-                    </li>
-                    <li>
-                      <Link to={`/category/bottom/shorts`}>쇼츠</Link>
-                    </li>
-                    <li>
-                      <Link to={`/category/bottom/trainningPants`}>
-                        트레이닝 팬츠
-                      </Link>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-              <li
-                className="menu_category_li"
-                onMouseEnter={handleMouseEnterNormal}
-                onMouseLeave={handleMouseLeave}
-              >
-                <Link to={`/outer`}>OUTER</Link>
-                <div className="subCategory">
-                  <ul>
-                    <li>
-                      <Link to={`/category/outer/coat`}>코트</Link>
-                    </li>
-                    <li>
-                      <Link to={`/category/outer/jacket`}>자켓</Link>
-                    </li>
-                    <li>
-                      <Link to={`/category/outer/cardigan`}>가디건</Link>
-                    </li>
-                    <li>
-                      <Link to={`/category/outer/jumper`}>점퍼</Link>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-              <li
-                className="menu_category_li"
-                onMouseEnter={handleMouseEnterShort}
-                onMouseLeave={handleMouseLeave}
-              >
-                <Link to={`/outer`}>OPS/SK</Link>
-                <div className="subCategory">
-                  <ul>
-                    <li>
-                      <Link to={`/category/ops&sk/ops`}>원피스</Link>
-                    </li>
-                    <li>
-                      <Link to={`/category/ops&sk/miniSkirt`}>미니 스커트</Link>
-                    </li>
-                    <li>
-                      <Link to={`/category/ops&sk/midiLongSkirt`}>
-                        미디-롱 스커트
-                      </Link>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-              <li className="menu_category_li">
-                <Link to={"/t-emperature"}>T-EMPERTURE</Link>
-              </li>
-            </ul>
-          </div>
-        </div>
+        <HeaderMenu />
       </div>
     </header>
   );

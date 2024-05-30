@@ -13,10 +13,14 @@ const Login = () => {
     const member_pw = event.target.member_pw.value;
 
     try {
-      const response = await axios.post("http://localhost:5000/login", {
-        member_id,
-        member_pw,
-      });
+      const response = await axios.post(
+        "http://localhost:5000/login",
+        {
+          member_id,
+          member_pw,
+        },
+        { withCredentials: true }
+      );
 
       if (response.data.success) {
         Swal.fire({
