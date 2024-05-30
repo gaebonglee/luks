@@ -11,7 +11,32 @@ const JoinPw = ({
 }) => {
   const [pwConfirmTouched, setPwConfirmTouched] = useState(false);
 
-  const handlePwConfirmBlur = () => {
+  const validatePw = (pw) => {
+    const lengthCheck = /^.{8,16}$/;
+    const upperCheck = /[A-Z]/;
+    const lowerCheck = /[a-z]/;
+    const numberCheck = /[0-9]/;
+    const specialCheck = /[!@#$%^&*]/;
+
+    const checks = [
+      upperCheck.test(pw),
+      lowerCheck.test(pw),
+      numberCheck.test(pw),
+      specialCheck.test(pw),
+    ];
+    const validChecks = checks.filter((check) => check).length;
+
+    return lengthCheck.test(pw) && validChecks >= 2;
+  };
+
+  const onChangePw = (e) => {
+    const value = e.target.value;
+    handlePwChange(value, validatePw(value), value === memberPwConfirm);
+  };
+
+  const onChangePwConfirm = (e) => {
+    const value = e.target.value;
+    handlePwConfirmChange(value, value === memberPw);
     setPwConfirmTouched(true);
   };
 
@@ -21,27 +46,27 @@ const JoinPw = ({
         <th scope="row">비밀번호</th>
         <td className="input_td">
           <input
-            id="member_pw1"
+            id="member_pw"
             name="member_pw"
             className="inputTypeText"
             type="text"
             value={memberPw}
-            onChange={handlePwChange}
+            onChange={onChangePw}
             placeholder="특수문자 !@#$%^&*만 입력가능"
           />
         </td>
         <td className="join_guide">
-          <p className="pw1_msg">
-            <div className="conditionWrap">
-              <span id="pw_condition1">
-                {!pwValid && (
-                  <a className="warning">조건에 맞게 입력해주세요.</a>
-                )}
-                <a>영문 대소문자/숫자/특수문자 중 2가지 이상 조합, 8자~16자</a>
-                {pwValid && <FaCheck />}
+          <div className="conditionWrap">
+            <span id="pw_condition1">
+              {!pwValid && (
+                <span className="warning">조건에 맞게 입력해주세요.</span>
+              )}
+              <span>
+                영문 대소문자/숫자/특수문자 중 2가지 이상 조합, 8자~16자
               </span>
-            </div>
-          </p>
+              {pwValid && <FaCheck />}
+            </span>
+          </div>
         </td>
       </tr>
       <tr>
@@ -49,24 +74,22 @@ const JoinPw = ({
         <td className="input_td">
           <input
             id="member_pw2"
-            name="member_pw_confirm" 
+            name="member_pw_confirm"
             className="inputTypeText"
             type="text"
             value={memberPwConfirm}
-            onChange={handlePwConfirmChange}
-            onBlur={handlePwConfirmBlur}
+            onChange={onChangePwConfirm}
+            onBlur={() => setPwConfirmTouched(true)}
           />
         </td>
         <td className="join_guide">
-          <p className="pw2_msg">
-            <div className="conditionWrap">
-              <span id="pw_condition2">
-                {pwConfirmTouched && !pwMatch && (
-                  <a className="warning">비밀번호가 일치하지 않습니다.</a>
-                )}
-              </span>
-            </div>
-          </p>
+          <div className="conditionWrap">
+            <span id="pw_condition2">
+              {pwConfirmTouched && !pwMatch && (
+                <span className="warning">비밀번호가 일치하지 않습니다.</span>
+              )}
+            </span>
+          </div>
         </td>
       </tr>
     </>

@@ -35,6 +35,7 @@ const JoinAddress = ({
             <input
               type="text"
               id="sample6_postcode"
+              name="postcode" // 데이터베이스 컬럼과 일치
               placeholder="우편번호"
               value={postcode}
               readOnly
@@ -45,6 +46,7 @@ const JoinAddress = ({
           <input
             type="text"
             id="sample6_address"
+            name="basic_address" // 데이터베이스 컬럼과 일치
             placeholder="기본주소"
             value={basicAddress}
             readOnly
@@ -53,6 +55,7 @@ const JoinAddress = ({
           <input
             type="text"
             id="sample6_detailAddress"
+            name="detail_address" // 데이터베이스 컬럼과 일치
             placeholder="상세주소 (선택 입력 가능)"
             value={detailAddress}
             onChange={handleDetailAddressChange}

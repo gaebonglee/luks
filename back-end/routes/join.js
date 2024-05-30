@@ -1,23 +1,19 @@
 const express = require("express");
-const router = express.Router();
-const { saveMemberInfo } = require("../sql/join/saveMemberInfo");
+const saveMemberInfo = require("../sql/join/saveMemberInfo");
 
-router.post("/saveMemberInfo", (req, res) => {
+const router = express.Router();
+
+router.post("/register", (req, res) => {
   const memberData = req.body;
 
-  // 전달된 데이터 확인
-  console.log("Received Data: ", memberData);
+  console.log("Received member data: ", memberData);
 
-  saveMemberInfo(memberData, (error, results) => {
-    if (error) {
-      res.status(500).send({
-        error: "Error saving member information",
-      });
-    } else {
-      res.status(200).json({
-        message: "Member information saved successfully",
-      });
+  saveMemberInfo(memberData, (err, result) => {
+    if (err) {
+      console.error("Error saving member information: ", err);
+      return res.status(500).send("Error saving member information");
     }
+    res.status(200).json({ message: "회원가입이 완료되었습니다." });
   });
 });
 
