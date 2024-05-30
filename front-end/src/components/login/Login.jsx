@@ -2,9 +2,8 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../../style/login/login.scss";
 import axios from "axios";
-import Swal from "sweetalert2";
 
-const Login = () => {
+const Login = ({ setIsLoggedIn }) => {
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
@@ -23,25 +22,12 @@ const Login = () => {
       );
 
       if (response.data.success) {
-        Swal.fire({
-          icon: "success",
-          text: "로그인이 완료되었습니다.",
-        }).then(() => {
-          navigate("/");
-        });
-      } else {
-        Swal.fire({
-          icon: "error",
-          text: "아이디와 비밀번호를 다시 확인해주세요.",
-        });
+        setIsLoggedIn(true); // 로그인 상태를 즉시 업데이트
+        navigate("/");
       }
     } catch (error) {
       console.error("Login error:", error);
-      Swal.fire({
-        icon: "error",
-        title: "서버 오류",
-        text: "서버와의 통신 중 문제가 발생했습니다.",
-      });
+      alert("서버와의 통신 중 문제가 발생했습니다.");
     }
   };
 

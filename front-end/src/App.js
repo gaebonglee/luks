@@ -1,3 +1,4 @@
+// App.jsx
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Root from "./pages/Root";
@@ -9,12 +10,22 @@ import Category from "./pages/Category";
 import ProductDetail from "./components/product/ProductDetail";
 
 const App = () => {
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Root />}>
+        <Route
+          path="/"
+          element={
+            <Root isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+          }
+        >
           <Route index element={<Home />} />
-          <Route path="/login" element={<Login />} />
+          <Route
+            path="/login"
+            element={<Login setIsLoggedIn={setIsLoggedIn} />}
+          />
           <Route path="/join" element={<JoinPage />} />
           <Route path="mypage/*" element={<Mypage />} />
           <Route path="/category/:category" element={<Category />} />
