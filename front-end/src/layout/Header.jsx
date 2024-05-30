@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../style/Header.scss";
+import "../style/layout/Header.scss";
 
 //아이콘
 import { FiSearch } from "react-icons/fi";
