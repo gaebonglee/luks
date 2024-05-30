@@ -1,9 +1,7 @@
-const bcrypt = require("bcrypt");
 const db = require("../../config/db");
 
 const saveMemberInfo = async (memberData, callback) => {
   try {
-    const hashedPassword = await bcrypt.hash(memberData.member_pw, 10);
     const query = `
       INSERT INTO member (
         member_id, member_pw, member_name, member_roles, email, phonenumber, postcode, basic_address, detail_address, register_date
@@ -12,7 +10,7 @@ const saveMemberInfo = async (memberData, callback) => {
     `;
     const values = [
       memberData.member_id,
-      hashedPassword,
+      memberData.member_pw,
       memberData.member_name,
       memberData.email,
       memberData.phonenumber,

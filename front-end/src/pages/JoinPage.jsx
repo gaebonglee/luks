@@ -28,7 +28,6 @@ const JoinPage = () => {
   const [postcode, setPostcode] = useState("");
   const [basicAddress, setBasicAddress] = useState("");
   const [detailAddress, setDetailAddress] = useState("");
-
   const [allAgree, setAllAgree] = useState(false);
   const [termsAgree, setTermsAgree] = useState(false);
   const [privacyAgree, setPrivacyAgree] = useState(false);

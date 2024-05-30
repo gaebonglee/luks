@@ -4,6 +4,7 @@ const cors = require("cors");
 const productRouter = require("./routes/product");
 const categoryRouter = require("./routes/category");
 const joinRouter = require("./routes/join");
+const loginRouter = require("./routes/login");
 
 const app = express();
 
@@ -14,6 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/category", categoryRouter);
 app.use("/product", productRouter);
 app.use("/join", joinRouter);
+app.use("/login", loginRouter);
 
 const PORT = 5000;
 app.listen(PORT, () => {
