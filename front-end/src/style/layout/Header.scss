@@ -27,11 +27,31 @@ header {
 .header_flex {
   display: flex;
   justify-content: space-between;
+
   .header_user {
     display: flex;
     align-items: center;
     gap: 50px;
     font-size: $h2;
+
+    .header_member,
+    .header_like,
+    .header_mybag,
+    .header_log {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+
+      svg {
+        font-size: 24px; // 아이콘 크기 조정
+      }
+
+      p {
+        font-size: 11px;
+        margin: 0; // 기본 margin 제거
+      }
+    }
   }
 }
 
