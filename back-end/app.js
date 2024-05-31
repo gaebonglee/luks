@@ -9,6 +9,7 @@ const joinRouter = require("./routes/join");
 const loginRouter = require("./routes/login");
 const logoutRouter = require("./routes/logout");
 const mypageRouter = require("./routes/mypage");
+const wishListRouter = require("./routes/wishlist");
 
 const app = express();
 
@@ -53,11 +54,12 @@ app.use("/join", joinRouter);
 app.use("/login", loginRouter);
 app.use("/logout", logoutRouter);
 app.use("/mypage", mypageRouter);
+app.use("/wishlist", wishListRouter);
 
 // 세션 상태 확인 라우트 추가
 app.get("/check-session", (req, res) => {
   if (req.session.user) {
-    res.status(200).json({ loggedIn: true });
+    res.status(200).json({ loggedIn: true, user: req.session.user });
   } else {
     res.status(200).json({ loggedIn: false });
   }
