@@ -1,17 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
+import ProductWish from "../components/product/ProductWish";
 import "../style/product/Category.scss";
-
-//아이콘
-import { FiHeart } from "react-icons/fi";
-import { FaHeart } from "react-icons/fa";
 
 const Category = () => {
   const { category, subcategory } = useParams();
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
-  const [likedProducts, setLikedProducts] = useState({}); // 좋아요 상태 관리
 
   useEffect(() => {
     let apiUrl = `http://127.0.0.1:5000/category/${category}`;
@@ -32,13 +28,6 @@ const Category = () => {
         setError("There was an error fetching the product details.");
       });
   }, [category, subcategory]);
-
-  const toggleLike = (productId) => {
-    setLikedProducts((prevLikedProducts) => ({
-      ...prevLikedProducts,
-      [productId]: !prevLikedProducts[productId],
-    }));
-  };
 
   if (error) {
     return <div>{error}</div>;
@@ -74,13 +63,7 @@ const Category = () => {
                     {product.p_price.toLocaleString()}원
                   </div>
                   <div className="thumbnail_wish">
-                    <p onClick={() => toggleLike(product.product_id)}>
-                      {likedProducts[product.product_id] ? (
-                        <FaHeart />
-                      ) : (
-                        <FiHeart />
-                      )}
-                    </p>
+                    <ProductWish productId={product.product_id} />
                   </div>
                 </div>
               </li>

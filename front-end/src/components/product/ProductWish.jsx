@@ -17,7 +17,7 @@ const ProductWish = ({ productId }) => {
           }
         );
         const { liked_at, unliked_at } = response.data;
-        if (liked_at) {
+        if (liked_at && !unliked_at) {
           setLiked(true);
         } else {
           setLiked(false);
