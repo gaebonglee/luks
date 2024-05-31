@@ -1,4 +1,3 @@
-// MemberNav.jsx
 import React from "react";
 import { Link } from "react-router-dom";
 import { FaRegUser, FaHeart } from "react-icons/fa";
@@ -26,7 +25,7 @@ const MemberNav = ({ handleLogout }) => (
       </Link>
     </div>
     <div className="header_log">
-      <a href="/" onClick={handleLogout}>
+      <a href="#!" onClick={handleLogout}>
         <RiLogoutBoxFill />
         <p>logout</p>
       </a>

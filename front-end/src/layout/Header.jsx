@@ -1,4 +1,3 @@
-// Header.jsx
 import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -6,6 +5,7 @@ import HeaderMenu from "./HeaderMenu";
 import GuestNav from "./GuestNav";
 import MemberNav from "./MemberNav";
 import "../style/layout/Header.scss";
+import Swal from "sweetalert2";
 
 const Header = ({ isLoggedIn, setIsLoggedIn }) => {
   const navigate = useNavigate();
@@ -31,8 +31,10 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
         { withCredentials: true }
       );
       if (response.data.success) {
-        setIsLoggedIn(false);
-        navigate("/"); // 상태가 업데이트된 후 페이지 이동
+        Swal.fire("로그아웃 되었습니다.").then(() => {
+          setIsLoggedIn(false);
+          navigate("/"); // 상태가 업데이트된 후 페이지 이동
+        });
       } else {
         console.error("Logout failed:", response.data.message);
       }

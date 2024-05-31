@@ -31,13 +31,14 @@ header {
   .header_user {
     display: flex;
     align-items: center;
-    gap: 50px;
+    gap: 25px;
     font-size: $h2;
 
     .header_member,
     .header_like,
     .header_mybag,
     .header_log {
+      width: 50px;
       display: flex;
       flex-direction: column;
       align-items: center;

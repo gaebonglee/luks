@@ -2,6 +2,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../../style/login/login.scss";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const Login = ({ setIsLoggedIn }) => {
   const navigate = useNavigate();
@@ -23,7 +24,9 @@ const Login = ({ setIsLoggedIn }) => {
 
       if (response.data.success) {
         setIsLoggedIn(true); // 로그인 상태를 즉시 업데이트
-        navigate("/");
+        Swal.fire("로그인 되었습니다.").then(() => {
+          navigate("/");
+        });
       }
     } catch (error) {
       console.error("Login error:", error);
