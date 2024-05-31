@@ -19,7 +19,12 @@ router.post("/", (req, res) => {
     if (user) {
       // 세션에 사용자 정보 저장
       req.session.user = {
-        id: member_id,
+        id: user.member_id,
+        member_name: user.member_name,
+        phonenumber: user.phonenumber,
+        postcode: user.postcode,
+        basic_address: user.basic_address,
+        detail_address: user.detail_address,
       };
       req.session.save((err) => {
         if (err) {
