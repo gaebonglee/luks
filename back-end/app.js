@@ -52,7 +52,7 @@ app.use("/product", productRouter);
 app.use("/join", joinRouter);
 app.use("/login", loginRouter);
 app.use("/logout", logoutRouter);
-app.use("/mypage", mypageRouter); // 라우터 설정 확인
+app.use("/mypage", mypageRouter);
 
 // 세션 상태 확인 라우트 추가
 app.get("/check-session", (req, res) => {

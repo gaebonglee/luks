@@ -4,6 +4,10 @@ import axios from "axios";
 import InfoAdd from "./InfoAdd";
 import "../../style/product/ProductDetail.scss";
 
+//아이콘
+import { FiHeart } from "react-icons/fi";
+import { FaHeart } from "react-icons/fa";
+
 const ProductDetail = () => {
   const { productName, productId } = useParams();
   const [product, setProduct] = useState(null);
@@ -13,6 +17,7 @@ const ProductDetail = () => {
   const [care, setCare] = useState(null);
   const [sizeDetails, setSizeDetails] = useState([]);
   const [error, setError] = useState(null);
+  const [liked, setLiked] = useState(false); // 좋아요 상태
 
   useEffect(() => {
     axios
@@ -26,6 +31,7 @@ const ProductDetail = () => {
           setCare(response.data.fabricAndCare.care);
         }
         setSizeDetails(response.data.sizeDetails);
+        setLiked(response.data.product.is_liked); // 서버에서 초기 좋아요 상태를 받아올 경우
       })
       .catch((error) => {
         console.error(
@@ -35,6 +41,25 @@ const ProductDetail = () => {
         setError("There was an error fetching the product details.");
       });
   }, [productName, productId]);
+
+  const toggleLike = (productId) => {
+    const newLikedStatus = !liked;
+    setLiked(newLikedStatus);
+
+    const url = newLikedStatus
+      ? `http://127.0.0.1:5000/product/wishlist/add`
+      : `http://127.0.0.1:5000/product/wishlist/remove`;
+
+    axios
+      .post(url, { member_id: "test1111", product_id: productId }) // member_id는 실제 로그인된 사용자 ID로 변경
+      .then((response) => {
+        console.log(response.data.message);
+      })
+      .catch((error) => {
+        console.error("There was an error updating the wishlist!", error);
+        setLiked(!newLikedStatus); // 에러가 발생한 경우 상태 롤백
+      });
+  };
 
   if (error) {
     return <div>{error}</div>;
@@ -55,11 +80,19 @@ const ProductDetail = () => {
         <section className="productInfo_section">
           <div className="productInfo_wrap">
             <div className="productInfo_top">
-              <div className="product_NamePrice">
-                <p className="productName">{product.p_name}</p>
-                <p className="productPrice">
-                  {Number(product.p_price).toLocaleString()}원
-                </p>
+              <div className="product_header">
+                <div className="product_NamePrice">
+                  <p className="productName">{product.p_name}</p>
+                  <p className="productPrice">
+                    {Number(product.p_price).toLocaleString()}원
+                  </p>
+                </div>
+                <span
+                  className="wishList_icon"
+                  onClick={() => toggleLike(product.product_id)}
+                >
+                  {liked ? <FaHeart /> : <FiHeart />}
+                </span>
               </div>
               <div className="product_desc">
                 <p>{product.p_info}</p>
@@ -102,9 +135,6 @@ const ProductDetail = () => {
                 </div>
                 <div className="addToCart_btn">
                   <a>Add to Cart</a>
-                </div>
-                <div className="wishList_btn">
-                  <a>Wish List</a>
                 </div>
               </div>
             </div>

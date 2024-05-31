@@ -41,3 +41,25 @@
   color: $gray;
   position: relative;
 }
+
+// 좋아요 아이콘 스타일 추가
+.thumbnail_wish {
+  margin-top: 10px;
+  font-size: 20px;
+  display: flex;
+  justify-content: flex-start;
+
+  p {
+    cursor: pointer;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+  }
+
+  // 아이콘 크기 및 색상 설정
+  svg {
+    width: 24px;
+    height: 24px;
+    color: #ff0000; // 아이콘 색상 설정
+  }
+}

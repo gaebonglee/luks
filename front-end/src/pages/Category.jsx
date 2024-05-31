@@ -3,10 +3,15 @@ import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import "../style/product/Category.scss";
 
+//아이콘
+import { FiHeart } from "react-icons/fi";
+import { FaHeart } from "react-icons/fa";
+
 const Category = () => {
   const { category, subcategory } = useParams();
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
+  const [likedProducts, setLikedProducts] = useState({}); // 좋아요 상태 관리
 
   useEffect(() => {
     let apiUrl = `http://127.0.0.1:5000/category/${category}`;
@@ -27,6 +32,13 @@ const Category = () => {
         setError("There was an error fetching the product details.");
       });
   }, [category, subcategory]);
+
+  const toggleLike = (productId) => {
+    setLikedProducts((prevLikedProducts) => ({
+      ...prevLikedProducts,
+      [productId]: !prevLikedProducts[productId],
+    }));
+  };
 
   if (error) {
     return <div>{error}</div>;
@@ -60,6 +72,15 @@ const Category = () => {
                   </p>
                   <div className="thumbnail_productPrice">
                     {product.p_price.toLocaleString()}원
+                  </div>
+                  <div className="thumbnail_wish">
+                    <p onClick={() => toggleLike(product.product_id)}>
+                      {likedProducts[product.product_id] ? (
+                        <FaHeart />
+                      ) : (
+                        <FiHeart />
+                      )}
+                    </p>
                   </div>
                 </div>
               </li>
