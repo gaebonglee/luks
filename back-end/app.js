@@ -8,6 +8,7 @@ const categoryRouter = require("./routes/category");
 const joinRouter = require("./routes/join");
 const loginRouter = require("./routes/login");
 const logoutRouter = require("./routes/logout");
+const mypageRouter = require("./routes/mypage");
 
 const app = express();
 
@@ -50,7 +51,8 @@ app.use("/category", categoryRouter);
 app.use("/product", productRouter);
 app.use("/join", joinRouter);
 app.use("/login", loginRouter);
-app.use("/logout", logoutRouter); 
+app.use("/logout", logoutRouter);
+app.use("/mypage", mypageRouter); // 라우터 설정 확인
 
 // 세션 상태 확인 라우트 추가
 app.get("/check-session", (req, res) => {
