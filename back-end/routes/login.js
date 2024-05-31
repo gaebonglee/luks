@@ -8,7 +8,7 @@ router.post("/", (req, res) => {
 
   console.log("Received member data: ", { member_id, member_pw });
 
-  selectMemberIdPw(member_id, member_pw, (err, isValidUser) => {
+  selectMemberIdPw(member_id, member_pw, (err, user) => {
     if (err) {
       console.error("Error during login: ", err);
       return res
@@ -16,9 +16,15 @@ router.post("/", (req, res) => {
         .json({ success: false, message: "Internal server error" });
     }
 
-    if (isValidUser) {
+    if (user) {
+      // 세션에 사용자 정보 저장
       req.session.user = {
-        id: member_id,
+        id: user.member_id,
+        member_name: user.member_name,
+        phonenumber: user.phonenumber,
+        postcode: user.postcode,
+        basic_address: user.basic_address,
+        detail_address: user.detail_address,
       };
       req.session.save((err) => {
         if (err) {
@@ -39,6 +45,5 @@ router.post("/", (req, res) => {
     }
   });
 });
-
 
 module.exports = router;

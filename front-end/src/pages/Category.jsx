@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
+import ProductWish from "../components/product/ProductWish";
 import "../style/product/Category.scss";
 
 const Category = () => {
@@ -60,6 +61,9 @@ const Category = () => {
                   </p>
                   <div className="thumbnail_productPrice">
                     {product.p_price.toLocaleString()}원
+                  </div>
+                  <div className="thumbnail_wish">
+                    <ProductWish productId={product.product_id} />
                   </div>
                 </div>
               </li>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import InfoAdd from "./InfoAdd";
+import ProductWish from "./ProductWish";
 import "../../style/product/ProductDetail.scss";
 
 const ProductDetail = () => {
@@ -55,11 +56,14 @@ const ProductDetail = () => {
         <section className="productInfo_section">
           <div className="productInfo_wrap">
             <div className="productInfo_top">
-              <div className="product_NamePrice">
-                <p className="productName">{product.p_name}</p>
-                <p className="productPrice">
-                  {Number(product.p_price).toLocaleString()}원
-                </p>
+              <div className="product_header">
+                <div className="product_NamePrice">
+                  <p className="productName">{product.p_name}</p>
+                  <p className="productPrice">
+                    {Number(product.p_price).toLocaleString()}원
+                  </p>
+                </div>
+                <ProductWish productId={product.product_id} />
               </div>
               <div className="product_desc">
                 <p>{product.p_info}</p>
@@ -102,9 +106,6 @@ const ProductDetail = () => {
                 </div>
                 <div className="addToCart_btn">
                   <a>Add to Cart</a>
-                </div>
-                <div className="wishList_btn">
-                  <a>Wish List</a>
                 </div>
               </div>
             </div>

@@ -1,13 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import "../../style/mypage/MypageMenu.scss";
+import axios from "axios";
 
 const MypageMenu = () => {
+  const [memberName, setMemberName] = useState("");
+
+  useEffect(() => {
+    const fetchMemberName = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/mypage", {
+          withCredentials: true,
+        });
+        setMemberName(response.data.member.member_name);
+      } catch (error) {
+        console.error("Failed to fetch member name", error);
+      }
+    };
+
+    fetchMemberName();
+  }, []);
+
   return (
     <section className="left_section">
       <div className="mypageMenu_wrap">
         <div className="mypageMenu_top">
-          <p>@@@님</p>
+          <p>{memberName}님</p>
         </div>
         <div className="mypageMenu_bottom">
           <div className="myOrder">
@@ -49,7 +67,7 @@ const MypageMenu = () => {
             <ul>
               <li>
                 <NavLink
-                  to="/mypage/info"
+                  to="/mypage/memberinfo"
                   className={({ isActive }) => (isActive ? "active" : "")}
                 >
                   회원 정보수정
