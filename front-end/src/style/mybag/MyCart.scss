@@ -39,6 +39,13 @@ tbody {
   width: 10%;
 }
 
+.mybag_checkbox_column {
+  input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+  }
+}
+
 .mybag_quantity_column {
   align-content: center;
 }

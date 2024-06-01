@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import "../../style/mybag/MyCart.scss";
 import { AiOutlineCloseSquare } from "react-icons/ai";
+import MyCartDeleteBtn from "./MyCartDeleteBtn";
 
 const MyCart = () => {
   const [cart, setCart] = useState([]);
@@ -33,6 +34,7 @@ const MyCart = () => {
         const response = await axios.get(`http://localhost:5000/cart/mycart`, {
           withCredentials: true,
         });
+        console.log("Cart data:", response.data.products);
         setCart(response.data.products);
         setLoading(false);
       } catch (error) {
@@ -46,14 +48,31 @@ const MyCart = () => {
     fetchCart();
   }, [isLoggedIn]);
 
-  const handleRemove = async (productId) => {
+  const handleRemove = async (productId, colorId, sizeId) => {
+    console.log(
+      "Remove item - productId:",
+      productId,
+      "colorId:",
+      colorId,
+      "sizeId:",
+      sizeId
+    );
     try {
       await axios.post(
         `http://localhost:5000/cart/remove`,
-        { product_id: productId },
+        { product_id: productId, color_id: colorId, size_id: sizeId },
         { withCredentials: true }
       );
-      setCart(cart.filter((item) => item.product_id !== productId));
+      setCart(
+        cart.filter(
+          (item) =>
+            !(
+              item.product_id === productId &&
+              item.color_id === colorId &&
+              item.size_id === sizeId
+            )
+        )
+      );
     } catch (error) {
       console.error(
         "There was an error removing the item from the cart!",
@@ -90,7 +109,9 @@ const MyCart = () => {
             </tr>
           ) : (
             cart.map((product) => (
-              <tr key={product.product_id}>
+              <tr
+                key={`${product.product_id}-${product.color_id}-${product.size_id}`}
+              >
                 <td className="mybag_checkbox_column">
                   <input type="checkbox" />
                 </td>
@@ -119,7 +140,13 @@ const MyCart = () => {
                   <button
                     type="button"
                     className="mybag_close_btn"
-                    onClick={() => handleRemove(product.product_id)}
+                    onClick={() =>
+                      handleRemove(
+                        product.product_id,
+                        product.color_id,
+                        product.size_id
+                      )
+                    }
                   >
                     <AiOutlineCloseSquare />
                   </button>

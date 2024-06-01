@@ -19,16 +19,22 @@ function addToCart(memberId, productId, colorId, sizeId, quantity, callback) {
   );
 }
 
-function removeFromCart(memberId, productId, callback) {
-  const query = `DELETE FROM cart WHERE member_id = ? AND product_id = ?`;
-  connection.query(query, [memberId, productId], (error, results) => {
-    if (error) {
-      console.error("Database query error:", error);
-      callback(error, null);
-    } else {
-      callback(null, results);
+function removeFromCart(memberId, productId, colorId, sizeId, callback) {
+  const query = `
+    DELETE FROM cart 
+    WHERE member_id = ? AND product_id = ? AND color_id = ? AND size_id = ?`;
+  connection.query(
+    query,
+    [memberId, productId, colorId, sizeId],
+    (error, results) => {
+      if (error) {
+        console.error("Database query error:", error);
+        callback(error, null);
+      } else {
+        callback(null, results);
+      }
     }
-  });
+  );
 }
 
 function getCartItemStatus(memberId, productId, callback) {
@@ -46,8 +52,10 @@ function getCartItemStatus(memberId, productId, callback) {
 function getCart(memberId, callback) {
   const query = `
     SELECT 
-      p.*, 
-      c.quantity, 
+      c.*, 
+      p.p_name, 
+      p.p_image_url, 
+      p.p_price, 
       cl.color_name, 
       s.size 
     FROM cart c

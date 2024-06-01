@@ -52,17 +52,26 @@ router.post("/remove", (req, res) => {
   if (!req.session.user) {
     return res.status(401).json({ success: false, message: "Unauthorized" });
   }
-  const { product_id } = req.body;
+  const { product_id, color_id, size_id } = req.body;
   const member_id = req.session.user.id;
+
+  if (!product_id || !color_id || !size_id) {
+    console.log("Invalid request data:", { product_id, color_id, size_id });
+    return res.status(400).json({ success: false, message: "Invalid request" });
+  }
 
   console.log(
     "Remove from cart - member_id:",
     member_id,
     "product_id:",
-    product_id
-  ); // 로깅 추가
+    product_id,
+    "color_id:",
+    color_id,
+    "size_id:",
+    size_id
+  );
 
-  removeFromCart(member_id, product_id, (error, results) => {
+  removeFromCart(member_id, product_id, color_id, size_id, (error, results) => {
     if (error) {
       return res
         .status(500)
@@ -97,7 +106,7 @@ router.get("/item-status/:product_id", (req, res) => {
   });
 });
 
-// 장바구니 목록 조회
+// 장바구니 항목 가져오기
 router.get("/mycart", (req, res) => {
   if (!req.session.user) {
     return res.status(401).json({ success: false, message: "Unauthorized" });
