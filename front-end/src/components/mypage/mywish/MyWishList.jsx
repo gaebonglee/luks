@@ -56,7 +56,9 @@ const MyWishList = () => {
       <div className="wish_productWrap">
         <ul className="thumbnail">
           {wishList.length === 0 ? (
-            <p>좋아요한 상품이 없습니다.</p>
+            <div className="wishlist_text">
+              <p>위시리스트가 비어있습니다.</p>
+            </div>
           ) : (
             wishList.map((product) => (
               <li key={product.product_id}>
