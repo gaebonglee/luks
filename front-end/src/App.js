@@ -8,6 +8,7 @@ import JoinPage from "./pages/JoinPage";
 import Mypage from "./pages/Mypage";
 import Category from "./pages/Category";
 import ProductDetail from "./components/product/ProductDetail";
+import MyBag from "./components/mybag/MyBag";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
@@ -44,6 +45,7 @@ const App = () => {
             path="/product/:productName/:productId"
             element={<ProductDetail />}
           />
+          <Route path="/mybag" element={<MyBag />} />
         </Route>
       </Routes>
     </Router>
