@@ -4,8 +4,6 @@ import MypageMenu from "../components/mypage/MypageMenu";
 import MypageMain from "../components/mypage/MypageMain";
 import MyOrder from "../components/mypage/myorder/MyOrder";
 import MyWishList from "../components/mypage/mywish/MyWishList";
-import "../style/mypage/Mypage.scss";
-
 const Mypage = () => {
   return (
     <div className="Mypage">

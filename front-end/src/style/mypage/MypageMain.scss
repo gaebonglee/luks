@@ -1,5 +1,16 @@
 @import "../common.scss";
 
+.Mypage {
+  display: flex;
+  padding: 0 8rem;
+  justify-content: space-between;
+  min-width: 1000px;
+  max-width: 1600px;
+  margin: 40px auto 0;
+  min-height: 550px;
+}
+
+
 .right_section {
   width: 100%;
 }

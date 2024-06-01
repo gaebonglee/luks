@@ -51,64 +51,47 @@ const MyWishList = () => {
     fetchWishList();
   }, [isLoggedIn]);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>{error}</div>;
-  }
-
-  if (!isLoggedIn) {
-    return (
-      <div>
-        <p>로그인이 필요합니다.</p>
-        <button onClick={() => (window.location.href = "/login")}>
-          로그인
-        </button>
-      </div>
-    );
-  }
-
   return (
-    <div className="wish_productWrap">
-      <ul className="thumbnail">
-        {wishList.length === 0 ? (
-          <p>좋아요한 상품이 없습니다.</p>
-        ) : (
-          wishList.map((product) => (
-            <li key={product.product_id}>
-              <div className="thumbnail_img">
-                <Link
-                  to={`/product/${encodeURIComponent(product.p_name)}/${
-                    product.product_id
-                  }`}
-                >
-                  <img src={product.p_image_url} alt={product.p_name} />
-                </Link>
-              </div>
-              <div className="thumbnail_info">
-                <p className="thumbnail_productName">
+    <section className="right_section">
+      <div className="wish_productWrap">
+        <ul className="thumbnail">
+          {wishList.length === 0 ? (
+            <p>좋아요한 상품이 없습니다.</p>
+          ) : (
+            wishList.map((product) => (
+              <li key={product.product_id}>
+                <div className="thumbnail_img">
                   <Link
                     to={`/product/${encodeURIComponent(product.p_name)}/${
                       product.product_id
                     }`}
                   >
-                    <span>{product.p_name.toLowerCase()}</span>
+                    <img src={product.p_image_url} alt={product.p_name} />
                   </Link>
-                </p>
-                <div className="thumbnail_productPrice">
-                  {product.p_price.toLocaleString()}원
                 </div>
-                <div className="thumbnail_wish">
-                  <ProductWish productId={product.product_id} />
+                <div className="thumbnail_info">
+                  <p className="thumbnail_productName">
+                    <Link
+                      to={`/product/${encodeURIComponent(product.p_name)}/${
+                        product.product_id
+                      }`}
+                    >
+                      <span>{product.p_name.toLowerCase()}</span>
+                    </Link>
+                  </p>
+                  <div className="thumbnail_productPrice">
+                    {product.p_price.toLocaleString()}원
+                  </div>
+                  <div className="thumbnail_wish">
+                    <ProductWish productId={product.product_id} />
+                  </div>
                 </div>
-              </div>
-            </li>
-          ))
-        )}
-      </ul>
-    </div>
+              </li>
+            ))
+          )}
+        </ul>
+      </div>
+    </section>
   );
 };
 

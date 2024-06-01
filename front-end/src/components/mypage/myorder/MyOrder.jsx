@@ -3,7 +3,7 @@ import "../../../style/mypage/MyOrder.scss";
 
 const MyOrder = () => {
   return (
-    <section className="myOrder_section">
+    <section className="right_section">
       <div className="myOrder_wrap">
         <div className="myOrder_title">
           <p>주문배송조회</p>
