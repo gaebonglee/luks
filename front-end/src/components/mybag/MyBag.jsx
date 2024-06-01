@@ -1,5 +1,5 @@
 import React from "react";
-import MybagProducts from "./MybagProducts";
+import MybagProducts from "./MyCart";
 import "../../style/mybag/Mybag.scss";
 
 //아이콘

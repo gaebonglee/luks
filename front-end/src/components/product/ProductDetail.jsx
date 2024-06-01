@@ -14,6 +14,8 @@ const ProductDetail = () => {
   const [fabric, setFabric] = useState(null);
   const [care, setCare] = useState(null);
   const [sizeDetails, setSizeDetails] = useState([]);
+  const [selectedColor, setSelectedColor] = useState(null);
+  const [selectedSize, setSelectedSize] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -46,6 +48,16 @@ const ProductDetail = () => {
     return <div>Loading...</div>;
   }
 
+  const handleColorChange = (event) => {
+    const selectedColorId = colors.find(color => color.color_name === event.target.value)?.color_id;
+    setSelectedColor(selectedColorId);
+  };
+
+  const handleSizeChange = (event) => {
+    const selectedSizeId = sizes.find(size => size.size === event.target.value)?.size_id;
+    setSelectedSize(selectedSizeId);
+  };
+
   return (
     <div className="ProductDetail_container">
       <div className="ProductDetail_wrap">
@@ -75,7 +87,7 @@ const ProductDetail = () => {
                 <li className="product_colorOption">
                   <label>COLOR</label>
                   <div className="product_optionValue">
-                    <select className="productOption1" id="productOption1">
+                    <select className="productOption1" id="productOption1" onChange={handleColorChange}>
                       <option value={"*"}>[필수] COLOR 선택</option>
                       {colors.map((color) => (
                         <option key={color.color_id} value={color.color_name}>
@@ -88,7 +100,7 @@ const ProductDetail = () => {
                 <li className="product_sizeOption">
                   <label>SIZE</label>
                   <div className="product_optionValue">
-                    <select className="productOption2" id="productOption2">
+                    <select className="productOption2" id="productOption2" onChange={handleSizeChange}>
                       <option value={"*"}>[필수] SIZE 선택</option>
                       {sizes.map((size) => (
                         <option key={size.size_id} value={size.size}>
@@ -100,7 +112,7 @@ const ProductDetail = () => {
                 </li>
               </ul>
             </div>
-            <ProductBtn />
+            <ProductBtn productId={product.product_id} colorId={selectedColor} sizeId={selectedSize} />
             <InfoAdd fabric={fabric} care={care} sizeDetails={sizeDetails} />
           </div>
         </section>
