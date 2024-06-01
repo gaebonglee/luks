@@ -18,7 +18,7 @@ th {
 }
 
 td {
-  padding: 30px 20px;
+  padding: 20px;
   text-align: center;
 }
 
@@ -68,24 +68,32 @@ tbody {
 }
 
 .mybag_info_image {
-  width: 100px;
-  height: 100px;
-  background-color: #f0f0f0;
+  width: 120px;
   padding-right: 10px;
 }
 
-.mybag_info_detail {
+.mybag_info_detailWrap {
   width: 90%;
+  padding-left: 10px;
+}
+.mybag_info_detail {
   display: flex;
   flex-direction: column;
   gap: 5px;
-  padding-left: 10px;
-
-  div {
-    font-size: 13px;
+  .name {
+    font-size: $h3;
+    font-weight: $weight3;
+  }
+  p {
+    font-size: 15px;
   }
 }
 
+.mybag_info_detail_colorSize {
+  display: flex;
+  gap: 10px;
+  font-size: 14px;
+}
 .mybag_close_btn {
   position: absolute;
   top: 20px;

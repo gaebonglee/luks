@@ -45,8 +45,15 @@ function getCartItemStatus(memberId, productId, callback) {
 
 function getCart(memberId, callback) {
   const query = `
-    SELECT p.*, c.quantity FROM cart c
+    SELECT 
+      p.*, 
+      c.quantity, 
+      cl.color_name, 
+      s.size 
+    FROM cart c
     JOIN product p ON c.product_id = p.product_id
+    JOIN colors cl ON c.color_id = cl.color_id
+    JOIN sizes s ON c.size_id = s.size_id
     WHERE c.member_id = ?`;
   connection.query(query, [memberId], (error, results) => {
     if (error) {

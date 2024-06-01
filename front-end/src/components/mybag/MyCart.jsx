@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import "../../style/mybag/MybagProducts.scss";
+import "../../style/mybag/MyCart.scss";
 import { AiOutlineCloseSquare } from "react-icons/ai";
 
 const MyCart = () => {
@@ -104,10 +104,17 @@ const MyCart = () => {
                       <img src={product.p_image_url} alt={product.p_name} />
                     </Link>
                   </div>
-                  <div className="mybag_info_detail">
-                    <div>{product.p_name}</div>
-                    <div>{product.p_price.toLocaleString()}원</div>
-                    <div>선택옵션</div>
+                  <div className="mybag_info_detailWrap">
+                    <div className="mybag_info_detail">
+                      <div className="mybag_info_detail name">
+                        {product.p_name}
+                      </div>
+                      <p>{product.p_price.toLocaleString()}원</p>
+                      <div className="mybag_info_detail_colorSize">
+                        <a>색상: {product.color_name}</a>
+                        <a>사이즈: {product.size}</a>
+                      </div>
+                    </div>
                   </div>
                   <button
                     type="button"
