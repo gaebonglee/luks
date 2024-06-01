@@ -33,6 +33,7 @@ router.post("/", (req, res) => {
             .status(500)
             .json({ success: false, message: "Internal server error" });
         }
+        console.log("Session saved: ", req.session.user);
         res
           .status(200)
           .json({ success: true, message: "로그인이 완료되었습니다." });

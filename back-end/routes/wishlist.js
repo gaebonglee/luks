@@ -5,6 +5,7 @@ const { removeWishList } = require("../sql/wishlist/removeWishList");
 const {
   getWishListItemStatus,
 } = require("../sql/wishlist/getWishListItemStatus");
+const { getWishList } = require("../sql/wishlist/getWishList");
 
 // 좋아요 추가
 router.post("/add", (req, res) => {
@@ -80,13 +81,31 @@ router.get("/item-status/:product_id", (req, res) => {
         .status(200)
         .json({ success: true, liked_at: null, unliked_at: null });
     }
-    res
-      .status(200)
-      .json({
-        success: true,
-        liked_at: results[0].liked_at,
-        unliked_at: results[0].unliked_at,
-      });
+    res.status(200).json({
+      success: true,
+      liked_at: results[0].liked_at,
+      unliked_at: results[0].unliked_at,
+    });
+  });
+});
+
+// 좋아요 목록 조회(components\mypage\mywish\MyWishList.jsx)
+router.get("/mywish", (req, res) => {
+  if (!req.session.user) {
+    console.log("Unauthorized access attempt to /mywish");
+    return res.status(401).json({ success: false, message: "Unauthorized" });
+  }
+  const member_id = req.session.user.id;
+  console.log(`Fetching wishlist for member_id: ${member_id}`);
+
+  getWishList(member_id, (error, results) => {
+    if (error) {
+      console.log("Database query error:", error);
+      return res
+        .status(500)
+        .json({ success: false, message: "Internal server error" });
+    }
+    res.status(200).json({ success: true, products: results });
   });
 });
 
