@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import InfoAdd from "./InfoAdd";
 import ProductWish from "./ProductWish";
+import ProductBtn from "./ProductBtn";
 import "../../style/product/ProductDetail.scss";
 
 const ProductDetail = () => {
@@ -99,16 +100,7 @@ const ProductDetail = () => {
                 </li>
               </ul>
             </div>
-            <div className="productInfo_bottom">
-              <div className="product_btnWrap">
-                <div className="buyNow_btn">
-                  <a>Buy Now</a>
-                </div>
-                <div className="addToCart_btn">
-                  <a>Add to Cart</a>
-                </div>
-              </div>
-            </div>
+            <ProductBtn />
             <InfoAdd fabric={fabric} care={care} sizeDetails={sizeDetails} />
           </div>
         </section>
