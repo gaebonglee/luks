@@ -49,12 +49,10 @@ router.post("/remove", (req, res) => {
         .status(500)
         .json({ success: false, message: "Internal server error" });
     }
-    res
-      .status(200)
-      .json({
-        success: true,
-        message: "상품이 위시리스트에서 삭제되었습니다.",
-      });
+    res.status(200).json({
+      success: true,
+      message: "상품이 위시리스트에서 삭제되었습니다.",
+    });
   });
 });
 
@@ -65,10 +63,6 @@ router.get("/item-status/:product_id", (req, res) => {
   }
   const member_id = req.session.user.id; // 세션에서 사용자 ID 가져오기
   const { product_id } = req.params;
-
-  console.log(
-    `Fetching wishlist item status for member_id=${member_id}, product_id=${product_id}`
-  ); // 디버깅 로그
 
   getWishListItemStatus(member_id, product_id, (error, results) => {
     if (error) {

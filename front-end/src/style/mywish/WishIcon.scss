@@ -1,0 +1,22 @@
+@import "../common.scss";
+
+// 좋아요 아이콘 스타일 추가
+.thumbnail_wish {
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-start;
+
+  p {
+    cursor: pointer;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+  }
+
+  // 아이콘 크기 및 색상 설정
+  svg {
+    width: 16px;
+    height: 16px;
+    color: #ff0000; // 아이콘 색상 설정
+  }
+}

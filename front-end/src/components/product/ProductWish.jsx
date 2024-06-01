@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import "../../style/mywish/WishIcon.scss";
 import { FiHeart } from "react-icons/fi";
 import { FaHeart } from "react-icons/fa";
-import Swal from "sweetalert2"; // SweetAlert2 라이브러리 사용
+import Swal from "sweetalert2";
 
 const ProductWish = ({ productId }) => {
-  const [liked, setLiked] = useState(false); // 초기값 false
+  const [liked, setLiked] = useState(false);
   const [error, setError] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     const checkLoginStatus = async () => {
@@ -65,7 +66,7 @@ const ProductWish = ({ productId }) => {
         cancelButtonText: "취소",
       }).then((result) => {
         if (result.isConfirmed) {
-          window.location.href = "/login"; // 로그인 페이지로 이동
+          window.location.href = "/login";
         }
       });
       return;

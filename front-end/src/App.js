@@ -1,8 +1,8 @@
-// App.jsx
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Root from "./pages/Root";
 import Home from "./pages/Home";
+import PrivateRoute from "./components/private/PrivateRoute";
 import Login from "./components/login/Login";
 import JoinPage from "./pages/JoinPage";
 import Mypage from "./pages/Mypage";
@@ -27,7 +27,14 @@ const App = () => {
             element={<Login setIsLoggedIn={setIsLoggedIn} />}
           />
           <Route path="/join" element={<JoinPage />} />
-          <Route path="mypage/*" element={<Mypage />} />
+          <Route
+            path="mypage/*"
+            element={
+              <PrivateRoute allowedRoles={["member"]}>
+                <Mypage />
+              </PrivateRoute>
+            }
+          />
           <Route path="/category/:category" element={<Category />} />
           <Route
             path="/category/:category/:subcategory"

@@ -21,6 +21,7 @@ router.post("/", (req, res) => {
       req.session.user = {
         id: user.member_id,
         member_name: user.member_name,
+        role: user.member_roles,
         phonenumber: user.phonenumber,
         postcode: user.postcode,
         basic_address: user.basic_address,
