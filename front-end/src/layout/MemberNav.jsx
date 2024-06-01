@@ -13,7 +13,7 @@ const MemberNav = ({ handleLogout }) => (
       </Link>
     </div>
     <div className="header_like">
-      <Link to="/mypage/wishlist">
+      <Link to="/mypage/mywish">
         <FaHeart />
         <p>my wish</p>
       </Link>

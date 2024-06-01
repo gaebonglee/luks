@@ -54,7 +54,7 @@ const MypageMenu = () => {
             <ul>
               <li>
                 <NavLink
-                  to="/mypage/wishlist"
+                  to="/mypage/mywish"
                   className={({ isActive }) => (isActive ? "active" : "")}
                 >
                   나의 위시리스트

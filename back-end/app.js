@@ -59,6 +59,7 @@ app.use("/wishlist", wishListRouter);
 // 세션 상태 확인 라우트 추가
 app.get("/check-session", (req, res) => {
   if (req.session.user) {
+    console.log("Session data: ", req.session.user);
     res.status(200).json({ loggedIn: true, user: req.session.user });
   } else {
     res.status(200).json({ loggedIn: false });
