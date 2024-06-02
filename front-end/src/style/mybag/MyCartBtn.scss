@@ -1,0 +1,27 @@
+@import "../common.scss";
+
+.mybag_bottom {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+
+  button {
+    font-size: 14px;
+    background-color: #f44336;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: #d32f2f;
+    }
+  }
+}
+
+.mybag_bottom_DeleteBtn,
+.mybag_bottom_BuynowBtn {
+  display: flex;
+  gap: 15px;
+}

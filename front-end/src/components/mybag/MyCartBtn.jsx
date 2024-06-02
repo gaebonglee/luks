@@ -1,4 +1,5 @@
 import React from "react";
+import "../../style/mybag/MyCartBtn.scss";
 
 const MyCartBtn = () => {
   return (
@@ -8,6 +9,7 @@ const MyCartBtn = () => {
         <button>전체 삭제</button>
       </div>
       <div className="mybag_bottom_BuynowBtn">
+        <a>총가격 : </a>
         <button>구매하기</button>
       </div>
     </div>
