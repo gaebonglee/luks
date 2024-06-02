@@ -1,0 +1,30 @@
+@import "../common.scss";
+
+.checkout_container {
+  min-width: 900px;
+  max-width: 1600px;
+  margin: 0px auto;
+  padding: 0px 100px 200px;
+}
+
+.checkout_wrap {
+  display: flex;
+  justify-content: space-between;
+}
+
+.shippingInfo_container {
+  position: relative;
+  width: 55%;
+  min-width: 530px;
+}
+
+.paymentInfo_container {
+  position: sticky;
+  z-index: 5;
+  top: 116px;
+  overflow: auto;
+  flex: 1 1 0%;
+  min-width: 370px;
+  max-height: 1200px;
+  margin-left: 35px;
+}

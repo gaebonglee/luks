@@ -1,0 +1,106 @@
+@import "../common.scss";
+
+.paymentMethod_wrap {
+  position: relative;
+  border-top: 3px solid $mute4;
+  padding: 0 0 30px 0;
+}
+
+.paymentMethod_title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 74px;
+  border-bottom: 1px solid $mute2;
+  a {
+    margin: 0;
+    font-size: 18px;
+    font-weight: $weight2;
+  }
+}
+
+.paymentMethod_container {
+  position: relative;
+  padding: 20px 0px 50px;
+}
+
+.paymentMethod_flex {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 0px -3px;
+  li {
+    position: relative;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    width: 25%;
+    margin-top: 6px;
+    padding: 0px 3px;
+    button {
+      align-items: center;
+      justify-content: center;
+      min-width: 40px;
+      min-height: 25px;
+      position: relative;
+      display: flex;
+      width: 100%;
+      height: 44px;
+      padding: 0px 10px;
+      font-size: 14px;
+      word-break: keep-all;
+      border: 1px solid rgb(0, 0, 0);
+      color: rgb(255, 255, 255);
+      background-color: rgb(0, 0, 0);
+    }
+  }
+}
+.paymentMethod_info {
+  margin-bottom: 24px;
+  text-align: right;
+  button {
+    cursor: pointer;
+    border: none;
+    font-size: 14px;
+    background-color: white;
+    color: rgb(160, 160, 160);
+    text-decoration: underline;
+  }
+}
+
+.paymentMethod_eventWrap {
+  margin-top: 20px;
+  background-color: rgb(247, 247, 247);
+  padding: 12px;
+  li {
+    position: relative;
+    margin-bottom: 12px;
+    button {
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      max-width: 100%;
+      font-size: 14px;
+      color: rgb(0, 0, 0);
+      span {
+        flex-shrink: 0;
+        min-width: 36px;
+        height: 24px;
+        margin-right: 8px;
+        padding: 0px 7px;
+        font-size: 13px;
+        font-weight: 500;
+        line-height: 24px;
+        color: rgb(93, 93, 93);
+        background-color: rgb(255, 255, 255);
+      }
+      a {
+        position: relative;
+        overflow: hidden;
+        padding-right: 11px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+  }
+}
