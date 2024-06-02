@@ -137,6 +137,36 @@ const MyCart = () => {
     }
   };
 
+  const handleRemoveSelected = async () => {
+    try {
+      await axios.post(
+        `http://localhost:5000/cart/remove-multiple`,
+        {
+          items: selectedItems.map((item) => {
+            const [product_id, color_id, size_id] = item.split("-");
+            return { product_id, color_id, size_id };
+          }),
+        },
+        { withCredentials: true }
+      );
+
+      setCart(
+        cart.filter(
+          (item) =>
+            !selectedItems.includes(
+              `${item.product_id}-${item.color_id}-${item.size_id}`
+            )
+        )
+      );
+      setSelectedItems([]);
+    } catch (error) {
+      console.error(
+        "There was an error removing the selected items from the cart!",
+        error
+      );
+    }
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -188,7 +218,7 @@ const MyCart = () => {
           )}
         </tbody>
       </table>
-      <MyCartBtn />
+      <MyCartBtn onRemoveSelected={handleRemoveSelected} />
     </section>
   );
 };

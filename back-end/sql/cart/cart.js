@@ -5,7 +5,7 @@ function addToCart(memberId, productId, colorId, sizeId, quantity, callback) {
     INSERT INTO cart (member_id, product_id, color_id, size_id, quantity) 
     VALUES (?, ?, ?, ?, ?)
     ON DUPLICATE KEY UPDATE quantity = quantity + VALUES(quantity)`;
-  
+
   connection.query(
     query,
     [memberId, productId, colorId, sizeId, quantity],
@@ -38,6 +38,30 @@ function removeFromCart(memberId, productId, colorId, sizeId, callback) {
   );
 }
 
+function removeMultipleFromCart(memberId, items, callback) {
+  const query = `
+    DELETE FROM cart 
+    WHERE member_id = ? AND (product_id, color_id, size_id) IN (${items
+      .map(() => "(?, ?, ?)")
+      .join(",")})
+  `;
+
+  const values = items.flatMap(({ product_id, color_id, size_id }) => [
+    product_id,
+    color_id,
+    size_id,
+  ]);
+
+  connection.query(query, [memberId, ...values], (error, results) => {
+    if (error) {
+      console.error("Database query error:", error);
+      callback(error, null);
+    } else {
+      callback(null, results);
+    }
+  });
+}
+
 function getCartItemStatus(memberId, productId, callback) {
   const query = `SELECT quantity FROM cart WHERE member_id = ? AND product_id = ?`;
   connection.query(query, [memberId, productId], (error, results) => {
@@ -52,14 +76,18 @@ function getCartItemStatus(memberId, productId, callback) {
 
 function getCartItemQuantity(memberId, productId, colorId, sizeId, callback) {
   const query = `SELECT quantity FROM cart WHERE member_id = ? AND product_id = ? AND color_id = ? AND size_id = ?`;
-  connection.query(query, [memberId, productId, colorId, sizeId], (error, results) => {
-    if (error) {
-      console.error("Database query error:", error);
-      callback(error, null);
-    } else {
-      callback(null, results);
+  connection.query(
+    query,
+    [memberId, productId, colorId, sizeId],
+    (error, results) => {
+      if (error) {
+        console.error("Database query error:", error);
+        callback(error, null);
+      } else {
+        callback(null, results);
+      }
     }
-  });
+  );
 }
 
 function getCart(memberId, callback) {
@@ -93,6 +121,7 @@ function getCart(memberId, callback) {
 module.exports = {
   addToCart,
   removeFromCart,
+  removeMultipleFromCart,
   getCartItemStatus,
   getCartItemQuantity,
   getCart,

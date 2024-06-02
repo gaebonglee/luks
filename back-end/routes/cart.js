@@ -3,6 +3,7 @@ const router = express.Router();
 const {
   addToCart,
   removeFromCart,
+  removeMultipleFromCart,
   getCartItemStatus,
   getCartItemQuantity,
   getCart,
@@ -81,6 +82,38 @@ router.post("/remove", (req, res) => {
     res
       .status(200)
       .json({ success: true, message: "상품이 장바구니에서 삭제되었습니다." });
+  });
+});
+
+// 여러 항목 삭제
+router.post("/remove-multiple", (req, res) => {
+  if (!req.session.user) {
+    return res.status(401).json({ success: false, message: "Unauthorized" });
+  }
+  const { items } = req.body;
+  const member_id = req.session.user.id;
+
+  if (!items || !Array.isArray(items) || items.length === 0) {
+    return res.status(400).json({ success: false, message: "Invalid request" });
+  }
+
+  console.log(
+    "Remove multiple from cart - member_id:",
+    member_id,
+    "items:",
+    items
+  );
+
+  removeMultipleFromCart(member_id, items, (error, results) => {
+    if (error) {
+      return res
+        .status(500)
+        .json({ success: false, message: "Internal server error" });
+    }
+    res.status(200).json({
+      success: true,
+      message: "선택된 상품이 장바구니에서 삭제되었습니다.",
+    });
   });
 });
 
