@@ -10,6 +10,7 @@ const MyCart = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [selectedItems, setSelectedItems] = useState([]);
 
   useEffect(() => {
     const checkLoginStatus = async () => {
@@ -81,6 +82,27 @@ const MyCart = () => {
     }
   };
 
+  const handleSelectAll = () => {
+    if (selectedItems.length === cart.length) {
+      setSelectedItems([]);
+    } else {
+      setSelectedItems(
+        cart.map(
+          (item) => `${item.product_id}-${item.color_id}-${item.size_id}`
+        )
+      );
+    }
+  };
+
+  const handleSelectItem = (productId, colorId, sizeId) => {
+    const itemKey = `${productId}-${colorId}-${sizeId}`;
+    if (selectedItems.includes(itemKey)) {
+      setSelectedItems(selectedItems.filter((key) => key !== itemKey));
+    } else {
+      setSelectedItems([...selectedItems, itemKey]);
+    }
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -95,7 +117,11 @@ const MyCart = () => {
         <thead>
           <tr>
             <th className="mybag_checkbox_column">
-              <input type="checkbox" />
+              <input
+                type="checkbox"
+                checked={selectedItems.length === cart.length}
+                onChange={handleSelectAll}
+              />
             </th>
             <th>상품정보</th>
             <th className="mybag_quantity_column">수량</th>
@@ -108,71 +134,79 @@ const MyCart = () => {
               <td colSpan="4">장바구니가 비어 있습니다.</td>
             </tr>
           ) : (
-            cart.map((product) => (
-              <tr
-                key={`${product.product_id}-${product.color_id}-${product.size_id}`}
-              >
-                <td className="mybag_checkbox_column">
-                  <input type="checkbox" />
-                </td>
-                <td className="mybag_info_column">
-                  <div className="mybag_info_image">
-                    <Link
-                      to={`/product/${encodeURIComponent(product.p_name)}/${
-                        product.product_id
-                      }`}
-                    >
-                      <img src={product.p_image_url} alt={product.p_name} />
-                    </Link>
-                  </div>
-                  <div className="mybag_info_detailWrap">
-                    <div className="mybag_info_detail">
-                      <div className="mybag_info_detail name">
-                        {product.p_name}
-                      </div>
-                      <p>{product.p_price.toLocaleString()}원</p>
-                      <div className="mybag_info_detail_colorSize">
-                        <a>색상: {product.color_name}</a>
-                        <a>사이즈: {product.size}</a>
+            cart.map((product) => {
+              const itemKey = `${product.product_id}-${product.color_id}-${product.size_id}`;
+              return (
+                <tr key={itemKey}>
+                  <td className="mybag_checkbox_column">
+                    <input
+                      type="checkbox"
+                      checked={selectedItems.includes(itemKey)}
+                      onChange={() =>
+                        handleSelectItem(
+                          product.product_id,
+                          product.color_id,
+                          product.size_id
+                        )
+                      }
+                    />
+                  </td>
+                  <td className="mybag_info_column">
+                    <div className="mybag_info_image">
+                      <Link
+                        to={`/product/${encodeURIComponent(product.p_name)}/${
+                          product.product_id
+                        }`}
+                      >
+                        <img src={product.p_image_url} alt={product.p_name} />
+                      </Link>
+                    </div>
+                    <div className="mybag_info_detailWrap">
+                      <div className="mybag_info_detail">
+                        <div className="mybag_info_detail name">
+                          {product.p_name}
+                        </div>
+                        <p>{product.p_price.toLocaleString()}원</p>
+                        <div className="mybag_info_detail_colorSize">
+                          <a>색상: {product.color_name}</a>
+                          <a>사이즈: {product.size}</a>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <button
-                    type="button"
-                    className="mybag_close_btn"
-                    onClick={() =>
-                      handleRemove(
-                        product.product_id,
-                        product.color_id,
-                        product.size_id
-                      )
-                    }
-                  >
-                    <AiOutlineCloseSquare />
-                  </button>
-                </td>
-                <td className="mybag_quantity_column">
-                  <div className="mybag_quantity_wrap">
-                    <button>-</button>
-                    <input type="text" value={product.quantity} readOnly />
-                    <button>+</button>
-                  </div>
-                </td>
-                <td className="mybag_price_column">
-                  <p>
-                    {(product.p_price * product.quantity).toLocaleString()}원
-                  </p>
-                  <button>BUY NOW</button>
-                </td>
-              </tr>
-            ))
+                    <button
+                      type="button"
+                      className="mybag_close_btn"
+                      onClick={() =>
+                        handleRemove(
+                          product.product_id,
+                          product.color_id,
+                          product.size_id
+                        )
+                      }
+                    >
+                      <AiOutlineCloseSquare />
+                    </button>
+                  </td>
+                  <td className="mybag_quantity_column">
+                    <div className="mybag_quantity_wrap">
+                      <button>-</button>
+                      <input type="text" value={product.quantity} readOnly />
+                      <button>+</button>
+                    </div>
+                  </td>
+                  <td className="mybag_price_column">
+                    <p>
+                      {(product.p_price * product.quantity).toLocaleString()}원
+                    </p>
+                    <button>BUY NOW</button>
+                  </td>
+                </tr>
+              );
+            })
           )}
         </tbody>
       </table>
-      <div className="mybag_bottom">
-        <button>선택상품 삭제</button>
-        <button>품절상품 삭제</button>
-      </div>
+      <MyCartDeleteBtn />
     </section>
   );
 };
