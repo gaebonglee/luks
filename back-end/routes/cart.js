@@ -4,6 +4,7 @@ const {
   addToCart,
   removeFromCart,
   getCartItemStatus,
+  getCartItemQuantity,
   getCart,
 } = require("../sql/cart/cart");
 
@@ -104,6 +105,33 @@ router.get("/item-status/:product_id", (req, res) => {
       .status(200)
       .json({ success: true, in_cart: true, quantity: results[0].quantity });
   });
+});
+
+// 특정 상품의 현재 수량 조회
+router.get("/item-quantity", (req, res) => {
+  if (!req.session.user) {
+    return res.status(401).json({ success: false, message: "Unauthorized" });
+  }
+  const { product_id, color_id, size_id } = req.query;
+  const member_id = req.session.user.id;
+
+  getCartItemQuantity(
+    member_id,
+    product_id,
+    color_id,
+    size_id,
+    (error, results) => {
+      if (error) {
+        return res
+          .status(500)
+          .json({ success: false, message: "Internal server error" });
+      }
+      if (results.length === 0) {
+        return res.status(200).json({ success: true, quantity: 0 });
+      }
+      res.status(200).json({ success: true, quantity: results[0].quantity });
+    }
+  );
 });
 
 // 장바구니 항목 가져오기

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import "../../style/mybag/MyCart.scss";
-import { AiOutlineCloseSquare } from "react-icons/ai";
-import MyCartDeleteBtn from "./MyCartDeleteBtn";
+import CartItem from "./CartItem";
+import CartQuantity from "./CartQuantity";
+import MyCartBtn from "./MyCartBtn";
 
 const MyCart = () => {
   const [cart, setCart] = useState([]);
@@ -35,11 +35,9 @@ const MyCart = () => {
         const response = await axios.get(`http://localhost:5000/cart/mycart`, {
           withCredentials: true,
         });
-        console.log("Cart data:", response.data.products);
         setCart(response.data.products);
         setLoading(false);
       } catch (error) {
-        console.error("There was an error fetching the cart!", error);
         setError("There was an error fetching the cart.");
         setLoading(false);
       }
@@ -50,14 +48,6 @@ const MyCart = () => {
   }, [isLoggedIn]);
 
   const handleRemove = async (productId, colorId, sizeId) => {
-    console.log(
-      "Remove item - productId:",
-      productId,
-      "colorId:",
-      colorId,
-      "sizeId:",
-      sizeId
-    );
     try {
       await axios.post(
         `http://localhost:5000/cart/remove`,
@@ -79,6 +69,50 @@ const MyCart = () => {
         "There was an error removing the item from the cart!",
         error
       );
+    }
+  };
+
+  const handleQuantityChange = async (productId, colorId, sizeId, delta) => {
+    try {
+      const response = await axios.get(
+        "http://localhost:5000/cart/item-quantity",
+        {
+          params: {
+            product_id: productId,
+            color_id: colorId,
+            size_id: sizeId,
+          },
+          withCredentials: true,
+        }
+      );
+
+      const currentQuantity = response.data.quantity;
+      const newQuantity = currentQuantity + delta;
+
+      if (newQuantity > 0) {
+        await axios.post(
+          `http://localhost:5000/cart/add`,
+          {
+            product_id: productId,
+            color_id: colorId,
+            size_id: sizeId,
+            quantity: delta,
+          },
+          { withCredentials: true }
+        );
+
+        setCart(
+          cart.map((item) =>
+            item.product_id === productId &&
+            item.color_id === colorId &&
+            item.size_id === sizeId
+              ? { ...item, quantity: newQuantity }
+              : item
+          )
+        );
+      }
+    } catch (error) {
+      console.error("There was an error updating the quantity!", error);
     }
   };
 
@@ -138,75 +172,23 @@ const MyCart = () => {
               const itemKey = `${product.product_id}-${product.color_id}-${product.size_id}`;
               return (
                 <tr key={itemKey}>
-                  <td className="mybag_checkbox_column">
-                    <input
-                      type="checkbox"
-                      checked={selectedItems.includes(itemKey)}
-                      onChange={() =>
-                        handleSelectItem(
-                          product.product_id,
-                          product.color_id,
-                          product.size_id
-                        )
-                      }
-                    />
-                  </td>
-                  <td className="mybag_info_column">
-                    <div className="mybag_info_image">
-                      <Link
-                        to={`/product/${encodeURIComponent(product.p_name)}/${
-                          product.product_id
-                        }`}
-                      >
-                        <img src={product.p_image_url} alt={product.p_name} />
-                      </Link>
-                    </div>
-                    <div className="mybag_info_detailWrap">
-                      <div className="mybag_info_detail">
-                        <div className="mybag_info_detail name">
-                          {product.p_name}
-                        </div>
-                        <p>{product.p_price.toLocaleString()}원</p>
-                        <div className="mybag_info_detail_colorSize">
-                          <a>색상: {product.color_name}</a>
-                          <a>사이즈: {product.size}</a>
-                        </div>
-                      </div>
-                    </div>
-                    <button
-                      type="button"
-                      className="mybag_close_btn"
-                      onClick={() =>
-                        handleRemove(
-                          product.product_id,
-                          product.color_id,
-                          product.size_id
-                        )
-                      }
-                    >
-                      <AiOutlineCloseSquare />
-                    </button>
-                  </td>
-                  <td className="mybag_quantity_column">
-                    <div className="mybag_quantity_wrap">
-                      <button>-</button>
-                      <input type="text" value={product.quantity} readOnly />
-                      <button>+</button>
-                    </div>
-                  </td>
-                  <td className="mybag_price_column">
-                    <p>
-                      {(product.p_price * product.quantity).toLocaleString()}원
-                    </p>
-                    <button>BUY NOW</button>
-                  </td>
+                  <CartItem
+                    product={product}
+                    isSelected={selectedItems.includes(itemKey)}
+                    onToggleSelect={handleSelectItem}
+                    onRemove={handleRemove}
+                  />
+                  <CartQuantity
+                    product={product}
+                    onQuantityChange={handleQuantityChange}
+                  />
                 </tr>
               );
             })
           )}
         </tbody>
       </table>
-      <MyCartDeleteBtn />
+      <MyCartBtn />
     </section>
   );
 };
