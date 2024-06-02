@@ -1,7 +1,7 @@
 import React from "react";
 import "../../style/checkout/PaymentInfo.scss";
 
-const PaymentInfo = () => {
+const PaymentInfo = ({ totalAmount }) => {
   return (
     <section className="payment_section">
       <div className="payment_title">
@@ -12,7 +12,9 @@ const PaymentInfo = () => {
           <li>
             <div className="totalAmount_wrap">
               <span className="totalAmount_left">총 결제 금액</span>
-              <span className="totalAmount_right">원</span>
+              <span className="totalAmount_right">
+                {totalAmount.toLocaleString()}원
+              </span>
             </div>
           </li>
         </ul>
