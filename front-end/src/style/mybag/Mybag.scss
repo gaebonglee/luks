@@ -1,0 +1,22 @@
+@import "../common.scss";
+
+.mybag_container {
+  padding: 0px 50px 200px;
+}
+
+.bagAndOrder_title {
+  display: flex;
+  justify-content: center;
+  padding: 70px 0px 78px;
+  ul {
+    display: flex;
+    li {
+      a {
+        font-weight: 700;
+      }
+      svg {
+        color: $gray;
+      }
+    }
+  }
+}

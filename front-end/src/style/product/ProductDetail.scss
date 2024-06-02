@@ -36,9 +36,10 @@
 
 .product_header {
   display: flex;
-  justify-content: space-between; 
-  align-items: center; 
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
+  padding-bottom: 10px;
 }
 
 .product_NamePrice {
@@ -117,35 +118,38 @@
   border-top: 1px solid $lightgray;
   padding: 20px 0;
   display: flex;
-  justify-content: space-between; 
+  justify-content: space-between;
 }
 
 .buyNow_btn,
 .addToCart_btn {
-  flex: 1; 
-  margin-right: 10px; 
+  flex: 1;
+  margin-right: 10px;
 
   &:last-child {
-    margin-right: 0; 
+    margin-right: 0;
   }
 
-  a {
+  button {
     display: block;
-    height: 45px; 
+    width: 100%;
+    height: 45px;
     line-height: 45px;
     text-align: center;
-    border-radius: 5px; 
-    font-size: 16px; 
+    border-radius: 5px;
+    font-size: 16px;
     font-weight: bold;
+    border: none;
+    cursor: pointer; // 버튼에는 커서 스타일 추가
   }
 }
 
-.buyNow_btn a {
+.buyNow_btn button {
   background: #000;
   color: #fff;
 }
 
-.addToCart_btn a {
+.addToCart_btn button {
   background: #f8f8f8;
   color: #000;
   border: 1px solid $lightgray;

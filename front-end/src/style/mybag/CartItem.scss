@@ -1,0 +1,67 @@
+@import "../common.scss";
+
+.mybag_checkbox_column {
+  input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.mybag_info_column {
+  text-align: left;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.mybag_info_image {
+  width: 120px;
+  padding-right: 10px;
+}
+
+.mybag_info_detailWrap {
+  width: 90%;
+  padding-left: 10px;
+}
+
+.mybag_info_detail {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  .name {
+    font-size: $h3;
+    font-weight: $weight3;
+    text-align: left; /* 추가된 부분 */
+  }
+
+  p {
+    font-size: 15px;
+    text-align: left; /* 추가된 부분 */
+  }
+}
+
+.mybag_info_detail_colorSize {
+  display: flex;
+  gap: 10px;
+  font-size: 14px;
+  text-align: left; /* 추가된 부분 */
+}
+
+.mybag_close_btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #a0a0a0;
+
+  &:hover {
+    color: #000;
+  }
+
+  svg {
+    font-size: 25px;
+  }
+}
