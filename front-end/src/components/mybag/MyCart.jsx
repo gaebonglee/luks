@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import "../../style/mybag/MyCart.scss";
 import CartItem from "./CartItem";
 import CartQuantity from "./CartQuantity";
@@ -11,6 +12,7 @@ const MyCart = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedItems, setSelectedItems] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const checkLoginStatus = async () => {
@@ -175,6 +177,35 @@ const MyCart = () => {
     return <div>{error}</div>;
   }
 
+  const handleCalculateTotal = async () => {
+    try {
+      const response = await axios.post(
+        `http://localhost:5000/cart/calculate-total`,
+        {
+          items: selectedItems.map((item) => {
+            const [product_id, color_id, size_id] = item.split("-");
+            return { product_id, color_id, size_id };
+          }),
+        },
+        { withCredentials: true }
+      );
+      return response.data.total_price;
+    } catch (error) {
+      console.error("There was an error calculating the total price!", error);
+      return 0;
+    }
+  };
+
+  const handleCheckout = () => {
+    const selectedProductDetails = cart.filter((item) =>
+      selectedItems.includes(
+        `${item.product_id}-${item.color_id}-${item.size_id}`
+      )
+    );
+
+    navigate("/checkout", { state: { selectedProductDetails } });
+  };
+
   return (
     <section className="mybag_section">
       <table className="mybag_table">
@@ -218,7 +249,12 @@ const MyCart = () => {
           )}
         </tbody>
       </table>
-      <MyCartBtn onRemoveSelected={handleRemoveSelected} />
+      <MyCartBtn
+        onRemoveSelected={handleRemoveSelected}
+        calculateTotal={handleCalculateTotal}
+        onCheckout={handleCheckout}
+        selectedItems={selectedItems} 
+      />
     </section>
   );
 };
