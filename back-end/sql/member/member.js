@@ -11,7 +11,7 @@ function getMemberInfo(memberId, callback) {
         console.error(`No member found with id: ${memberId}`);
         callback(new Error("Member not found"), null);
       } else {
-        console.log(`Member info: ${JSON.stringify(results[0])}`);
+        
         callback(null, results[0]);
       }
     }

@@ -4,6 +4,7 @@ const {
   saveOrder,
   saveOrderItems,
   savePayment,
+  saveShippingInfo, 
 } = require("../sql/order/order");
 
 router.post("/checkout", async (req, res) => {
@@ -21,6 +22,7 @@ router.post("/checkout", async (req, res) => {
     console.log("Order ID:", orderId); // 콘솔에 Order ID 출력
     await saveOrderItems(orderId, orderItems);
     await savePayment(orderId, paymentMethod, totalAmount);
+    await saveShippingInfo(orderId, shippingInfo); 
 
     res
       .status(200)

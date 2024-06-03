@@ -17,7 +17,6 @@ router.get("/info", (req, res) => {
         .status(500)
         .json({ success: false, message: "Internal server error" });
     }
-    console.log(`Member info retrieved: ${JSON.stringify(memberInfo)}`);
     res.status(200).json({ success: true, member: memberInfo });
   });
 });

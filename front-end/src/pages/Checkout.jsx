@@ -13,6 +13,7 @@ const Checkout = () => {
   const selectedItems = location.state?.selectedProductDetails || [];
   const [paymentMethod, setPaymentMethod] = useState("");
   const [shippingInfo, setShippingInfo] = useState({
+    address_name: "",
     recipient_name: "",
     phonenumber: "",
     postcode: "",
@@ -64,9 +65,9 @@ const Checkout = () => {
       );
 
       if (response.data.success) {
-        Swal.fire("주문이 성공적으로 완료되었습니다.");
+        Swal.fire("상품 구매 완료되었습니다.");
       } else {
-        Swal.fire("주문에 실패했습니다.");
+        Swal.fire("상품 구매 실패했습니다.");
       }
     } catch (error) {
       console.error("Error during checkout:", error);

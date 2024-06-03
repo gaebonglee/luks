@@ -27,13 +27,13 @@ function saveOrderItems(orderId, items) {
     VALUES ${items.map(() => "(?, ?, ?, ?, ?, ?)").join(", ")}`;
 
   const values = items.flatMap(
-    ({ product_id, color_id, size_id, quantity, price }) => [
-      orderId, // 여기에 orderId를 올바르게 전달
+    ({ product_id, color_id, size_id, quantity, p_price }) => [
+      orderId,
       product_id,
       color_id,
       size_id,
       quantity,
-      price,
+      p_price * quantity, // Calculate price as p_price * quantity
     ]
   );
 
@@ -70,8 +70,37 @@ function savePayment(orderId, paymentMethod, amount) {
   });
 }
 
+function saveShippingInfo(orderId, shippingInfo) {
+  const query = `
+    INSERT INTO shipping_info (order_id, address_name, recipient_name, phone_number, postcode, address, detail_address, request)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
+
+  const values = [
+    orderId,
+    shippingInfo.address_name,
+    shippingInfo.recipient_name,
+    shippingInfo.phonenumber,
+    shippingInfo.postcode,
+    shippingInfo.basic_address,
+    shippingInfo.detail_address,
+    shippingInfo.request,
+  ];
+
+  return new Promise((resolve, reject) => {
+    connection.query(query, values, (error, results) => {
+      if (error) {
+        console.error("Database query error:", error);
+        reject(error);
+      } else {
+        resolve(results);
+      }
+    });
+  });
+}
+
 module.exports = {
   saveOrder,
   saveOrderItems,
   savePayment,
+  saveShippingInfo,
 };
