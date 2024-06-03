@@ -9,6 +9,7 @@ import Mypage from "./pages/Mypage";
 import Category from "./pages/Category";
 import ProductDetail from "./components/product/ProductDetail";
 import MyBag from "./components/mybag/MyBag";
+import Checkout from "./pages/Checkout";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
@@ -46,6 +47,7 @@ const App = () => {
             element={<ProductDetail />}
           />
           <Route path="/mybag" element={<MyBag />} />
+          <Route path="/checkout" element={<Checkout />} />
         </Route>
       </Routes>
     </Router>

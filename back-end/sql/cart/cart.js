@@ -118,6 +118,26 @@ function getCart(memberId, callback) {
   });
 }
 
+function calculateTotalPrice(memberId, items, callback) {
+  const query = `
+    SELECT SUM(p.p_price * c.quantity) AS total_price
+    FROM cart c
+    JOIN product p ON c.product_id = p.product_id
+    WHERE c.member_id = ? AND (c.product_id, c.color_id, c.size_id) IN (${items.map(() => "(?, ?, ?)").join(",")})
+  `;
+
+  const values = items.flatMap(({ product_id, color_id, size_id }) => [product_id, color_id, size_id]);
+
+  connection.query(query, [memberId, ...values], (error, results) => {
+    if (error) {
+      console.error("Database query error:", error);
+      callback(error, null);
+    } else {
+      callback(null, results);
+    }
+  });
+}
+
 module.exports = {
   addToCart,
   removeFromCart,
@@ -125,4 +145,5 @@ module.exports = {
   getCartItemStatus,
   getCartItemQuantity,
   getCart,
+  calculateTotalPrice,
 };

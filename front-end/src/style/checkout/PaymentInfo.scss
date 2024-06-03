@@ -1,0 +1,98 @@
+@import "../common.scss";
+
+.payment_section {
+  position: relative;
+  padding: 30px 40px;
+  border: 3px solid $mute4;
+}
+
+.payment_title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 70px;
+  border-bottom: 1px solid $lightgray;
+}
+
+.payment_ul {
+  margin: 30px 0px;
+  li {
+    align-items: stretch;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.totalAmount_wrap {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex: 1 1 0%;
+  padding: 10px 0px;
+  .totalAmount_left {
+    display: inline-block;
+    font-weight: $weight2;
+  }
+  .totalAmount_right {
+    font-size: $h2;
+    font-weight: $weight2;
+    color: $red;
+  }
+}
+
+.payment_AgreeWrap {
+  padding-top: 25px;
+  border-top: 1px solid $lightgray;
+  ul {
+    margin-top: 10px;
+    li {
+      padding-top: 10px;
+      a {
+        color: $gray;
+      }
+    }
+  }
+  p {
+    padding-top: 10px;
+    font-size: $h4;
+  }
+}
+
+.payment_allAgree {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  span {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    min-width: fit-content;
+    min-height: fit-content;
+    line-height: 24px;
+    vertical-align: middle;
+  }
+  a {
+    padding-left: 10px;
+    font-size: $h3;
+  }
+}
+
+.checkoutBtn {
+  margin-top: 30px;
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    min-height: 25px;
+    width: 100%;
+    height: 72px;
+    font-size: 26px;
+    font-weight: 600;
+    color: rgb(255, 255, 255);
+    background: $mute4;
+    border: none;
+  }
+}

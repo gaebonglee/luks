@@ -11,6 +11,9 @@ const logoutRouter = require("./routes/logout");
 const mypageRouter = require("./routes/mypage");
 const wishListRouter = require("./routes/wishlist");
 const cartRouter = require("./routes/cart");
+const memberRouter = require("./routes/member");
+const orderRouter = require("./routes/order");
+const paymentRouter = require("./routes/payment");
 
 const app = express();
 
@@ -57,6 +60,9 @@ app.use("/logout", logoutRouter);
 app.use("/mypage", mypageRouter);
 app.use("/wishlist", wishListRouter);
 app.use("/cart", cartRouter);
+app.use("/member", memberRouter);
+app.use("/payment", paymentRouter);
+app.use("/order", orderRouter);
 
 // 세션 상태 확인 라우트 추가
 app.get("/check-session", (req, res) => {
