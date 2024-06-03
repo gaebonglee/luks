@@ -8,7 +8,7 @@ const ShippingInfo = () => {
     phonenumber: "",
     postcode: "",
     basic_address: "",
-    detail_address: "",
+    detail_address: "",     
   });
 
   const handlePostcodeChange = (e) => {
@@ -32,10 +32,11 @@ const ShippingInfo = () => {
     }));
   };
 
+  //다음 주소찾기
   const openPostcode = () => {
     new window.daum.Postcode({
       oncomplete: function (data) {
-        let addr = ""; // 주소 변수
+        let addr = "";
 
         if (data.userSelectedType === "R") {
           addr = data.roadAddress;

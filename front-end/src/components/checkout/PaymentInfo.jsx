@@ -1,7 +1,7 @@
 import React from "react";
 import "../../style/checkout/PaymentInfo.scss";
 
-const PaymentInfo = ({ totalAmount }) => {
+const PaymentInfo = ({ totalAmount, onCheckout }) => {
   return (
     <section className="payment_section">
       <div className="payment_title">
@@ -40,7 +40,7 @@ const PaymentInfo = ({ totalAmount }) => {
           </p>
         </div>
         <div className="checkoutBtn">
-          <button>CHECK OUT</button>
+          <button onClick={onCheckout}>CHECK OUT</button>
         </div>
       </div>
     </section>

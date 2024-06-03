@@ -9,7 +9,6 @@ router.get("/info", (req, res) => {
   }
 
   const memberId = req.session.user.id;
-  console.log(`Fetching info for member id: ${memberId}`);
 
   getMemberInfo(memberId, (error, memberInfo) => {
     if (error) {

@@ -1,7 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import "../../style/checkout/PaymentMethod.scss";
 
-const PaymentMethod = () => {
+const PaymentMethod = ({ onMethodChange }) => {
+  const [selectedMethod, setSelectedMethod] = useState("");
+  const [methodInfo, setMethodInfo] = useState("결제 방법을 선택해주세요");
+
+  const handleMethodChange = (method) => {
+    setSelectedMethod(method);
+    onMethodChange(method);
+    switch (method) {
+      case "card":
+        setMethodInfo("신용/체크카드 안내");
+        break;
+      case "naver":
+        setMethodInfo("네이버페이 안내");
+        break;
+      case "kakao":
+        setMethodInfo("카카오페이 안내");
+        break;
+      case "bank":
+        setMethodInfo("무통장입금 안내");
+        break;
+      default:
+        setMethodInfo("결제 방법을 선택해주세요");
+    }
+  };
+
   return (
     <section className="paymentMethod_section">
       <div className="paymentMethod_wrap">
@@ -10,27 +34,42 @@ const PaymentMethod = () => {
         </div>
         <div className="paymentMethod_container">
           <div className="paymentMethod_info">
-            <button>신용/체크카드 안내</button>
+            <button>{methodInfo}</button>
           </div>
           <ul className="paymentMethod_flex">
             <li>
-              <button>신용/체크카드</button>
+              <button onClick={() => handleMethodChange("card")}>
+                신용/체크카드
+              </button>
             </li>
             <li>
-              <button>네이버페이</button>
+              <button onClick={() => handleMethodChange("naver")}>
+                네이버페이
+              </button>
             </li>
             <li>
-              <button>카카오페이</button>
+              <button onClick={() => handleMethodChange("kakao")}>
+                카카오페이
+              </button>
             </li>
             <li>
-              <button>무통장입금</button>
+              <button onClick={() => handleMethodChange("bank")}>
+                무통장입금
+              </button>
             </li>
           </ul>
-          <div className="paymentMethod_option">
-            <div className="paymentMethod_option row">
-              <option value={"카드사를 선택해주세요"}></option>
+          {selectedMethod === "card" && (
+            <div className="paymentMethod_option">
+              <div className="paymentMethod_option row">
+                <select>
+                  <option value="">카드사를 선택해주세요</option>
+                  <option value="shinhan">신한카드</option>
+                  <option value="kookmin">국민카드</option>
+                  <option value="woori">우리카드</option>
+                </select>
+              </div>
             </div>
-          </div>
+          )}
           <ul className="paymentMethod_eventWrap">
             <li>
               <button>

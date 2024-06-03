@@ -24,11 +24,24 @@
   padding: 20px 0px 50px;
 }
 
+.paymentMethod_info {
+  margin-bottom: 24px;
+  text-align: right;
+  button {
+    cursor: pointer;
+    border: none;
+    font-size: 14px;
+    background-color: white;
+    color: rgb(160, 160, 160);
+    text-decoration: underline;
+  }
+}
+
 .paymentMethod_flex {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  margin: 0px -3px;
+
   li {
     position: relative;
     flex-shrink: 0;
@@ -54,16 +67,31 @@
     }
   }
 }
-.paymentMethod_info {
-  margin-bottom: 24px;
-  text-align: right;
-  button {
-    cursor: pointer;
-    border: none;
-    font-size: 14px;
-    background-color: white;
-    color: rgb(160, 160, 160);
-    text-decoration: underline;
+
+.paymentMethod_option {
+  .row {
+    margin-bottom: 20px;
+
+    select {
+      width: 98%;
+      padding: 12px;
+      margin: 7px;
+      border: 1px solid $lightgray;
+      background-color: $white;
+      font-size: 15px;
+      cursor: pointer;
+      color: $black;
+
+      &:hover {
+        background-color: #e0e0e0;
+      }
+
+      &:focus {
+        outline: none;
+        border-color: #999;
+        background-color: #fff;
+      }
+    }
   }
 }
 
