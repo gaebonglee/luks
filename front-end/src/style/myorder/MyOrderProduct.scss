@@ -2,8 +2,9 @@
 
 .MyOrderProduct_titleWrap {
   display: flex;
+  align-items: center;
+  padding-bottom: 10px;
   h3 {
-    margin-bottom: 12px;
     font-size: 22px;
   }
   a {
@@ -11,14 +12,68 @@
   }
 }
 
+.MyOrderProduct_contents {
+  border-top: 4px solid $mute4;
+  border-bottom: 1px solid $mute4;
+}
+
 .MyOrderProduct_table {
-    width: 100%;
-    table-layout: fixed;
+  width: 100%;
+  table-layout: fixed;
   thead {
     width: 100%;
     min-height: 73px;
     font-size: 18px;
     font-weight: 700;
     line-height: 72px;
+  }
+  tbody {
+    border-top: 1px solid $mute2;
+    tr {
+      td {
+        margin-top: 40px;
+        padding-bottom: 20px;
+      }
+    }
+  }
+}
+
+.MyOrderProduct_detailWrap {
+  display: flex;
+  gap: 10px;
+  img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    background-color: gray;
+  }
+}
+
+.MyOrderProduct_detail {
+  padding-bottom: 10px;
+
+  &.name {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+}
+
+.MyOrderProduct_progress,
+.MyOrderProduct_review {
+  text-align: center;
+}
+
+.MyOrderProduct_review {
+  gap: 10px;
+
+  a {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 5px;
+    background-color: $mute4;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
   }
 }
