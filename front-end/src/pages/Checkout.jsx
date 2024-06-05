@@ -8,9 +8,6 @@ import "../style/checkout/Checkout.scss";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-//아이콘
-import { IoMdArrowDropright } from "react-icons/io";
-
 const Checkout = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -26,20 +23,11 @@ const Checkout = () => {
     request: "",
   });
 
-  // 총 결제 금액 계산
   const totalAmount = selectedItems.reduce((sum, item) => {
     const price = parseFloat(item.p_price);
     const quantity = parseInt(item.quantity, 10);
-
-    if (isNaN(price) || isNaN(quantity)) {
-      console.error("Invalid price or quantity", item);
-      return sum;
-    }
     return sum + price * quantity;
   }, 0);
-
-  // totalAmount 확인을 위해 콘솔에 출력
-  console.log("Total Amount:", totalAmount);
 
   const handleMethodChange = (method) => {
     setPaymentMethod(method);
@@ -87,15 +75,13 @@ const Checkout = () => {
         <div className="bagAndOrder_title">
           <ul>
             <li>
-              <a>SHOPPING BAG</a>
-              <IoMdArrowDropright />
+              <a>01 SHOPPING BAG</a>
             </li>
             <li>
-              <a className="changeColor">ORDER</a>
-              <IoMdArrowDropright />
+              <a>02 ORDER</a>
             </li>
             <li>
-              <a>ORDER CONFIRMED</a>
+              <a>03 ORDER CONFIRMED</a>
             </li>
           </ul>
         </div>
