@@ -1,0 +1,37 @@
+@import "../common.scss";
+
+.Confirmed_container {
+  min-width: 900px;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 50px 200px;
+}
+
+.Confirmed_btnWrap {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  padding-top: 120px;
+  .left,
+  .right {
+    display: flex;
+    flex: 1 1 0%;
+    align-items: center;
+    justify-content: center;
+    max-width: 400px;
+    height: 70px;
+    font-size: 25px;
+    font-weight: $weight3;
+  }
+
+  .left {
+    color: $black;
+    background-color: $white;
+    border: 1px solid $mute4;
+  }
+  .right {
+    color: $white;
+    background-color: $mute4;
+    border: 1px solid $mute4;
+  }
+}

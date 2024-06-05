@@ -1,0 +1,53 @@
+@import "../common.scss";
+
+@import "../common.scss";
+.ShippingConfirm_section {
+  padding-top: 80px;
+  h3 {
+    margin-bottom: 12px;
+    font-size: 22px;
+  }
+  p {
+    padding-top: 20px;
+  }
+}
+
+.ShippingConfirm_wrap {
+  border-top: 4px solid $mute4;
+}
+
+.ShippingConfirm_table {
+  width: 100%;
+  th {
+    width: 120px;
+    padding: 20px 0px;
+    font-size: 13px;
+    text-align: center;
+    white-space: pre-wrap;
+    vertical-align: middle;
+    border-right: 1px solid $mute2;
+    border-bottom: 1px solid $mute2;
+  }
+  td {
+    padding: 20px;
+    font-size: 15px;
+    white-space: pre-wrap;
+    border-bottom: 1px solid $mute2;
+  }
+}
+
+.AddressChangeBtn {
+  background-color: $white;
+  min-width: 40px;
+  min-height: 25px;
+  display: inline-block;
+  width: 130px;
+  margin-left: 30px;
+  line-height: 30px;
+  color: $black;
+  text-align: center;
+  border: 1px solid $mute2;
+  a {
+    font-size: 15px;
+  }
+}

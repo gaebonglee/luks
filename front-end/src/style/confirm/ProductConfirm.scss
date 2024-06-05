@@ -1,0 +1,74 @@
+@import "../common.scss";
+
+/* ProductConfirm.scss */
+.ProductConfirm_section {
+  h3 {
+    margin-bottom: 12px;
+    font-size: 22px;
+  }
+}
+
+.ProductConfirm_wrap {
+  border-top: 4px solid $mute4;
+}
+
+.ProductConfirm_table {
+  width: 100%;
+  thead {
+    font-size: 14px;
+    line-height: 50px;
+    border-bottom: 1px solid $mute4;
+  }
+  tbody {
+    border-bottom: 1px solid $mute2;
+  }
+}
+
+.ProductConfirm_table th,
+.ProductConfirm_table td {
+  padding: 15px 10px;
+  text-align: center;
+}
+
+.ProductConfirm_table th {
+  font-weight: bold;
+}
+
+.product_wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .row {
+    width: 100px;
+    height: 100px;
+    margin-right: 20px;
+    object-fit: cover;
+  }
+}
+
+.ProductConfirm_productInfo {
+  width: 65%;
+  .wrap {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.ProductConfirm_productInfo_detail {
+  text-align: start;
+}
+.ProductConfirm_productInfo_detail h3 {
+  line-height: 20px;
+  font-size: 1.2em;
+  font-weight: 400;
+}
+
+.ProductConfirm_productInfo_detail p {
+  margin: 7px 0;
+}
+
+.ProductConfirm_qantity,
+.ProductConfirm_progress {
+  font-size: $h3;
+  font-weight: $weight3;
+}
