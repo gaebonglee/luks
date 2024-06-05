@@ -1,9 +1,9 @@
 import React from "react";
-import MyCart from "./MyCart";
-import "../../style/mybag/Mybag.scss";
+import MyCart from "../components/mybag/MyCart";
+import "../style/mybag/Mybag.scss";
 
 //아이콘
-import { IoIosArrowForward } from "react-icons/io";
+import { IoMdArrowDropright } from "react-icons/io";
 
 const MyBag = () => {
   return (
@@ -12,15 +12,15 @@ const MyBag = () => {
         <div className="bagAndOrder_title">
           <ul>
             <li>
-              <a>01 SHOPPING BAG</a>
-              <IoIosArrowForward />
+              <a className="changeColor">SHOPPING BAG</a>
+              <IoMdArrowDropright />
             </li>
             <li>
-              <a>02 ORDER</a>
-              <IoIosArrowForward />
+              <a>ORDER</a>
+              <IoMdArrowDropright />
             </li>
             <li>
-              <a>01 ORDER CONFIRMED</a>
+              <a>ORDER CONFIRMED</a>
             </li>
           </ul>
         </div>

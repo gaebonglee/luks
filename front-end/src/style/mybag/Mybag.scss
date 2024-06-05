@@ -7,11 +7,18 @@
 .bagAndOrder_title {
   display: flex;
   justify-content: center;
-  padding: 70px 0px 78px;
+  padding: 80px 0;
+  color: $lightgray;
   ul {
     display: flex;
     li {
+      display: flex;
+      align-items: center;
+      font-size: 16px;
       a {
+        display: inline-flex;
+        align-items: center;
+        padding: 0 10px;
         font-weight: 700;
       }
       svg {
@@ -19,4 +26,8 @@
       }
     }
   }
+}
+
+.changeColor {
+  color: $black;
 }

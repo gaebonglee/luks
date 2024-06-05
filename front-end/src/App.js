@@ -8,7 +8,7 @@ import JoinPage from "./pages/JoinPage";
 import Mypage from "./pages/Mypage";
 import Category from "./pages/Category";
 import ProductDetail from "./components/product/ProductDetail";
-import MyBag from "./components/mybag/MyBag";
+import MyBag from "./pages/MyBag";
 import Checkout from "./pages/Checkout";
 import Confirmed from "./pages/Confirmed";
 

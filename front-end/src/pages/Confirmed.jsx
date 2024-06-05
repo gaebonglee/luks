@@ -5,6 +5,9 @@ import PaymentConfirm from "../components/confirmed/PaymentConfirm";
 import ShippingConfirm from "../components/confirmed/ShippingConfirm";
 import "../style/confirm/Confirmed.scss";
 
+//아이콘
+import { IoMdArrowDropright } from "react-icons/io";
+
 const Confirmed = () => {
   const location = useLocation();
   const { selectedItems, paymentMethod, shippingInfo, totalAmount } =
@@ -15,13 +18,15 @@ const Confirmed = () => {
       <div className="bagAndOrder_title">
         <ul>
           <li>
-            <a>01 SHOPPING BAG</a>
+            <a>SHOPPING BAG</a>
+            <IoMdArrowDropright />
           </li>
           <li>
-            <a>02 ORDER</a>
+            <a>ORDER</a>
+            <IoMdArrowDropright />
           </li>
           <li>
-            <a>03 ORDER CONFIRMED</a>
+            <a className="changeColor">ORDER CONFIRMED</a>
           </li>
         </ul>
       </div>
