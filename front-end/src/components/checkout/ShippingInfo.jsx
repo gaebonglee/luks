@@ -23,7 +23,7 @@ const ShippingInfo = ({ onChange }) => {
           const member = response.data.member;
           setMemberInfo((prevState) => ({
             ...prevState,
-            recipient_name: member.member_name, // Set recipient_name to member_name
+            recipient_name: member.member_name,
             phonenumber: member.phonenumber,
             postcode: member.postcode,
             basic_address: member.basic_address,

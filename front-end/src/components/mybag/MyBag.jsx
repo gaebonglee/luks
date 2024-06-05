@@ -1,5 +1,5 @@
 import React from "react";
-import MybagProducts from "./MyCart";
+import MyCart from "./MyCart";
 import "../../style/mybag/Mybag.scss";
 
 //아이콘
@@ -24,7 +24,7 @@ const MyBag = () => {
             </li>
           </ul>
         </div>
-        <MybagProducts />
+        <MyCart />
       </div>
     </div>
   );

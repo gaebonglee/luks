@@ -1,10 +1,10 @@
 import React from "react";
 import "../../style/confirm/ProductConfirm.scss";
 
-const ProductConfirm = () => {
+const ProductConfirm = ({ selectedItems }) => {
   return (
     <section className="ProductConfirm_section">
-      <h3>주문상품정보 / 개 상품</h3>
+      <h3>주문상품정보 / {selectedItems.length}개 상품</h3>
       <div className="ProductConfirm_wrap">
         <table className="ProductConfirm_table">
           <thead>
@@ -16,30 +16,34 @@ const ProductConfirm = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td className="product_wrap">
-                <div className="row">
-                  <img alt="상품 이미지" />
-                </div>
-              </td>
-              <td className="ProductConfirm_productInfo">
-                <div className="wrap">
-                  <div className="ProductConfirm_productInfo_detail">
-                    <h3>상품이름</h3>
-                    <p>
-                      <strong>원</strong>
-                    </p>
-                    <p>옵션: </p>
+            {selectedItems.map((item) => (
+              <tr key={`${item.product_id}-${item.color_id}-${item.size_id}`}>
+                <td className="product_wrap">
+                  <div className="row">
+                    <img src={item.p_image_url} alt="상품 이미지" />
                   </div>
-                </div>
-              </td>
-              <td className="ProductConfirm_qantity">
-                <p>수량</p>
-              </td>
-              <td className="ProductConfirm_progress">
-                <p>진행상태</p>
-              </td>
-            </tr>
+                </td>
+                <td className="ProductConfirm_productInfo">
+                  <div className="wrap">
+                    <div className="ProductConfirm_productInfo_detail">
+                      <h3>{item.p_name}</h3>
+                      <p>
+                        <strong>{item.p_price.toLocaleString()}원</strong>
+                      </p>
+                      <p>
+                        옵션: {item.color_name}, {item.size}
+                      </p>
+                    </div>
+                  </div>
+                </td>
+                <td className="ProductConfirm_qantity">
+                  <p>{item.quantity}개</p>
+                </td>
+                <td className="ProductConfirm_progress">
+                  <p>결제완료</p>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
