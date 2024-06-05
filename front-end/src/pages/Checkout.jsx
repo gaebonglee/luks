@@ -78,7 +78,7 @@ const Checkout = () => {
               <a>01 SHOPPING BAG</a>
             </li>
             <li>
-              <a>02 ORDER</a>
+              <a className="changeColor">02 ORDER</a>
             </li>
             <li>
               <a>03 ORDER CONFIRMED</a>

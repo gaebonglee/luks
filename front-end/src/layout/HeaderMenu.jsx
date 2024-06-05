@@ -7,15 +7,15 @@ const HeaderMenu = () => {
   };
 
   const handleMouseEnterNormal = () => {
-    document.getElementById("header").style.height = "230px";
+    document.getElementById("header").style.height = "235px";
   };
 
   const handleMouseEnterShort = () => {
-    document.getElementById("header").style.height = "210px";
+    document.getElementById("header").style.height = "215px";
   };
 
   const handleMouseLeave = () => {
-    document.getElementById("header").style.height = "130px";
+    document.getElementById("header").style.height = "135px";
   };
 
   return (
@@ -83,7 +83,7 @@ const HeaderMenu = () => {
             onMouseEnter={handleMouseEnterNormal}
             onMouseLeave={handleMouseLeave}
           >
-            <Link to={`/outer`}>OUTER</Link>
+            <Link to={`/category/outer`}>OUTER</Link>
             <div className="subCategory">
               <ul>
                 <li>
@@ -106,7 +106,7 @@ const HeaderMenu = () => {
             onMouseEnter={handleMouseEnterShort}
             onMouseLeave={handleMouseLeave}
           >
-            <Link to={`/outer`}>OPS/SK</Link>
+            <Link to={`/category/ops&sk`}>OPS/SK</Link>
             <div className="subCategory">
               <ul>
                 <li>

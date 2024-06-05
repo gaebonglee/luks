@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Swal from "sweetalert2"; // SweetAlert2 추가
 import "../../style/checkout/PaymentInfo.scss";
 
 const PaymentInfo = ({ totalAmount, onCheckout }) => {
@@ -32,6 +33,17 @@ const PaymentInfo = ({ totalAmount, onCheckout }) => {
       ...prevState,
       [name]: checked,
     }));
+  };
+
+  const handleCheckoutClick = () => {
+    // 필수사항 동의 체크 확인
+    if (!agreements.personalInfo || !agreements.thirdPartyConsentInfo) {
+      Swal.fire("필수사항에 동의해주세요.");
+      return;
+    }
+
+    // 모든 조건이 충족되면 onCheckout 호출
+    onCheckout();
   };
 
   return (
@@ -86,7 +98,7 @@ const PaymentInfo = ({ totalAmount, onCheckout }) => {
           </p>
         </div>
         <div className="checkoutBtn">
-          <button onClick={onCheckout}>CHECK OUT</button>
+          <button onClick={handleCheckoutClick}>CHECK OUT</button>
         </div>
       </div>
     </section>

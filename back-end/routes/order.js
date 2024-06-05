@@ -20,12 +20,12 @@ router.post("/checkout", async (req, res) => {
 
   try {
     const orderId = await saveOrder(memberId, totalAmount, "Pending");
-    console.log("Order ID:", orderId);
+    console.log("Order ID:", orderId); // 콘솔에 Order ID 출력
     await saveOrderItems(orderId, orderItems);
     await savePayment(orderId, paymentMethod, totalAmount);
     await saveShippingInfo(orderId, shippingInfo);
 
-    //주문 성공 후 장바구니에서 주문한 항목 제거
+    // 주문 성공 후 장바구니에서 항목 제거
     const itemsToRemove = orderItems.map((item) => ({
       product_id: item.product_id,
       color_id: item.color_id,
