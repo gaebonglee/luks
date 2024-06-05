@@ -1,0 +1,76 @@
+@import "../common.scss";
+
+.RecentOrders_title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 4px solid $mute4;
+  div {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.RecentOrders_section {
+  width: 100%;
+  position: relative;
+
+  h3 {
+    padding-bottom: 10px;
+    font-weight: 600;
+    font-size: 23px;
+    line-height: 30px;
+    position: relative;
+  }
+}
+
+.RecentOrders_table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+
+  .RecentOrders_thead,
+  .RecentOrders_tbody {
+    border-bottom: 1px solid #303033;
+    align-items: center;
+
+    th,
+    td {
+      padding: 10px 0;
+    }
+  }
+
+  .RecentOrders_thead {
+    th {
+      height: 30px;
+    }
+  }
+
+  .RecentOrders_tbody {
+    td {
+      min-height: 60px;
+    }
+
+    .history {
+      display: flex;
+      align-items: center;
+
+
+      .img_box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        img {
+          width: 60px;
+          height: 60px;
+          background-color: gray;
+        }
+      }
+
+      .prd_order {
+        padding-left: 10px;
+      }
+    }
+  }
+}
