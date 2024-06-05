@@ -20,7 +20,7 @@ router.post("/checkout", async (req, res) => {
   }
 
   try {
-    const orderId = await saveOrder(memberId, totalAmount, "Pending");
+    const orderId = await saveOrder(memberId, totalAmount, "배송완료");
     console.log("Order ID:", orderId); // 콘솔에 Order ID 출력
     await saveOrderItems(orderId, orderItems);
     await savePayment(orderId, paymentMethod, totalAmount);

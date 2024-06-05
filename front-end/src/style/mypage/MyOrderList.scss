@@ -6,6 +6,7 @@
     padding-bottom: 10px;
   }
 }
+
 .MyOrderList_contents {
   border-top: 4px solid $mute4;
 }
@@ -19,12 +20,32 @@
     font-size: 18px;
     font-weight: 700;
     line-height: 72px;
+    th {
+      &:nth-child(1) {
+        width: 60%;
+      }
+      &:nth-child(2) {
+        width: 20%;
+      }
+      &:nth-child(3) {
+        width: 20%;
+      }
+    }
   }
   tbody {
     border-top: 3px solid $mute4;
     tr {
       td {
         padding-bottom: 20px;
+        &:nth-child(1) {
+          width: 60%;
+        }
+        &:nth-child(2) {
+          width: 20%;
+        }
+        &:nth-child(3) {
+          width: 20%;
+        }
       }
     }
   }
@@ -85,4 +106,9 @@
     text-align: center;
     cursor: pointer;
   }
+}
+
+.OrderListEmpty {
+  padding-top: 10px;
+  float: right;
 }
