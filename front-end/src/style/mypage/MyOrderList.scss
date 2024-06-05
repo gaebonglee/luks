@@ -1,38 +1,88 @@
 @import "../common.scss";
 
-.myOrder_title {
-  padding-bottom: 10px;
-  border-bottom: 3px solid black;
-  p {
-    font-size: $h3;
-    font-weight: $weight2;
+.MyOrderList {
+  h3 {
+    font-size: 22px;
+    padding-bottom: 10px;
+  }
+}
+.MyOrderList_contents {
+  border-top: 4px solid $mute4;
+}
+
+.MyOrderList_table {
+  width: 100%;
+  table-layout: fixed;
+  thead {
+    width: 100%;
+    min-height: 73px;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 72px;
+  }
+  tbody {
+    border-top: 3px solid $mute4;
+    tr {
+      td {
+        padding-bottom: 20px;
+      }
+    }
   }
 }
 
-.myOrder_categry {
-  border-bottom: 2px solid black;
-  ul {
-    padding: 5px 0;
+.MyOrderList_orderInfo {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  padding: 16px 0px;
+  border-bottom: 1px solid rgb(228, 228, 228);
+
+  a {
     display: flex;
-    font-size: 15px;
+    span {
+      &.bold {
+        font-weight: $weight3;
+      }
+    }
   }
-  .productInfo,
-  .deliveryCharge,
-  .process,
-  .review {
+}
+
+.MyOrderList_detailWrap {
+  display: flex;
+  gap: 10px;
+  img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    background-color: gray;
+  }
+}
+
+.MyOrderList_detail {
+  padding-bottom: 10px;
+
+  &.name {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+}
+
+.MyOrderList_progress,
+.MyOrderList_review {
+  text-align: center;
+}
+
+.MyOrderList_review {
+  gap: 10px;
+
+  a {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 5px;
+    background-color: $mute4;
+    color: white;
+    text-decoration: none;
     text-align: center;
-    padding: 10px;
-  }
-  .productInfo {
-    flex: 1 1 0%;
-  }
-  .deliveryCharge {
-    width: min(20%, 140px);
-  }
-  .process {
-    width: min(28%, 200px);
-  }
-  .review {
-    width: min(22%, 223px);
+    cursor: pointer;
   }
 }
