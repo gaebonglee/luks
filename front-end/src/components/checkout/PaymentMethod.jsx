@@ -9,16 +9,16 @@ const PaymentMethod = ({ onMethodChange }) => {
     setSelectedMethod(method);
     onMethodChange(method);
     switch (method) {
-      case "card":
+      case "카드결제":
         setMethodInfo("신용/체크카드 안내");
         break;
-      case "naver":
+      case "네이버페이":
         setMethodInfo("네이버페이 안내");
         break;
-      case "kakao":
+      case "카카오페이":
         setMethodInfo("카카오페이 안내");
         break;
-      case "bank":
+      case "무통장입금":
         setMethodInfo("무통장입금 안내");
         break;
       default:
@@ -38,22 +38,22 @@ const PaymentMethod = ({ onMethodChange }) => {
           </div>
           <ul className="paymentMethod_flex">
             <li>
-              <button onClick={() => handleMethodChange("card")}>
+              <button onClick={() => handleMethodChange("카드결제")}>
                 신용/체크카드
               </button>
             </li>
             <li>
-              <button onClick={() => handleMethodChange("naver")}>
+              <button onClick={() => handleMethodChange("네이버페이")}>
                 네이버페이
               </button>
             </li>
             <li>
-              <button onClick={() => handleMethodChange("kakao")}>
+              <button onClick={() => handleMethodChange("카카오페이")}>
                 카카오페이
               </button>
             </li>
             <li>
-              <button onClick={() => handleMethodChange("bank")}>
+              <button onClick={() => handleMethodChange("무통장입금")}>
                 무통장입금
               </button>
             </li>

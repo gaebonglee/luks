@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import PaymentInfo from "../components/checkout/PaymentInfo";
 import ShippingInfo from "../components/checkout/ShippingInfo";
 import CheckProductInfo from "../components/checkout/CheckProductInfo";
@@ -10,6 +10,7 @@ import Swal from "sweetalert2";
 
 const Checkout = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const selectedItems = location.state?.selectedProductDetails || [];
   const [paymentMethod, setPaymentMethod] = useState("");
   const [shippingInfo, setShippingInfo] = useState({
@@ -22,21 +23,11 @@ const Checkout = () => {
     request: "",
   });
 
-  // 총 결제 금액 계산
   const totalAmount = selectedItems.reduce((sum, item) => {
-    // item.p_price와 item.quantity가 모두 숫자인지 확인
     const price = parseFloat(item.p_price);
     const quantity = parseInt(item.quantity, 10);
-
-    if (isNaN(price) || isNaN(quantity)) {
-      console.error("Invalid price or quantity", item);
-      return sum;
-    }
     return sum + price * quantity;
   }, 0);
-
-  // totalAmount 확인을 위해 콘솔에 출력
-  console.log("Total Amount:", totalAmount);
 
   const handleMethodChange = (method) => {
     setPaymentMethod(method);
@@ -66,6 +57,9 @@ const Checkout = () => {
 
       if (response.data.success) {
         Swal.fire("상품 구매 완료되었습니다.");
+        navigate("/confirmed", {
+          state: { selectedItems, paymentMethod, shippingInfo, totalAmount },
+        });
       } else {
         Swal.fire("상품 구매 실패했습니다.");
       }
@@ -84,7 +78,7 @@ const Checkout = () => {
               <a>01 SHOPPING BAG</a>
             </li>
             <li>
-              <a>02 ORDER</a>
+              <a className="changeColor">02 ORDER</a>
             </li>
             <li>
               <a>03 ORDER CONFIRMED</a>

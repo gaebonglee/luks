@@ -226,7 +226,7 @@ const MyCart = () => {
         <tbody>
           {cart.length === 0 ? (
             <tr>
-              <td colSpan="4">장바구니가 비어 있습니다.</td>
+              <td colSpan="4" className="MyCartEmpty">장바구니가 비어 있습니다.</td>
             </tr>
           ) : (
             cart.map((product) => {

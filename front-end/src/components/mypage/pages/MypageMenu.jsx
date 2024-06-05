@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import "../../style/mypage/MypageMenu.scss";
+import "../../../style/mypage/MypageMenu.scss";
 import axios from "axios";
 
 const MypageMenu = () => {
@@ -33,10 +33,10 @@ const MypageMenu = () => {
             <ul>
               <li>
                 <NavLink
-                  to="/mypage/order"
+                  to="/mypage/my-order/list"
                   className={({ isActive }) => (isActive ? "active" : "")}
                 >
-                  주문조회
+                  주문배송조회
                 </NavLink>
               </li>
               <li>

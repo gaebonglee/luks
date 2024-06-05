@@ -38,7 +38,7 @@ function removeFromCart(memberId, productId, colorId, sizeId, callback) {
   );
 }
 
-function removeMultipleFromCart(memberId, items, callback) {
+function removeMultipleFromCart(memberId, items) {
   const query = `
     DELETE FROM cart 
     WHERE member_id = ? AND (product_id, color_id, size_id) IN (${items
@@ -52,13 +52,15 @@ function removeMultipleFromCart(memberId, items, callback) {
     size_id,
   ]);
 
-  connection.query(query, [memberId, ...values], (error, results) => {
-    if (error) {
-      console.error("Database query error:", error);
-      callback(error, null);
-    } else {
-      callback(null, results);
-    }
+  return new Promise((resolve, reject) => {
+    connection.query(query, [memberId, ...values], (error, results) => {
+      if (error) {
+        console.error("Database query error:", error);
+        reject(error);
+      } else {
+        resolve(results);
+      }
+    });
   });
 }
 
@@ -123,10 +125,16 @@ function calculateTotalPrice(memberId, items, callback) {
     SELECT SUM(p.p_price * c.quantity) AS total_price
     FROM cart c
     JOIN product p ON c.product_id = p.product_id
-    WHERE c.member_id = ? AND (c.product_id, c.color_id, c.size_id) IN (${items.map(() => "(?, ?, ?)").join(",")})
+    WHERE c.member_id = ? AND (c.product_id, c.color_id, c.size_id) IN (${items
+      .map(() => "(?, ?, ?)")
+      .join(",")})
   `;
 
-  const values = items.flatMap(({ product_id, color_id, size_id }) => [product_id, color_id, size_id]);
+  const values = items.flatMap(({ product_id, color_id, size_id }) => [
+    product_id,
+    color_id,
+    size_id,
+  ]);
 
   connection.query(query, [memberId, ...values], (error, results) => {
     if (error) {

@@ -1,5 +1,5 @@
 import React from "react";
-import "../../style/myorder/MyOrderProduct.scss";
+import "../../../style/myorder/MyOrderProduct.scss";
 
 const MyOrderProduct = () => {
   return (
@@ -22,19 +22,24 @@ const MyOrderProduct = () => {
               <td className="MyOrderProduct_detailWrap">
                 <img></img>
                 <div className="MyOrderProduct_detail">
-                  <h3>상품이름</h3>
-                  <p>옵션: </p>
-                  <p>
-                    <strong>원</strong>
-                  </p>
+                  <div className="MyOrderProduct_detail name">상품이름이름</div>
+                  <div className="MyOrderProduct_detail colorSize">
+                    <span>색상: </span>
+                    <span>사이즈: </span>
+                  </div>
+                  <div className="MyOrderProduct_detail priceWrap">
+                    <span>원</span>
+                    <span>/</span>
+                    <span>수량 개</span>
+                  </div>
                 </div>
               </td>
               <td className="MyOrderProduct_progress">
                 <p>진행상태</p>
               </td>
               <td className="MyOrderProduct_review">
-                <button>구매확정</button>
-                <button>리뷰작성</button>
+                <a>구매확정</a>
+                <a>리뷰작성</a>
               </td>
             </tr>
           </tbody>

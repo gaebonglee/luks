@@ -1,0 +1,43 @@
+@import "../common.scss";
+
+.MyOrderShippingInfo_section {
+  position: relative;
+  margin-top: 80px;
+  h3 {
+    position: relative;
+    padding-bottom: 10px;
+    border-bottom: 4px solid $mute4;
+    font-size: 22px;
+    line-height: 30px;
+  }
+}
+
+.MyOrderShippingInfo_table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+
+  tbody {
+    tr {
+      border-bottom: 1px solid $mute4;
+    }
+
+    td {
+      padding: 10px;
+
+      &.title {
+        width: 140px;
+        font-weight: bold;
+        border-right: 1px solid $mute4;
+
+        &.right {
+          border-left: 1px solid $mute4;
+        }
+      }
+
+      &.field {
+        background-color: #fff;
+      }
+    }
+  }
+}

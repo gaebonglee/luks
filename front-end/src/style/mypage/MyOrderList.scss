@@ -1,23 +1,16 @@
 @import "../common.scss";
 
-.MyOrderProduct_titleWrap {
-  display: flex;
-  align-items: center;
-  padding-bottom: 10px;
+.MyOrderList {
   h3 {
     font-size: 22px;
-  }
-  a {
-    padding-left: 10px;
+    padding-bottom: 10px;
   }
 }
-
-.MyOrderProduct_contents {
+.MyOrderList_contents {
   border-top: 4px solid $mute4;
-  border-bottom: 1px solid $mute4;
 }
 
-.MyOrderProduct_table {
+.MyOrderList_table {
   width: 100%;
   table-layout: fixed;
   thead {
@@ -28,17 +21,33 @@
     line-height: 72px;
   }
   tbody {
-    border-top: 1px solid $mute2;
+    border-top: 3px solid $mute4;
     tr {
       td {
-        margin-top: 40px;
         padding-bottom: 20px;
       }
     }
   }
 }
 
-.MyOrderProduct_detailWrap {
+.MyOrderList_orderInfo {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  padding: 16px 0px;
+  border-bottom: 1px solid rgb(228, 228, 228);
+
+  a {
+    display: flex;
+    span {
+      &.bold {
+        font-weight: $weight3;
+      }
+    }
+  }
+}
+
+.MyOrderList_detailWrap {
   display: flex;
   gap: 10px;
   img {
@@ -49,7 +58,7 @@
   }
 }
 
-.MyOrderProduct_detail {
+.MyOrderList_detail {
   padding-bottom: 10px;
 
   &.name {
@@ -58,12 +67,12 @@
   }
 }
 
-.MyOrderProduct_progress,
-.MyOrderProduct_review {
+.MyOrderList_progress,
+.MyOrderList_review {
   text-align: center;
 }
 
-.MyOrderProduct_review {
+.MyOrderList_review {
   gap: 10px;
 
   a {
