@@ -11,6 +11,7 @@ import ProductDetail from "./components/product/ProductDetail";
 import MyBag from "./components/mybag/MyBag";
 import Checkout from "./pages/Checkout";
 import Confirmed from "./pages/Confirmed";
+import MyOrder from "./pages/MyOrder";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
@@ -50,6 +51,7 @@ const App = () => {
           <Route path="/mybag" element={<MyBag />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/confirmed" element={<Confirmed />} />
+          <Route path="/my-order" element={<MyOrder />} />
         </Route>
       </Routes>
     </Router>
