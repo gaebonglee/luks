@@ -28,7 +28,6 @@ router.post("/", (req, res) => {
     } else {
       return res.status(200).json({
         success: false,
-        message: "비밀번호를 다시 확인해주세요",
       });
     }
   });

@@ -30,7 +30,9 @@ const Login = ({ setIsLoggedIn }) => {
       }
     } catch (error) {
       console.error("Login error:", error);
-      alert("서버와의 통신 중 문제가 발생했습니다.");
+      Swal.fire({
+        text: "서버와의 통신 중 문제가 발생했습니다.",
+      });
     }
   };
 

@@ -68,8 +68,9 @@ const JoinId = ({ memberId, idValid, handleIdChange }) => {
                     "{memberId}"는 이미 가입된 아이디입니다.
                   </span>
                 )}
-                {!isDuplicate && idValid && <FaCheck />}
+
                 {!isDuplicate && <span>영문 소문자/숫자, 8자~16자</span>}
+                {!isDuplicate && idValid && <FaCheck />}
               </span>
             </div>
           </p>

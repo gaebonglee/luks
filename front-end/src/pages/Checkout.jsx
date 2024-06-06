@@ -8,6 +8,9 @@ import "../style/checkout/Checkout.scss";
 import axios from "axios";
 import Swal from "sweetalert2";
 
+//아이콘
+import { IoMdArrowDropright } from "react-icons/io";
+
 const Checkout = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -75,13 +78,15 @@ const Checkout = () => {
         <div className="bagAndOrder_title">
           <ul>
             <li>
-              <a>01 SHOPPING BAG</a>
+              <a className="changeColor">SHOPPING BAG</a>
+              <IoMdArrowDropright />
             </li>
             <li>
-              <a className="changeColor">02 ORDER</a>
+              <a>ORDER</a>
+              <IoMdArrowDropright />
             </li>
             <li>
-              <a>03 ORDER CONFIRMED</a>
+              <a>ORDER CONFIRMED</a>
             </li>
           </ul>
         </div>

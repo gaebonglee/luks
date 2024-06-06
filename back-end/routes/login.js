@@ -20,6 +20,7 @@ router.post("/", (req, res) => {
       // 세션에 사용자 정보 저장
       req.session.user = {
         id: user.member_id,
+        pw: user.member_pw,
         member_name: user.member_name,
         role: user.member_roles,
         phonenumber: user.phonenumber,
