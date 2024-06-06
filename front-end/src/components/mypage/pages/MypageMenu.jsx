@@ -67,7 +67,7 @@ const MypageMenu = () => {
             <ul>
               <li>
                 <NavLink
-                  to="/mypage/memberinfo"
+                  to="/mypage/edit/reconfirm"
                   className={({ isActive }) => (isActive ? "active" : "")}
                 >
                   회원 정보수정
