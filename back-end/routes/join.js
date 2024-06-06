@@ -1,6 +1,7 @@
 const express = require("express");
 const saveMemberInfo = require("../sql/join/saveMemberInfo");
 const selectMemberId = require("../sql/join/selectMemberId");
+const selectEmail = require("../sql/join/selectEmail");
 
 const router = express.Router();
 
@@ -21,8 +22,6 @@ router.post("/register", (req, res) => {
 router.post("/check-id", (req, res) => {
   const { member_id } = req.body;
 
-  console.log("Received member id for checking: ", member_id);
-
   selectMemberId(member_id, (err, count) => {
     if (err) {
       console.error("Error checking member ID: ", err);
@@ -31,7 +30,23 @@ router.post("/check-id", (req, res) => {
     if (count > 0) {
       return res.status(409).json({ message: "아이디가 이미 존재합니다." });
     } else {
-      return res.status(200).json({ message: "아이디를 사용할 수 있습니다." });
+      return res.status(200).json({});
+    }
+  });
+});
+
+router.post("/check-email", (req, res) => {
+  const { email } = req.body;
+
+  selectEmail(email, (err, count) => {
+    if (err) {
+      console.error("Error checking email: ", err);
+      return res.status(500).json({ error: "Database error" });
+    }
+    if (count > 0) {
+      return res.status(409).json({ message: "이메일이 이미 존재합니다." });
+    } else {
+      return res.status(200).json({});
     }
   });
 });

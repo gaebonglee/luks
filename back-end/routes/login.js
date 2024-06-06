@@ -23,6 +23,7 @@ router.post("/", (req, res) => {
         pw: user.member_pw,
         member_name: user.member_name,
         role: user.member_roles,
+        email:user.email,
         phonenumber: user.phonenumber,
         postcode: user.postcode,
         basic_address: user.basic_address,
