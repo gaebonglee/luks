@@ -1,7 +1,13 @@
 import React from "react";
 import "../../../style/myorder/MyOrderPaymentInfo.scss";
 
-const MyOrderPaymentInfo = () => {
+const MyOrderPaymentInfo = ({ order }) => {
+  const totalAmount = order.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
+  const paymentMethod = order[0].payment_method;
+
   return (
     <section className="MyOrderPaymentInfo_section">
       <h3>결제정보</h3>
@@ -10,14 +16,14 @@ const MyOrderPaymentInfo = () => {
           <li className="pay_total">
             <div className="left">주문금액</div>
             <div className="right">
-              <span className="right num">5555</span>
+              <span className="right num">{totalAmount.toLocaleString()}</span>
               <span>원</span>
             </div>
           </li>
           <li className="pay_total_detail">
             <div className="left">상품금액</div>
             <div className="right">
-              <span className="right num">5555</span>
+              <span className="right num">{totalAmount.toLocaleString()}</span>
               <span>원</span>
             </div>
           </li>
@@ -26,7 +32,7 @@ const MyOrderPaymentInfo = () => {
           <li className="pay_total">
             <div className="left">할인금액</div>
             <div className="right">
-              <span className="right num">4444</span>
+              <span className="right num">0</span>
               <span>원</span>
             </div>
           </li>
@@ -35,15 +41,14 @@ const MyOrderPaymentInfo = () => {
           <li className="pay_total">
             <div className="left">주문금액</div>
             <div className="right">
-              <span className="right num">3333</span>
+              <span className="right num">{totalAmount.toLocaleString()}</span>
               <span>원</span>
             </div>
           </li>
           <li className="pay_total_detail">
             <div className="left">결제방법</div>
             <div className="right">
-              <span className="right num">3333</span>
-              <span>원</span>
+              <span className="right num">{paymentMethod}</span>
             </div>
           </li>
         </ul>

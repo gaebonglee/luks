@@ -114,8 +114,18 @@ router.post("/update", (req, res) => {
       console.error("Error updating member information: ", err);
       return res.status(500).send("Error updating member information");
     }
+
+    // 세션 업데이트
+    req.session.user.id = memberData.new_member_id;
+    req.session.user.member_name = memberData.member_name;
+    req.session.user.email = memberData.email;
+    req.session.user.phonenumber = memberData.phonenumber;
+    req.session.user.postcode = memberData.postcode;
+    req.session.user.basic_address = memberData.basic_address;
+    req.session.user.detail_address = memberData.detail_address;
+
     console.log("Update result:", result);
-    res.status(200).json({ });
+    res.status(200).json({});
   });
 });
 

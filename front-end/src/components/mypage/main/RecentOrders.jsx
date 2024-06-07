@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../../../style/mypage/RecentOrders.scss";
-
 import { IoIosArrowForward } from "react-icons/io";
 
 const RecentOrders = () => {
@@ -19,7 +18,13 @@ const RecentOrders = () => {
           }
         );
         console.log("Fetched Orders:", response.data.orders); // 데이터 구조 확인용 로그
-        setOrders(response.data.orders);
+
+        // 데이터 내림차순 정렬
+        const sortedOrders = response.data.orders.sort(
+          (a, b) => b.order_id - a.order_id
+        );
+
+        setOrders(sortedOrders);
         setLoading(false);
       } catch (error) {
         console.error("There was an error fetching the recent orders!", error);
