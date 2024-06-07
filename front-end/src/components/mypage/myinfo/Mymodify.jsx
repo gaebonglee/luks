@@ -6,6 +6,7 @@ import NameEmailNum from "../../../components/join/NameEmailNum";
 import JoinAddress from "../../../components/join/JoinAddress";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import axios from "axios";
 import "../../../style/join/JoinPage.scss";
 import "../../../style/join/JoinBtn.scss";
 
@@ -13,6 +14,7 @@ const Mymodify = () => {
   const MySwal = withReactContent(Swal);
   const navigate = useNavigate();
 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [memberId, setMemberId] = useState("");
   const [idValid, setIdValid] = useState(true);
   const [isDuplicate, setIsDuplicate] = useState(false);
@@ -23,23 +25,43 @@ const Mymodify = () => {
   const [memberName, setMemberName] = useState("");
   const [memberEmail, setMemberEmail] = useState("");
   const [emailValid, setEmailValid] = useState(true);
+  const [isEmailDuplicate, setIsEmailDuplicate] = useState(false);
   const [memberMobileNum, setMemberMobileNum] = useState("");
   const [postcode, setPostcode] = useState("");
   const [basicAddress, setBasicAddress] = useState("");
   const [detailAddress, setDetailAddress] = useState("");
 
   useEffect(() => {
-    // 사용자 정보를 가져오는 함수
+    const checkLoginStatus = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:5000/check-session",
+          {
+            withCredentials: true,
+          }
+        );
+        if (response.data.loggedIn) {
+          setIsLoggedIn(true);
+          fetchMemberInfo();
+        } else {
+          setIsLoggedIn(false);
+          navigate("/login");
+        }
+      } catch (error) {
+        console.error("There was an error checking the login status!", error);
+        navigate("/login");
+      }
+    };
+
     const fetchMemberInfo = async () => {
       try {
-        const response = await fetch("http://localhost:5000/mypage/info", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          credentials: "include", // 세션 정보 포함
-        });
-        const data = await response.json();
+        const response = await axios.get(
+          "http://localhost:5000/mypage/memberInfo",
+          {
+            withCredentials: true,
+          }
+        );
+        const data = response.data;
         setMemberId(data.member_id);
         setMemberName(data.member_name);
         setMemberEmail(data.email);
@@ -48,12 +70,12 @@ const Mymodify = () => {
         setBasicAddress(data.basic_address);
         setDetailAddress(data.detail_address);
       } catch (error) {
-        console.error("Error fetching member information:", error);
+        console.error("Error fetching member info:", error);
       }
     };
 
-    fetchMemberInfo();
-  }, []);
+    checkLoginStatus();
+  }, [navigate]);
 
   const handleIdChange = (value, isValid) => {
     setMemberId(value);
@@ -104,6 +126,29 @@ const Mymodify = () => {
   const handleEmailChange = (value, isValid) => {
     setMemberEmail(value);
     setEmailValid(isValid);
+    if (isValid) {
+      checkEmailDuplicate(value);
+    } else {
+      setIsEmailDuplicate(false);
+    }
+  };
+
+  const checkEmailDuplicate = async (email) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:5000/mypage/check-email`,
+        { withCredentials: true }
+      );
+
+      if (response.data.count > 0) {
+        setIsEmailDuplicate(true);
+      } else {
+        setIsEmailDuplicate(false);
+      }
+    } catch (error) {
+      console.error("Error checking email duplicate:", error);
+      setIsEmailDuplicate(false);
+    }
   };
 
   const handleMobileNumChange = (value) => {
@@ -122,12 +167,12 @@ const Mymodify = () => {
     setDetailAddress(e.target.value);
   };
 
-  const handleConfirm = (e) => {
+  const handleConfirm = async (e) => {
     e.preventDefault();
 
-    // 모든 필수 항목이 입력되었는지 확인
     if (
       !memberId ||
+      !memberPw ||
       !memberName ||
       !memberEmail ||
       !memberMobileNum ||
@@ -147,6 +192,15 @@ const Mymodify = () => {
         icon: "error",
         title: "아이디 중복",
         text: `${memberId}는 이미 가입된 아이디입니다.`,
+      });
+      return;
+    }
+
+    if (isEmailDuplicate) {
+      MySwal.fire({
+        icon: "error",
+        title: "이메일 중복",
+        text: `${memberEmail}는 이미 사용 중인 이메일입니다.`,
       });
       return;
     }
@@ -171,38 +225,31 @@ const Mymodify = () => {
       detail_address: detailAddress,
     };
 
-    fetch("http://localhost:5000/mypage/update", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-      body: JSON.stringify(memberData),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          return response.text().then((text) => {
-            throw new Error(text);
-          });
-        }
-        return response.json();
-      })
-      .then((data) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/mypage/update",
+        memberData,
+        { withCredentials: true }
+      );
+      if (response.status === 200) {
         MySwal.fire({
           icon: "success",
-          title: "회원정보가 수정되었습니다!",
+          title: "회원정보 수정 완료",
+          text: "회원정보가 성공적으로 수정되었습니다.",
         }).then(() => {
           navigate("/mypage");
         });
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-        MySwal.fire({
-          icon: "error",
-          title: "회원정보 수정에 실패했습니다.",
-          text: "조건에 맞춰 회원정보를 수정해주세요.",
-        });
+      } else {
+        throw new Error("Failed to update member info");
+      }
+    } catch (error) {
+      console.error("Error updating member info:", error);
+      MySwal.fire({
+        icon: "error",
+        title: "수정 실패",
+        text: "회원정보 수정에 실패했습니다. 다시 시도해주세요.",
       });
+    }
   };
 
   return (
@@ -238,6 +285,7 @@ const Mymodify = () => {
                   handleEmailChange={handleEmailChange}
                   handleMobileNumChange={handleMobileNumChange}
                   emailValid={emailValid}
+                  isEmailDuplicate={isEmailDuplicate}
                 />
                 <JoinAddress
                   postcode={postcode}
