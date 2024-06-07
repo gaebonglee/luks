@@ -98,9 +98,32 @@ function saveShippingInfo(orderId, shippingInfo) {
   });
 }
 
+function saveBuyerInfo(orderId, memberInfo) {
+  const query = `INSERT INTO buyer_info (order_id, member_name, email, phonenumber) VALUES (?,?,?,?)`;
+
+  const values = [
+    orderId,
+    memberInfo.member_name,
+    memberInfo.email,
+    memberInfo.phonenumber,
+  ];
+
+  return new Promise((resolve, reject) => {
+    connection.query(query, values, (error, results) => {
+      if (error) {
+        console.error("Database query error:", error);
+        reject(error);
+      } else {
+        resolve(results);
+      }
+    });
+  });
+}
+
 module.exports = {
   saveOrder,
   saveOrderItems,
   savePayment,
   saveShippingInfo,
+  saveBuyerInfo,
 };
