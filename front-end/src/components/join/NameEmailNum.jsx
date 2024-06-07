@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 const NameEmailNum = ({
   memberName,
@@ -9,14 +9,44 @@ const NameEmailNum = ({
   handleMobileNumChange,
   emailValid,
 }) => {
+  const [isDuplicateEmail, setIsDuplicateEmail] = useState(false);
+
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
 
+  const checkEmailDuplicate = async (email) => {
+    try {
+      const response = await fetch("http://localhost:5000/join/check-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+
+      if (response.status === 409) {
+        setIsDuplicateEmail(true);
+      } else {
+        setIsDuplicateEmail(false);
+      }
+    } catch (error) {
+      console.error("Error checking email duplicate:", error);
+      setIsDuplicateEmail(false);
+    }
+  };
+
   const onChangeEmail = (e) => {
     const value = e.target.value;
     handleEmailChange(value, validateEmail(value));
+    if (validateEmail(value)) {
+      checkEmailDuplicate(value);
+    } else {
+      setIsDuplicateEmail(false);
+    }
   };
 
   const onChangeMobileNum = (e) => {
@@ -56,6 +86,12 @@ const NameEmailNum = ({
             {memberEmail && !emailValid && (
               <span className="warning">유효한 이메일을 입력하세요.</span>
             )}
+            {isDuplicateEmail && (
+              <span className="warning">
+                "{memberEmail}"는 중복된 이메일입니다.
+              </span>
+            )}
+            {emailValid && !isDuplicateEmail}
           </div>
         </td>
       </tr>

@@ -27,10 +27,14 @@ const Login = ({ setIsLoggedIn }) => {
         Swal.fire("로그인 되었습니다.").then(() => {
           navigate("/");
         });
+      } else {
+        Swal.fire("아이디 또는 비밀번호를 다시 확인해주세요.");
       }
     } catch (error) {
       console.error("Login error:", error);
-      alert("서버와의 통신 중 문제가 발생했습니다.");
+      Swal.fire({
+        text: "서버와의 통신 중 문제가 발생했습니다.",
+      });
     }
   };
 

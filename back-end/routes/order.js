@@ -7,6 +7,7 @@ const {
   saveShippingInfo,
 } = require("../sql/order/order");
 const { removeMultipleFromCart } = require("../sql/cart/cart");
+const { getOrders } = require("../sql/order/getOrders");
 
 router.post("/checkout", async (req, res) => {
   const { orderItems, paymentMethod, shippingInfo, totalAmount } = req.body;
@@ -19,7 +20,7 @@ router.post("/checkout", async (req, res) => {
   }
 
   try {
-    const orderId = await saveOrder(memberId, totalAmount, "Pending");
+    const orderId = await saveOrder(memberId, totalAmount, "배송완료");
     console.log("Order ID:", orderId); // 콘솔에 Order ID 출력
     await saveOrderItems(orderId, orderItems);
     await savePayment(orderId, paymentMethod, totalAmount);
@@ -33,16 +34,32 @@ router.post("/checkout", async (req, res) => {
     }));
     await removeMultipleFromCart(memberId, itemsToRemove);
 
-    res
-      .status(200)
-      .json({
-        success: true,
-        message: "Order successfully placed and items removed from cart",
-      });
+    res.status(200).json({
+      success: true,
+      message: "Order successfully placed and items removed from cart",
+    });
   } catch (error) {
     console.error("Error during order placement:", error);
     res.status(500).json({ success: false, message: "Order placement failed" });
   }
+});
+
+//주문배송조회jsx
+router.get("/my-orders", (req, res) => {
+  if (!req.session.user) {
+    return res.status(401).json({ success: false, message: "Unauthorized" });
+  }
+
+  const memberId = req.session.user.id;
+
+  getOrders(memberId, (error, results) => {
+    if (error) {
+      return res
+        .status(500)
+        .json({ success: false, message: "Internal server error" });
+    }
+    res.status(200).json({ success: true, orders: results });
+  });
 });
 
 module.exports = router;

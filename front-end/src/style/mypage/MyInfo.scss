@@ -1,0 +1,62 @@
+@import "../common.scss";
+
+.ConfirmPassword_titleWrap {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding-bottom: 10px;
+  border-bottom: 4px solid $mute4;
+  h3 {
+    font-size: 23px;
+  }
+  a {
+    color: $gray;
+    font-size: 14px;
+    padding-left: 10px;
+  }
+}
+.reconfirmWrap {
+  padding: 30px 0;
+  border-bottom: 1px solid $mute4;
+}
+.reconfirm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.in_row {
+  display: flex;
+  align-items: center;
+
+  label {
+    display: inline-block;
+    min-width: 90px;
+    font-size: 15px;
+    font-weight: 400;
+    color: #303033;
+    line-height: 40px;
+  }
+  input {
+    font-size: 15px;
+    padding: 8px 15px;
+    border: 1px solid $lightgray;
+    outline: none;
+  }
+}
+
+.reconfirmBtn {
+  padding-top: 30px;
+  border-top: 1px solid #d4d4d4;
+  text-align: center;
+  button {
+    width: 300px;
+    height: 50px;
+    margin: 0 auto;
+    color: $white;
+    background: $mute4;
+    border: none;
+    font-weight: 600;
+    font-size: 18px;
+  }
+}

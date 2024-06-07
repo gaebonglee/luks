@@ -38,7 +38,7 @@ const Confirmed = () => {
           <a href="/">계속 쇼핑하기</a>
         </button>
         <button className="right">
-          <a href="/orders">주문/배송조회</a>
+          <a href="mypage/my-order/list">주문/배송조회</a>
         </button>
       </div>
     </div>
