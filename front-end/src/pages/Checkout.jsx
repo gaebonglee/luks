@@ -7,8 +7,6 @@ import PaymentMethod from "../components/checkout/PaymentMethod";
 import "../style/checkout/Checkout.scss";
 import axios from "axios";
 import Swal from "sweetalert2";
-
-//아이콘
 import { IoMdArrowDropright } from "react-icons/io";
 
 const Checkout = () => {

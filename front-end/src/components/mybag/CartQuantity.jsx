@@ -1,7 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "../../style/mybag/CartQuantity.scss";
 
 const CartQuantity = ({ product, onQuantityChange }) => {
+  const navigate = useNavigate();
+
   const handleQuantityChange = (delta) => {
     const newQuantity = product.quantity + delta;
     if (newQuantity > 0) {
@@ -12,6 +15,11 @@ const CartQuantity = ({ product, onQuantityChange }) => {
         delta
       );
     }
+  };
+
+  const handleBuyNow = () => {
+    const selectedProductDetails = [product];
+    navigate("/checkout", { state: { selectedProductDetails } });
   };
 
   return (
@@ -27,7 +35,7 @@ const CartQuantity = ({ product, onQuantityChange }) => {
       </td>
       <td className="mybag_price_column">
         <p>{(product.p_price * product.quantity).toLocaleString()}원</p>
-        <button>BUY NOW</button>
+        <button onClick={handleBuyNow}>BUY NOW</button>
       </td>
     </>
   );
