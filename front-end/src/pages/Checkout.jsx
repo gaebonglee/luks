@@ -76,11 +76,11 @@ const Checkout = () => {
         <div className="bagAndOrder_title">
           <ul>
             <li>
-              <a className="changeColor">SHOPPING BAG</a>
+              <a>SHOPPING BAG</a>
               <IoMdArrowDropright />
             </li>
             <li>
-              <a>ORDER</a>
+              <a className="changeColor">ORDER</a>
               <IoMdArrowDropright />
             </li>
             <li>

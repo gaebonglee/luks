@@ -2,11 +2,15 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../../../style/mypage/MyOrderList.scss";
+import Review from "../review/Review";
 
 const MyOrderList = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
+  const [selectedOrder, setSelectedOrder] = useState(null);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -50,6 +54,17 @@ const MyOrderList = () => {
     navigate("/mypage/my-order/detail", { state: { order } });
   };
 
+  const handleReviewClick = (event, order) => {
+    event.stopPropagation();
+    setSelectedOrder(order);
+    setIsReviewModalOpen(true);
+  };
+
+  const closeReviewModal = () => {
+    setIsReviewModalOpen(false);
+    setSelectedOrder(null);
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -68,7 +83,7 @@ const MyOrderList = () => {
               <tr>
                 <th>상품정보</th>
                 <th>진행상태</th>
-                <th>구매확정 및 리뷰</th>
+                <th>리뷰</th>
               </tr>
             </thead>
             <tbody>
@@ -102,11 +117,11 @@ const MyOrderList = () => {
                       </td>
                     </tr>
                     {orderGroup.map((order) => (
-                      <tr
-                        key={order.product_id}
-                        onClick={() => handleOrderClick(orderGroup)}
-                      >
-                        <td className="MyOrderList_detailWrap">
+                      <tr key={order.product_id}>
+                        <td
+                          className="MyOrderList_detailWrap"
+                          onClick={() => handleOrderClick(orderGroup)}
+                        >
                           <img src={order.p_image_url} alt="상품 이미지" />
                           <div className="MyOrderList_detail">
                             <div className="MyOrderList_detail name">
@@ -127,8 +142,11 @@ const MyOrderList = () => {
                           <p>{order.status}</p>
                         </td>
                         <td className="MyOrderList_review">
-                          <a>구매확정</a>
-                          <a>리뷰작성</a>
+                          <a
+                            onClick={(event) => handleReviewClick(event, order)}
+                          >
+                            리뷰작성
+                          </a>
                         </td>
                       </tr>
                     ))}
@@ -139,6 +157,13 @@ const MyOrderList = () => {
           </table>
         </div>
       </div>
+      {isReviewModalOpen && (
+        <Review
+          isOpen={isReviewModalOpen}
+          onRequestClose={closeReviewModal}
+          order={selectedOrder}
+        />
+      )}
     </section>
   );
 };

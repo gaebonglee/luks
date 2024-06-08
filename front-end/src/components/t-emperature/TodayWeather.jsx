@@ -12,7 +12,7 @@ import { WiHumidity } from "react-icons/wi";
 import { IoUmbrella } from "react-icons/io5";
 import { FaTemperatureLow } from "react-icons/fa6";
 
-const OpenWeatherMap = () => {
+const TodayWeather = () => {
   const navigate = useNavigate();
   const [weatherData, setWeatherData] = useState([]);
   const [city, setCity] = useState("Seoul");
@@ -100,7 +100,13 @@ const OpenWeatherMap = () => {
   }, [city, apiKey]);
 
   const handleSearchChange = (e) => {
-    setSearch(e.target.value);
+    const value = e.target.value;
+    const regex = /^[a-zA-Z\s]*$/;
+    if (regex.test(value)) {
+      setSearch(value);
+    } else {
+      Swal.fire("영어만 입력 가능합니다.");
+    }
   };
 
   const handleSearchSubmit = (e) => {
@@ -146,6 +152,7 @@ const OpenWeatherMap = () => {
                   type="text"
                   value={search}
                   onChange={handleSearchChange}
+                  maxLength="20"
                   placeholder="지역이름 검색"
                 />
                 <button type="submit">
@@ -154,7 +161,7 @@ const OpenWeatherMap = () => {
               </form>
             </div>
             <div className="detailedWeather">
-              <h2>오늘 날씨</h2>
+              <h2>세부 내용</h2>
               {weatherData.length > 0 ? (
                 <div className="detailedWeather_itemWrap">
                   <div className="detailedWeather_item">
@@ -215,4 +222,4 @@ const OpenWeatherMap = () => {
   );
 };
 
-export default OpenWeatherMap;
+export default TodayWeather;

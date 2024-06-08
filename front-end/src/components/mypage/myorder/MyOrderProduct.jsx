@@ -14,7 +14,8 @@ const MyOrderProduct = ({ order }) => {
             <tr>
               <th>상품정보</th>
               <th>진행상태</th>
-              <th>구매확정 및 리뷰</th>
+              <th>리뷰</th>
+              {/* <th>구매확정 및 리뷰</th> */}
             </tr>
           </thead>
           <tbody>
@@ -41,7 +42,7 @@ const MyOrderProduct = ({ order }) => {
                   <p>{item.status}</p>
                 </td>
                 <td className="MyOrderProduct_review">
-                  <a>구매확정</a>
+                  {/* <a>구매확정</a> */}
                   <a>리뷰작성</a>
                 </td>
               </tr>

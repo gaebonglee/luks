@@ -1,0 +1,106 @@
+@import "../common.scss";
+
+.Modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  padding: 20px;
+  border-radius: 4px;
+  outline: none;
+  max-width: 500px;
+  width: 100%;
+}
+
+.Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.reviewModal_titleWrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.reviewModal_titleWrap {
+  h2 {
+    margin: 0;
+    padding-bottom: 10px;
+  }
+  button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+  }
+}
+
+.ReviewForm {
+  .stars {
+    display: flex;
+    padding-left: 10px;
+
+    .star {
+      cursor: pointer;
+      font-size: 1.5rem;
+      color: #ddd;
+      transition: color 0.2s;
+    }
+
+    .selected {
+      color: gold;
+    }
+  }
+
+  .ReviewSubmitWrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  .ReviewSubmit {
+    align-content: center;
+    font-size: 18px;
+    background-color: $mute4;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+  }
+}
+
+.ReviewForm_wrap {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+
+  label {
+    margin-bottom: 5px;
+  }
+}
+
+.review_form {
+  margin-bottom: 15px;
+
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  textarea {
+    font-size: 16px;
+    padding: 10px;
+    width: 100%;
+    height: 100px;
+    resize: none;
+    outline: none;
+  }
+}

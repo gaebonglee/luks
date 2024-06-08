@@ -8,7 +8,7 @@ const ChooseOne = () => {
           
         </div>
         <div className="ChooseOne_contentWrap">
-            <p>확</p>
+            <p></p>
         </div>
       </div>
     </section>
