@@ -1,9 +1,13 @@
 import React from "react";
+import OpenWeatherMap from "../components/t-emperature/OpenWeatherMap";
+import "../style/temperature/Temperature.scss";
 
 const Temperature = () => {
   return (
     <div className="Temperature_page">
-      <div className="Temperature_container"></div>
+      <div className="Temperature_container">
+        <OpenWeatherMap />
+      </div>
     </div>
   );
 };
