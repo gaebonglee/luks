@@ -57,7 +57,7 @@ const JoinId = ({ memberId, idValid, handleIdChange }) => {
           ></input>
         </td>
         <td className="join_guide">
-          <p className="id_msg">
+          <div className="id_msg">
             <div className="conditionWrap">
               <span id="id_condition">
                 {!idValid && (
@@ -73,7 +73,7 @@ const JoinId = ({ memberId, idValid, handleIdChange }) => {
                 {!isDuplicate && idValid && <FaCheck />}
               </span>
             </div>
-          </p>
+          </div>
         </td>
       </tr>
     </>
