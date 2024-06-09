@@ -1,0 +1,81 @@
+@import "../common.scss";
+
+.ReviewList_section {
+  padding: 20px;
+}
+
+.ReviewList_tabs {
+  display: flex;
+  border-bottom: 4px solid $mute4;
+  margin-bottom: 20px;
+
+  button {
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: $white;
+    color: $mute4;
+    border: none;
+    outline: none;
+
+    &.active {
+      background-color: $mute4;
+      color: white;
+    }
+  }
+}
+
+.ReviewList_contents {
+  .ReviewList_writable,
+  .ReviewList_written {
+    ul {
+      padding: 0;
+
+      .ReviewItem {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid $mute4;
+        padding: 10px 0;
+
+        .ReviewItem_info {
+          display: flex;
+          gap: 10px;
+
+          img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            background-color: gray;
+          }
+
+          div {
+            .ReviewItem_name {
+              font-weight: bold;
+              margin-bottom: 5px;
+            }
+          }
+
+          .ReviewItem_stars {
+            padding: 5px 0 5px 0;
+            display: flex;
+            .star {
+              color: #ffd700;
+              margin-right: 2px;
+            }
+          }
+        }
+
+        button {
+          padding: 10px 20px;
+          background-color: $mute4;
+          color: white;
+          border: none;
+          cursor: pointer;
+          &:hover {
+            background-color: darken($mute4, 10%);
+          }
+        }
+      }
+    }
+  }
+}

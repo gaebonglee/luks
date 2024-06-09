@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import MyOrderProduct from "../myorder/MyOrderProduct";
 import BuyerInfo from "../myorder/BuyerInfo";
@@ -8,11 +8,17 @@ import MyOrderShippingInfo from "../myorder/MyOrderShippingInfo";
 
 const MyOrderDetail = () => {
   const location = useLocation();
-  const { order } = location.state;
+  const navigate = useNavigate();
+  const { order } = location.state || {}; 
   const [buyerInfo, setBuyerInfo] = useState(null);
   const [shippingInfo, setShippingInfo] = useState(null);
 
   useEffect(() => {
+    if (!order) {
+      navigate("/mypage");
+      return;
+    }
+
     const fetchBuyerInfo = async () => {
       try {
         const response = await axios.get(
@@ -45,7 +51,11 @@ const MyOrderDetail = () => {
 
     fetchBuyerInfo();
     fetchShippingInfo();
-  }, [order]);
+  }, [order, navigate]);
+
+  if (!order) {
+    return <div>Loading...</div>;
+  }
 
   if (!buyerInfo || !shippingInfo) {
     return <div>Loading...</div>;
