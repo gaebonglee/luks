@@ -2,14 +2,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../../../style/mypage/MyOrderList.scss";
-import Review from "../review/Review";
 
 const MyOrderList = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
-  const [selectedOrder, setSelectedOrder] = useState(null);
+  const [user, setUser] = useState(null);
 
   const navigate = useNavigate();
 
@@ -23,7 +21,6 @@ const MyOrderList = () => {
           }
         );
 
-        // 주문을 주문 번호별로 그룹화
         const groupedOrders = response.data.orders.reduce((acc, order) => {
           const { order_id } = order;
           if (!acc[order_id]) {
@@ -33,7 +30,6 @@ const MyOrderList = () => {
           return acc;
         }, {});
 
-        // 그룹화된 주문을 내림차순으로 정렬
         const sortedOrders = Object.values(groupedOrders).sort(
           (a, b) => b[0].order_id - a[0].order_id
         );
@@ -47,22 +43,26 @@ const MyOrderList = () => {
       }
     };
 
+    const fetchUser = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:5000/check-session`,
+          {
+            withCredentials: true,
+          }
+        );
+        setUser(response.data.user);
+      } catch (error) {
+        console.error("There was an error fetching the user!", error);
+      }
+    };
+
     fetchOrders();
+    fetchUser();
   }, []);
 
   const handleOrderClick = (order) => {
     navigate("/mypage/my-order/detail", { state: { order } });
-  };
-
-  const handleReviewClick = (event, order) => {
-    event.stopPropagation();
-    setSelectedOrder(order);
-    setIsReviewModalOpen(true);
-  };
-
-  const closeReviewModal = () => {
-    setIsReviewModalOpen(false);
-    setSelectedOrder(null);
   };
 
   if (loading) {
@@ -82,8 +82,8 @@ const MyOrderList = () => {
             <thead>
               <tr>
                 <th>상품정보</th>
+                <th>배송비</th>
                 <th>진행상태</th>
-                <th>리뷰</th>
               </tr>
             </thead>
             <tbody>
@@ -128,8 +128,8 @@ const MyOrderList = () => {
                               {order.p_name}
                             </div>
                             <div className="MyOrderList_detail colorSize">
-                              <span>색상: {order.color_name}</span>
-                              <span>사이즈: {order.size}</span>
+                              <p>color : {order.color_name}</p>
+                              <p>size : {order.size}</p>
                             </div>
                             <div className="MyOrderList_detail priceWrap">
                               <span>{order.price.toLocaleString()}원</span>
@@ -138,15 +138,11 @@ const MyOrderList = () => {
                             </div>
                           </div>
                         </td>
+                        <td className="MyOrderList_shipping">
+                          <p>무료배송</p>
+                        </td>
                         <td className="MyOrderList_progress">
                           <p>{order.status}</p>
-                        </td>
-                        <td className="MyOrderList_review">
-                          <a
-                            onClick={(event) => handleReviewClick(event, order)}
-                          >
-                            리뷰작성
-                          </a>
                         </td>
                       </tr>
                     ))}
@@ -157,13 +153,6 @@ const MyOrderList = () => {
           </table>
         </div>
       </div>
-      {isReviewModalOpen && (
-        <Review
-          isOpen={isReviewModalOpen}
-          onRequestClose={closeReviewModal}
-          order={selectedOrder}
-        />
-      )}
     </section>
   );
 };

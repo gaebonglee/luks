@@ -41,7 +41,7 @@ const MypageMenu = () => {
               </li>
               <li>
                 <NavLink
-                  to="/mypage/review"
+                  to="/mypage/review/list"
                   className={({ isActive }) => (isActive ? "active" : "")}
                 >
                   상품 리뷰

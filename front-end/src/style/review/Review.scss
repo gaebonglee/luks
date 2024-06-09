@@ -44,10 +44,18 @@
   }
 }
 
+.reviewModal_productInfo {
+  display: flex;
+  gap: 10px;
+  img {
+    width: 120px;
+  }
+}
+
 .ReviewForm {
   .stars {
     display: flex;
-    padding-left: 10px;
+    padding-top: 10px;
 
     .star {
       cursor: pointer;
@@ -90,7 +98,7 @@
 .review_form {
   margin-bottom: 15px;
 
-  label {
+  a{
     display: block;
     margin-bottom: 5px;
   }

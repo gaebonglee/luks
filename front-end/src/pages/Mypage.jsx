@@ -17,6 +17,7 @@ const Mypage = () => {
         <Route path="/" element={<MypageMain />} />
         <Route path="my-order/list" element={<MyOrderList />} />
         <Route path="my-order/detail" element={<MyOrderDetail />} />
+        <Route path="review/list" element={<MyOrderDetail />} />
         <Route path="mywish" element={<MyWishList />} />
         <Route path="edit/reconfirm" element={<MyInfo />} />
         <Route path="edit/info" element={<Mymodify />} />
