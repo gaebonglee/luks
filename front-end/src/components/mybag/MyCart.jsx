@@ -178,6 +178,10 @@ const MyCart = () => {
   }
 
   const handleCalculateTotal = async () => {
+    if (selectedItems.length === 0) {
+      return 0; // 장바구니가 비어 있는 경우 0을 반환
+    }
+  
     try {
       const response = await axios.post(
         `http://localhost:5000/cart/calculate-total`,
