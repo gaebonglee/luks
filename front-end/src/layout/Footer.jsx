@@ -27,8 +27,8 @@ const Footer = () => {
                     이용약관
                   </Link>
                 </li>
-                <span />
-                <li>
+                {/*<span />
+                 <li>
                   <Link to="#" className="notice_page">
                     공지사항
                   </Link>
@@ -50,23 +50,23 @@ const Footer = () => {
                   <Link to="#" className="evnet_page">
                     이벤트
                   </Link>
-                </li>
+                </li> */}
               </ul>
             </div>
           </div>
           <div className="footer_bottom">
             <div className="info_section">
               <div className="top">
-                <span>상호명 : 주식회사 다할수있조</span>
+                <span>상호명 : 주식회사 룩스</span>
                 <span>사업장소재지 : 서울특별시 서초구 서운로 220</span>
                 <span>팩스 : 010-0000-0000</span>
-                <span>통신판매업신고 : 2024-서울강남-0517</span>
+                <span>통신판매업신고 : 2024-서울강남-0610</span>
               </div>
               <div className="bottom">
                 <span>전화번호 : 1588-1588</span>
-                <span>이메일 : 0000@tmp.co.kr</span>
-                <span>대표 : 다할수</span>
-                <span>개인정보 보호책임자 : 다할수</span>
+                <span>이메일 : 0000@luks.co.kr</span>
+                <span>대표 : 룩스</span>
+                <span>개인정보 보호책임자 : 룩스</span>
               </div>
             </div>
           </div>

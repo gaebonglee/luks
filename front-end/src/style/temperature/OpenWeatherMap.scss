@@ -1,0 +1,156 @@
+@import "../common.scss";
+
+.OpenWeatherMap_section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 0;
+
+  .OpenWeatherMap_container {
+    width: 80%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+
+    .NextBtn {
+      max-width: 200px;
+      border-radius: 20px;
+      padding: 1rem 5rem;
+      font-size: 20px;
+      border: none;
+      background-color: $mute4;
+      color: white;
+      font-weight: $weight1;
+    }
+  }
+
+  .searchWrap {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 1.5rem;
+
+    form {
+      width: 100%;
+      display: flex;
+      border: 1px solid $lightgray;
+      border-radius: 8px;
+
+      input {
+        flex: 1;
+        outline: none;
+        border: none;
+        font-size: 18px;
+        padding: 20px;
+        border-radius: 8px;
+      }
+      button {
+        outline: none;
+        background-color: black;
+        color: $white;
+        padding: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
+        svg {
+          font-size: $h2;
+        }
+      }
+    }
+  }
+
+  .todayWeatherWrap {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+
+    .currentWeather {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 30%;
+    }
+    .Weather_SearchDetail {
+      width: 78%;
+    }
+    .currentWeather,
+    .detailedWeather {
+      padding: 1rem;
+      border: 1px solid $lightgray;
+      border-radius: 8px;
+      h2 {
+        margin-bottom: 1rem;
+      }
+      .weather_item,
+      .detailedWeather_item {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        h3 {
+          margin-bottom: 0.5rem;
+        }
+        img {
+          width: 150px; // 이미지 크기 설정
+          height: auto; // 비율을 유지하면서 크기 조정
+        }
+        p {
+          margin: 0.25rem 0;
+        }
+      }
+    }
+  }
+
+  .detailedWeather_itemWrap {
+    display: flex;
+    justify-content: space-around;
+    .detailedWeather_item {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      a {
+        padding-top: 10px;
+        color: $gray;
+      }
+      svg {
+        font-size: 50px;
+      }
+      p {
+        font-size: 20px;
+      }
+    }
+  }
+  .forecastWrap {
+    width: 100%;
+    h2 {
+      margin-bottom: 1rem;
+    }
+    .animation_container {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+
+      .weather_item {
+        width: calc(20% - 0.8rem);
+        padding: 1rem;
+        border: 1px solid $lightgray;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+        h3 {
+          margin-bottom: 0.5rem;
+        }
+        p {
+          margin: 0.25rem 0;
+        }
+      }
+    }
+  }
+}

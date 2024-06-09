@@ -7,6 +7,8 @@ const MyOrderList = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [user, setUser] = useState(null);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,7 +21,6 @@ const MyOrderList = () => {
           }
         );
 
-        // 주문을 주문 번호별로 그룹화
         const groupedOrders = response.data.orders.reduce((acc, order) => {
           const { order_id } = order;
           if (!acc[order_id]) {
@@ -29,7 +30,6 @@ const MyOrderList = () => {
           return acc;
         }, {});
 
-        // 그룹화된 주문을 내림차순으로 정렬
         const sortedOrders = Object.values(groupedOrders).sort(
           (a, b) => b[0].order_id - a[0].order_id
         );
@@ -43,7 +43,22 @@ const MyOrderList = () => {
       }
     };
 
+    const fetchUser = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:5000/check-session`,
+          {
+            withCredentials: true,
+          }
+        );
+        setUser(response.data.user);
+      } catch (error) {
+        console.error("There was an error fetching the user!", error);
+      }
+    };
+
     fetchOrders();
+    fetchUser();
   }, []);
 
   const handleOrderClick = (order) => {
@@ -67,8 +82,8 @@ const MyOrderList = () => {
             <thead>
               <tr>
                 <th>상품정보</th>
+                <th>배송비</th>
                 <th>진행상태</th>
-                <th>구매확정 및 리뷰</th>
               </tr>
             </thead>
             <tbody>
@@ -102,19 +117,19 @@ const MyOrderList = () => {
                       </td>
                     </tr>
                     {orderGroup.map((order) => (
-                      <tr
-                        key={order.product_id}
-                        onClick={() => handleOrderClick(orderGroup)}
-                      >
-                        <td className="MyOrderList_detailWrap">
+                      <tr key={order.product_id}>
+                        <td
+                          className="MyOrderList_detailWrap"
+                          onClick={() => handleOrderClick(orderGroup)}
+                        >
                           <img src={order.p_image_url} alt="상품 이미지" />
                           <div className="MyOrderList_detail">
                             <div className="MyOrderList_detail name">
                               {order.p_name}
                             </div>
                             <div className="MyOrderList_detail colorSize">
-                              <span>색상: {order.color_name}</span>
-                              <span>사이즈: {order.size}</span>
+                              <p>color : {order.color_name}</p>
+                              <p>size : {order.size}</p>
                             </div>
                             <div className="MyOrderList_detail priceWrap">
                               <span>{order.price.toLocaleString()}원</span>
@@ -123,12 +138,11 @@ const MyOrderList = () => {
                             </div>
                           </div>
                         </td>
+                        <td className="MyOrderList_shipping">
+                          <p>무료배송</p>
+                        </td>
                         <td className="MyOrderList_progress">
                           <p>{order.status}</p>
-                        </td>
-                        <td className="MyOrderList_review">
-                          <a>구매확정</a>
-                          <a>리뷰작성</a>
                         </td>
                       </tr>
                     ))}

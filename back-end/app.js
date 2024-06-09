@@ -16,6 +16,7 @@ const orderRouter = require("./routes/order");
 const paymentRouter = require("./routes/payment");
 const RecentOrdersRouter = require("./routes/recentOrders");
 const ConfirmPasswordRouter = require("./routes/confirmPassword");
+const ReviewRouter = require("./routes/review");
 
 const app = express();
 
@@ -67,6 +68,7 @@ app.use("/payment", paymentRouter);
 app.use("/order", orderRouter);
 app.use("/recentOrders", RecentOrdersRouter);
 app.use("/confirmPassword", ConfirmPasswordRouter);
+app.use("/review", ReviewRouter);
 
 // 세션 상태 확인 라우트 추가
 app.get("/check-session", (req, res) => {

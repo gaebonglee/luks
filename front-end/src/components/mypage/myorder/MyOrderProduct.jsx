@@ -6,18 +6,33 @@ const MyOrderProduct = ({ order }) => {
     <section className="MyOrderProduct_section">
       <div className="MyOrderProduct_titleWrap">
         <h3>주문상품정보</h3>
-        <a>주문일자 : {new Date(order[0].order_date).toLocaleDateString()}</a>
       </div>
       <div className="MyOrderProduct_contents">
         <table className="MyOrderProduct_table">
           <thead>
             <tr>
               <th>상품정보</th>
+              <th>배송비</th>
               <th>진행상태</th>
-              <th>구매확정 및 리뷰</th>
             </tr>
           </thead>
           <tbody>
+            <tr>
+              <td colSpan="3">
+                <div className="MyOrderProduct_orderInfo">
+                  <a>
+                    <span>주문일자</span>
+                    <span className="bold">
+                      {new Date(order[0].order_date).toLocaleDateString()}
+                    </span>
+                  </a>
+                  <a>
+                    <span>주문번호</span>
+                    <span className="bold">{order[0].order_id}</span>
+                  </a>
+                </div>
+              </td>
+            </tr>
             {order.map((item) => (
               <tr key={item.product_id}>
                 <td className="MyOrderProduct_detailWrap">
@@ -37,12 +52,11 @@ const MyOrderProduct = ({ order }) => {
                     </div>
                   </div>
                 </td>
+                <td className="MyOrderProduct_shipping">
+                  <p>무료배송</p>
+                </td>
                 <td className="MyOrderProduct_progress">
                   <p>{item.status}</p>
-                </td>
-                <td className="MyOrderProduct_review">
-                  <a>구매확정</a>
-                  <a>리뷰작성</a>
                 </td>
               </tr>
             ))}

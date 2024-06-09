@@ -123,9 +123,9 @@ const HeaderMenu = () => {
               </ul>
             </div>
           </li>
-          <li className="menu_category_li">
+          {/* <li className="menu_category_li">
             <Link to={"/t-emperature"}>T-EMPERTURE</Link>
-          </li>
+          </li> */}
         </ul>
       </div>
     </div>

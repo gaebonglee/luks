@@ -11,6 +11,8 @@ import ProductDetail from "./components/product/ProductDetail";
 import MyBag from "./pages/MyBag";
 import Checkout from "./pages/Checkout";
 import Confirmed from "./pages/Confirmed";
+// import Temperature from "./pages/Temperature";
+// import ChooseOne from "./components/t-emperature/ChooseOne"
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
@@ -50,6 +52,8 @@ const App = () => {
           <Route path="/mybag" element={<MyBag />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/confirmed" element={<Confirmed />} />
+          {/* <Route path="/t-emperature" element={<Temperature />} />
+          <Route path="/t-emperature/chooseOne" element={< ChooseOne />} /> */}
         </Route>
       </Routes>
     </Router>
