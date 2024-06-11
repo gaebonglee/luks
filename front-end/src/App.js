@@ -4,6 +4,7 @@ import Root from "./pages/Root";
 import Home from "./pages/Home";
 import PrivateRoute from "./components/private/PrivateRoute";
 import Login from "./components/login/Login";
+import SnsLogin from "./components/login/SnsLogin";
 import JoinPage from "./pages/JoinPage";
 import Mypage from "./pages/Mypage";
 import Category from "./pages/Category";
@@ -31,6 +32,7 @@ const App = () => {
             path="/login"
             element={<Login setIsLoggedIn={setIsLoggedIn} />}
           />
+          <Route path="/oauth/kakaologin" element={<SnsLogin />} />
           <Route path="/join" element={<JoinPage />} />
           <Route
             path="mypage/*"

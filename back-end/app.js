@@ -32,7 +32,7 @@ const sessionStore = new MySQLStore(options);
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "http://localhost:3001",
     credentials: true,
   })
 );
@@ -69,6 +69,9 @@ app.use("/order", orderRouter);
 app.use("/recentOrders", RecentOrdersRouter);
 app.use("/confirmPassword", ConfirmPasswordRouter);
 app.use("/review", ReviewRouter);
+
+// OAuth 경로 추가
+app.use("/oauth", joinRouter);
 
 // 세션 상태 확인 라우트 추가
 app.get("/check-session", (req, res) => {
