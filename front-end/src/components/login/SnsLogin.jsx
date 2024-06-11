@@ -11,7 +11,7 @@ const OAuthCallback = () => {
     const code = new URL(window.location.href).searchParams.get("code");
     if (code) {
       axios
-        .get(`http://localhost:5000/oauth/kakaologin?code=${code}`)
+        .get(`http://localhost:5000/join/oauth/kakaologin?code=${code}`)
         .then((response) => {
           if (response.data.message === "회원가입이 완료되었습니다.") {
             Swal.fire("로그인 되었습니다.").then(() => {
@@ -28,7 +28,7 @@ const OAuthCallback = () => {
     }
   }, [navigate]);
 
-  return <div>로그인 중...</div>;
+  return <div></div>;
 };
 
 export default OAuthCallback;

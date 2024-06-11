@@ -71,9 +71,6 @@ app.use("/recentOrders", RecentOrdersRouter);
 app.use("/confirmPassword", ConfirmPasswordRouter);
 app.use("/review", ReviewRouter);
 
-// OAuth 경로 추가
-app.use("/oauth", joinRouter);
-
 // 세션 상태 확인 라우트 추가
 app.get("/check-session", (req, res) => {
   if (req.session.user) {

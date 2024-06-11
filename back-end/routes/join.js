@@ -19,66 +19,6 @@ router.post("/register", (req, res) => {
   });
 });
 
-// ------카카오톡 로그인 관련 --------- \\
-router.get("/oauth/kakaologin", async (req, res) => {
-  const code = req.query.code;
-
-  try {
-    const token = await axios.post(
-      "https://kauth.kakao.com/oauth/token",
-      {},
-      {
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        params: {
-          grant_type: "authorization_code",
-          client_id: process.env.KAKAO_LOGIN_REST_KEY,
-          code,
-          redirect_uri: "http://localhost:3001/oauth/kakaologin",
-        },
-      }
-    );
-
-    const userInfo = await axios.post(
-      "https://kapi.kakao.com/v2/user/me",
-      {},
-      {
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-          Authorization: "Bearer " + token.data.access_token,
-        },
-      }
-    );
-
-    const userId = userInfo.data.id + "_kakao";
-    const phoneNumber = userInfo.data.kakao_account.phone_number || "";
-
-    const memberData = {
-      member_id: userId,
-      member_pw: "",
-      member_name: userInfo.data.kakao_account.profile.nickname,
-      email: userInfo.data.kakao_account.email,
-      phonenumber: phoneNumber,
-      postcode: "",
-      basic_address: "",
-      detail_address: "",
-    };
-
-    saveMemberInfo(memberData, (err, result) => {
-      if (err) {
-        console.error("Error saving member information: ", err);
-        return res.status(500).send("Error saving member information");
-      }
-      res.redirect("http://localhost:3001/");
-    });
-  } catch (error) {
-    console.error("Error during Kakao login:", error);
-    res.status(400).end("로그인 에러");
-  }
-});
-// ------카카오톡 로그인 관련 --------- \\
-
 router.post("/check-id", (req, res) => {
   const { member_id } = req.body;
 
