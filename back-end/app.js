@@ -17,6 +17,7 @@ const paymentRouter = require("./routes/payment");
 const RecentOrdersRouter = require("./routes/recentOrders");
 const ConfirmPasswordRouter = require("./routes/confirmPassword");
 const ReviewRouter = require("./routes/review");
+require('dotenv').config();
 
 const app = express();
 

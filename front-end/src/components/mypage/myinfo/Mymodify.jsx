@@ -9,6 +9,7 @@ import withReactContent from "sweetalert2-react-content";
 import axios from "axios";
 import "../../../style/join/JoinPage.scss";
 import "../../../style/join/JoinBtn.scss";
+import "../../../style/mypage/Mymodify.scss";
 
 const Mymodify = () => {
   const MySwal = withReactContent(Swal);
@@ -30,6 +31,12 @@ const Mymodify = () => {
   const [postcode, setPostcode] = useState("");
   const [basicAddress, setBasicAddress] = useState("");
   const [detailAddress, setDetailAddress] = useState("");
+
+  // 인증번호 관련
+  const [certificateNumber, setCertificateNumber] = useState("");
+  const [showCertificateButton, setShowCertificateButton] = useState(false);
+  const [certificateStatus, setCertificateStatus] = useState(false);
+  const [inputCertificateNumber, setInputCertificateNumber] = useState("");
 
   useEffect(() => {
     const checkLoginStatus = async () => {
@@ -170,6 +177,15 @@ const Mymodify = () => {
   const handleConfirm = async (e) => {
     e.preventDefault();
 
+    if (!certificateStatus) {
+      MySwal.fire({
+        icon: "error",
+        title: "인증번호 확인 필요",
+        text: "인증번호 확인을 해주세요.",
+      });
+      return;
+    }
+
     if (
       !memberId ||
       !memberPw ||
@@ -252,6 +268,48 @@ const Mymodify = () => {
     }
   };
 
+  // 인증번호 관련
+  const GenerateSixDigitNumber = () => {
+    return Math.floor(Math.random() * 900000 + 100000);
+  };
+
+  const handleSendCertificate = async () => {
+    setShowCertificateButton(true);
+
+    const randomNumber = GenerateSixDigitNumber();
+    setCertificateNumber(randomNumber);
+
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/mypage/certification",
+        { certificateNumber: randomNumber, phonenumber: memberMobileNum },
+        { withCredentials: true }
+      );
+      console.log("Response:", response.data);
+    } catch (error) {
+      console.error("Error sending certificate number:", error);
+    }
+  };
+
+  const handleCheckCertificate = () => {
+    if (parseInt(inputCertificateNumber) === certificateNumber) {
+      setCertificateStatus(true);
+      Swal.fire({
+        icon: "success",
+        title: "번호 인증이 완료되었습니다.",
+      });
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "인증번호가 틀렸습니다. 다시 시도해주세요.",
+      });
+    }
+  };
+
+  const handleCertificateInputChange = (e) => {
+    setInputCertificateNumber(e.target.value);
+  };
+
   return (
     <div className="joinPage_container">
       <form
@@ -295,6 +353,40 @@ const Mymodify = () => {
                   handleBasicAddressChange={handleBasicAddressChange}
                   handleDetailAddressChange={handleDetailAddressChange}
                 />
+                <tr>
+                  <th></th>
+                  <td className="btn_td">
+                    <button
+                      className="authenticationBtn"
+                      type="button"
+                      onClick={handleSendCertificate}
+                      disabled={!memberMobileNum}
+                    >
+                      인증번호 발송
+                    </button>
+                  </td>
+                </tr>
+                {showCertificateButton && (
+                  <tr>
+                    <th></th>
+                    <td>
+                      <input
+                        className="input_authentication"
+                        type="text"
+                        value={inputCertificateNumber}
+                        onChange={handleCertificateInputChange}
+                        maxLength="6"
+                      />
+                      <button
+                        className="authenticationBtn_short"
+                        type="button"
+                        onClick={handleCheckCertificate}
+                      >
+                        인증번호 확인
+                      </button>
+                    </td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>
