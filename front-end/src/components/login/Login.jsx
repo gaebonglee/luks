@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../../style/login/login.scss";
+
 import axios from "axios";
 import Swal from "sweetalert2";
 
@@ -8,7 +9,6 @@ const Login = ({ setIsLoggedIn }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // 카카오 SDK 초기화
     if (!window.Kakao.isInitialized()) {
       window.Kakao.init(process.env.REACT_APP_KAKAO_API_KEY);
     }
@@ -30,7 +30,7 @@ const Login = ({ setIsLoggedIn }) => {
       );
 
       if (response.data.success) {
-        setIsLoggedIn(true); // 로그인 상태를 즉시 업데이트
+        setIsLoggedIn(true);
         Swal.fire("로그인 되었습니다.").then(() => {
           navigate("/");
         });
@@ -46,7 +46,7 @@ const Login = ({ setIsLoggedIn }) => {
   };
 
   const handlerKakaoLogin = () => {
-    window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_API_KEY}&response_type=code&redirect_uri=http://localhost:3001/oauth/kakaologin`;
+    window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_API_KEY}&response_type=code&redirect_uri=${process.env.REACT_APP_KAKAO_REDIRECT_URI}`;
   };
 
   return (
@@ -93,7 +93,7 @@ const Login = ({ setIsLoggedIn }) => {
           </ul>
         </div>
         <div className="sns_loginWrap">
-          <button onClick={handlerKakaoLogin}>
+          <button type="button" onClick={handlerKakaoLogin}>
             <img src="/images/kakao_login_btn.png" alt="kakao_loginbtn" />
           </button>
         </div>

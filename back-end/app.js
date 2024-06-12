@@ -5,6 +5,7 @@ const session = require("express-session");
 const MySQLStore = require("connect-mysql2")(session);
 const productRouter = require("./routes/product");
 const categoryRouter = require("./routes/category");
+const snsloginRouter = require("./routes/snslogin");
 const joinRouter = require("./routes/join");
 const loginRouter = require("./routes/login");
 const logoutRouter = require("./routes/logout");
@@ -17,7 +18,7 @@ const paymentRouter = require("./routes/payment");
 const RecentOrdersRouter = require("./routes/recentOrders");
 const ConfirmPasswordRouter = require("./routes/confirmPassword");
 const ReviewRouter = require("./routes/review");
-require('dotenv').config();
+require("dotenv").config();
 
 const app = express();
 
@@ -56,8 +57,14 @@ app.use(
   })
 );
 
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.url}`);
+  next();
+});
+
 app.use("/category", categoryRouter);
 app.use("/product", productRouter);
+app.use("/snslogin", snsloginRouter);
 app.use("/join", joinRouter);
 app.use("/login", loginRouter);
 app.use("/logout", logoutRouter);
