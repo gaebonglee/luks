@@ -4,6 +4,7 @@ const {
   getWritableReviews,
   getWrittenReviews,
 } = require("../sql/review/writeReview");
+const { updateReview, deleteReview } = require("../sql/review/EditReview");
 
 const router = express.Router();
 
@@ -21,6 +22,39 @@ router.post("/save-review", (req, res) => {
     res
       .status(200)
       .json({ success: true, message: "Review saved successfully" });
+  });
+});
+
+router.put("/edit-review/:id", (req, res) => {
+  const reviewId = req.params.id;
+  const { rating, reviewText } = req.body;
+
+  updateReview(reviewId, rating, reviewText, (error, results) => {
+    if (error) {
+      console.error("Failed to update review", error);
+      return res
+        .status(500)
+        .json({ success: false, message: "Internal server error" });
+    }
+    res
+      .status(200)
+      .json({ success: true, message: "Review updated successfully" });
+  });
+});
+
+router.delete("/delete-review/:id", (req, res) => {
+  const reviewId = req.params.id;
+
+  deleteReview(reviewId, (error, results) => {
+    if (error) {
+      console.error("Failed to delete review", error);
+      return res
+        .status(500)
+        .json({ success: false, message: "Internal server error" });
+    }
+    res
+      .status(200)
+      .json({ success: true, message: "Review deleted successfully" });
   });
 });
 
@@ -43,7 +77,6 @@ router.get("/list", (req, res) => {
           .status(500)
           .json({ success: false, message: "Internal server error" });
       }
-
 
       res.status(200).json({
         success: true,

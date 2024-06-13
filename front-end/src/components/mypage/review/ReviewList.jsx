@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ReviewModal from "./ReviewModal";
 import Swal from "sweetalert2";
-import { GoStarFill } from "react-icons/go"; // 아이콘 import 추가
+import { GoStarFill } from "react-icons/go";
 import "../../../style/review/ReviewList.scss";
 
 const ReviewList = () => {
@@ -18,22 +18,23 @@ const ReviewList = () => {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchReviews = async () => {
-      try {
-        const response = await axios.get(`http://localhost:5000/review/list`, {
-          withCredentials: true,
-        });
-        setWritableReviews(response.data.writable);
-        setWrittenReviews(response.data.written);
-        setLoading(false);
-      } catch (error) {
-        console.error("There was an error fetching the reviews!", error);
-        setError("There was an error fetching the reviews.");
-        setLoading(false);
-      }
-    };
+  const fetchReviews = async () => {
+    try {
+      const response = await axios.get(`http://localhost:5000/review/list`, {
+        withCredentials: true,
+      });
+      setWritableReviews(response.data.writable);
+      setWrittenReviews(response.data.written);
+      setLoading(false);
+    } catch (error) {
+      console.error("There was an error fetching the reviews!", error);
+      setError("There was an error fetching the reviews.");
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
+    fetchReviews();
     const fetchUser = async () => {
       try {
         const response = await axios.get(
@@ -48,7 +49,6 @@ const ReviewList = () => {
       }
     };
 
-    fetchReviews();
     fetchUser();
   }, []);
 
@@ -62,32 +62,80 @@ const ReviewList = () => {
     setSelectedReview(null);
   };
 
-  const handleReviewSubmit = async (reviewData) => {
+  const handleReviewSubmit = async (reviewData, reviewId = null) => {
     try {
-      // 리뷰 저장 로직
-      await axios.post(`http://localhost:5000/review/save-review`, reviewData, {
-        withCredentials: true,
-      });
+      if (reviewId) {
+        // 수정 로직
+        await axios.put(
+          `http://localhost:5000/review/edit-review/${reviewId}`,
+          reviewData,
+          {
+            withCredentials: true,
+          }
+        );
+        Swal.fire({
+          icon: "success",
+          title: "리뷰 수정이 완료되었습니다!",
+          confirmButtonText: "확인",
+        });
+      } else {
+        // 새 리뷰 작성 로직
+        await axios.post(
+          `http://localhost:5000/review/save-review`,
+          reviewData,
+          {
+            withCredentials: true,
+          }
+        );
 
-      Swal.fire({
-        icon: "success",
-        title: "리뷰 작성이 완료되었습니다!",
-        confirmButtonText: "확인",
-      });
+        Swal.fire({
+          icon: "success",
+          title: "리뷰 작성이 완료되었습니다!",
+          confirmButtonText: "확인",
+        });
+      }
 
-      // 리뷰 작성 후 리스트 갱신
-      const response = await axios.get(`http://localhost:5000/review/list`, {
-        withCredentials: true,
-      });
-      setWritableReviews(response.data.writable);
-      setWrittenReviews(response.data.written);
+      // 리뷰 작성/수정 후 리스트 갱신
+      fetchReviews();
 
       closeReviewModal();
     } catch (error) {
       console.error("There was an error saving the review!", error);
       Swal.fire({
         icon: "error",
-        title: "리뷰 작성에 실패했습니다.",
+        title: "리뷰 저장에 실패했습니다.",
+        confirmButtonText: "확인",
+      });
+    }
+  };
+
+  const handleReviewEdit = (review) => {
+    setSelectedReview(review);
+    setIsReviewModalOpen(true);
+  };
+
+  const handleReviewDelete = async (reviewId) => {
+    try {
+      await axios.delete(
+        `http://localhost:5000/review/delete-review/${reviewId}`,
+        {
+          withCredentials: true,
+        }
+      );
+
+      Swal.fire({
+        icon: "success",
+        title: "리뷰가 삭제되었습니다!",
+        confirmButtonText: "확인",
+      });
+
+      // 리뷰 삭제 후 리스트 갱신
+      fetchReviews();
+    } catch (error) {
+      console.error("There was an error deleting the review!", error);
+      Swal.fire({
+        icon: "error",
+        title: "리뷰 삭제에 실패했습니다.",
         confirmButtonText: "확인",
       });
     }
@@ -163,14 +211,23 @@ const ReviewList = () => {
                         <p>
                           색상: {review.color_name}, 사이즈: {review.size}
                         </p>
-
                         <div className="ReviewItem_stars">
                           {[...Array(review.rating)].map((_, index) => (
                             <GoStarFill key={index} className="star" />
                           ))}
                         </div>
-                        <p>{review.review_text}</p>
+                        <p className="ReviewItem_text">{review.review_text}</p>
                       </div>
+                    </div>
+                    <div className="Review_editBtn">
+                      <button onClick={() => handleReviewEdit(review)}>
+                        수정
+                      </button>
+                      <button
+                        onClick={() => handleReviewDelete(review.review_id)}
+                      >
+                        삭제
+                      </button>
                     </div>
                   </li>
                 ))}

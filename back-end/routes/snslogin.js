@@ -1,18 +1,22 @@
 const express = require("express");
 const axios = require("axios");
-const selectMemberById = require("../sql/login/selectMemberById");
 const saveMemberInfo = require("../sql/join/saveMemberInfo");
+const selectMemberById = require("../sql/login/selectMemberById");
 
 const router = express.Router();
 
 router.post("/oauth/kakao", async (req, res) => {
   const code = req.body.code;
+  console.log("Received code:", code);
 
   try {
     const tokenResponse = await axios.post(
       "https://kauth.kakao.com/oauth/token",
-      null,
+      {},
       {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
         params: {
           grant_type: "authorization_code",
           client_id: process.env.KAKAO_REST_API_KEY,
@@ -22,11 +26,8 @@ router.post("/oauth/kakao", async (req, res) => {
       }
     );
 
-    if (tokenResponse.data.error) {
-      throw new Error(tokenResponse.data.error_description);
-    }
-
     const accessToken = tokenResponse.data.access_token;
+    console.log("Token response:", tokenResponse.data);
 
     const userResponse = await axios.get("https://kapi.kakao.com/v2/user/me", {
       headers: {
@@ -34,9 +35,7 @@ router.post("/oauth/kakao", async (req, res) => {
       },
     });
 
-    if (!userResponse.data.kakao_account) {
-      throw new Error("Failed to get user account information from Kakao.");
-    }
+    console.log("User response:", userResponse.data);
 
     const kakaoAccount = userResponse.data.kakao_account;
     const memberData = {
@@ -44,8 +43,8 @@ router.post("/oauth/kakao", async (req, res) => {
       member_pw: "",
       member_name: kakaoAccount.name,
       member_roles: "member",
-      email: kakaoAccount.email || "",
-      phonenumber: kakaoAccount.phone_number || "",
+      email: kakaoAccount.email,
+      phonenumber: kakaoAccount.phone_number,
       postcode: "",
       basic_address: "",
       detail_address: "",
@@ -84,7 +83,6 @@ router.post("/oauth/kakao", async (req, res) => {
             .json({ success: true, message: "로그인이 완료되었습니다." });
         });
       } else {
-        // 새로운 사용자라면 회원가입 처리
         saveMemberInfo(memberData, (err, result) => {
           if (err) {
             console.error("Error saving member information: ", err);
@@ -122,7 +120,7 @@ router.post("/oauth/kakao", async (req, res) => {
     });
   } catch (error) {
     console.error("Error during Kakao login: ", error);
-    res.status(500).json({ success: false, message: error.message });
+    res.status(500).json({ success: false, message: "Internal server error" });
   }
 });
 

@@ -5,7 +5,7 @@ const session = require("express-session");
 const MySQLStore = require("connect-mysql2")(session);
 const productRouter = require("./routes/product");
 const categoryRouter = require("./routes/category");
-const snsloginRouter = require("./routes/snslogin");
+// const snsloginRouter = require("./routes/snslogin");
 const joinRouter = require("./routes/join");
 const loginRouter = require("./routes/login");
 const logoutRouter = require("./routes/logout");
@@ -64,7 +64,7 @@ app.use((req, res, next) => {
 
 app.use("/category", categoryRouter);
 app.use("/product", productRouter);
-app.use("/snslogin", snsloginRouter);
+// app.use("/snslogin", snsloginRouter);
 app.use("/join", joinRouter);
 app.use("/login", loginRouter);
 app.use("/logout", logoutRouter);

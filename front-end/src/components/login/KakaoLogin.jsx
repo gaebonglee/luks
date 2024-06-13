@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-const KakaoLogin = () => {
+const KakaoLogin = ({ setIsLoggedIn }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -15,6 +15,7 @@ const KakaoLogin = () => {
         .post("http://localhost:5000/snslogin/oauth/kakao", { code })
         .then((response) => {
           if (response.data.success) {
+            setIsLoggedIn(true);
             Swal.fire("로그인 되었습니다.").then(() => {
               navigate("/");
             });
@@ -31,7 +32,7 @@ const KakaoLogin = () => {
           });
         });
     }
-  }, [navigate]);
+  }, [navigate, setIsLoggedIn]);
 
   return <div></div>;
 };

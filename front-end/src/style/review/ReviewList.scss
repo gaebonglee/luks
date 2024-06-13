@@ -54,7 +54,9 @@
               margin-bottom: 5px;
             }
           }
-
+          .ReviewItem_text {
+            max-width: 650px;
+          }
           .ReviewItem_stars {
             padding: 5px 0 5px 0;
             display: flex;
@@ -78,4 +80,9 @@
       }
     }
   }
+}
+
+.Review_editBtn {
+  display: flex;
+  gap: 10px;
 }

@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import Swal from "sweetalert2";
 import "../../../style/review/Review.scss";
-
-//아이콘
 import { GoStarFill } from "react-icons/go";
 import { MdOutlineCancel } from "react-icons/md";
 
@@ -18,11 +16,23 @@ const ReviewModal = ({
 }) => {
   const [reviewText, setReviewText] = useState("");
   const [rating, setRating] = useState(0);
+  const [reviewId, setReviewId] = useState(null);
+
+  useEffect(() => {
+    if (order && order.review_id) {
+      setReviewId(order.review_id);
+      setReviewText(order.review_text);
+      setRating(order.rating);
+    } else {
+      setReviewId(null);
+      setReviewText("");
+      setRating(0);
+    }
+  }, [order]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // 리뷰가 20자 이상인지 확인
     if (reviewText.length < 20) {
       Swal.fire({
         icon: "warning",
@@ -39,7 +49,9 @@ const ReviewModal = ({
       reviewText,
     };
 
-    await onReviewSubmit(reviewData);
+    await onReviewSubmit(reviewData, reviewId);
+
+    onRequestClose();
   };
 
   const handleStarClick = (index) => {
@@ -56,7 +68,7 @@ const ReviewModal = ({
         overlayClassName="Overlay"
       >
         <div className="reviewModal_titleWrap">
-          <h2>리뷰 작성</h2>
+          <h2>리뷰 {reviewId ? "수정" : "작성"}</h2>
           <button onClick={onRequestClose}>
             <MdOutlineCancel />
           </button>
@@ -96,7 +108,7 @@ const ReviewModal = ({
           </div>
           <div className="ReviewSubmitWrapper">
             <button type="submit" className="ReviewSubmit">
-              작성완료
+              {reviewId ? "수정 완료" : "작성 완료"}
             </button>
           </div>
         </form>
