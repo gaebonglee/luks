@@ -7,7 +7,7 @@ header {
   font-size: 16px;
   z-index: 99;
   height: 130px;
-  border-top: 1px solid transparent;
+  border-bottom: 1px solid $darkgray;
   background: #fffefc;
   transition: ease 0.25s;
 }

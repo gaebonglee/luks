@@ -49,6 +49,7 @@
     width: 25%;
     margin-top: 6px;
     padding: 0px 3px;
+
     button {
       align-items: center;
       justify-content: center;
@@ -57,13 +58,18 @@
       position: relative;
       display: flex;
       width: 100%;
-      height: 44px;
+      height: 45px;
       padding: 0px 10px;
       font-size: 14px;
-      word-break: keep-all;
-      border: 1px solid rgb(0, 0, 0);
+      border: none;
       color: rgb(255, 255, 255);
       background-color: rgb(0, 0, 0);
+      transition: background-color 0.15s ease;
+
+      &.active {
+        font-weight: 500;
+        background-color: $mute4;
+      }
     }
   }
 }

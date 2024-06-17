@@ -37,28 +37,20 @@ const PaymentMethod = ({ onMethodChange }) => {
             <button>{methodInfo}</button>
           </div>
           <ul className="paymentMethod_flex">
-            <li>
-              <button onClick={() => handleMethodChange("카드결제")}>
-                신용/체크카드
-              </button>
-            </li>
-            <li>
-              <button onClick={() => handleMethodChange("네이버페이")}>
-                네이버페이
-              </button>
-            </li>
-            <li>
-              <button onClick={() => handleMethodChange("카카오페이")}>
-                카카오페이
-              </button>
-            </li>
-            <li>
-              <button onClick={() => handleMethodChange("무통장입금")}>
-                무통장입금
-              </button>
-            </li>
+            {["카드결제", "네이버페이", "카카오페이", "무통장입금"].map(
+              (method) => (
+                <li key={method}>
+                  <button
+                    className={selectedMethod === method ? "active" : ""}
+                    onClick={() => handleMethodChange(method)}
+                  >
+                    {method}
+                  </button>
+                </li>
+              )
+            )}
           </ul>
-          {selectedMethod === "card" && (
+          {selectedMethod === "카드결제" && (
             <div className="paymentMethod_option">
               <div className="paymentMethod_option row">
                 <select>
