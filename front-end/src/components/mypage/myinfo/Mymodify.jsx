@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import JoinId from "../../../components/join/JoinId";
 import JoinPw from "../../../components/join/JoinPw";
 import NameEmailNum from "../../../components/join/NameEmailNum";
 import JoinAddress from "../../../components/join/JoinAddress";
@@ -17,8 +16,6 @@ const Mymodify = () => {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [memberId, setMemberId] = useState("");
-  const [idValid, setIdValid] = useState(true);
-  const [isDuplicate, setIsDuplicate] = useState(false);
   const [memberPw, setMemberPw] = useState("");
   const [pwValid, setPwValid] = useState(true);
   const [memberPwConfirm, setMemberPwConfirm] = useState("");
@@ -83,37 +80,6 @@ const Mymodify = () => {
 
     checkLoginStatus();
   }, [navigate]);
-
-  const handleIdChange = (value, isValid) => {
-    setMemberId(value);
-    setIdValid(isValid);
-    if (isValid) {
-      checkIdDuplicate(value);
-    } else {
-      setIsDuplicate(false);
-    }
-  };
-
-  const checkIdDuplicate = async (id) => {
-    try {
-      const response = await fetch("http://localhost:5000/join/check-id", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ member_id: id }),
-      });
-
-      if (response.status === 409) {
-        setIsDuplicate(true);
-      } else {
-        setIsDuplicate(false);
-      }
-    } catch (error) {
-      console.error("Error checking ID duplicate:", error);
-      setIsDuplicate(false);
-    }
-  };
 
   const handlePwChange = (value, isValid, match) => {
     setMemberPw(value);
@@ -199,15 +165,6 @@ const Mymodify = () => {
         icon: "error",
         title: "필수 항목 누락",
         text: "모든 필수 항목을 입력하세요.",
-      });
-      return;
-    }
-
-    if (isDuplicate) {
-      MySwal.fire({
-        icon: "error",
-        title: "아이디 중복",
-        text: `${memberId}는 이미 가입된 아이디입니다.`,
       });
       return;
     }
@@ -322,11 +279,12 @@ const Mymodify = () => {
           <div className="join_wrap">
             <table>
               <tbody>
-                <JoinId
-                  memberId={memberId}
-                  idValid={idValid}
-                  handleIdChange={handleIdChange}
-                />
+                <tr>
+                  <th>아이디</th>
+                  <td className="disabledID">
+                    <input type="text" value={memberId} disabled />
+                  </td>
+                </tr>
                 <JoinPw
                   memberPw={memberPw}
                   pwValid={pwValid}
