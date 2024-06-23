@@ -57,15 +57,21 @@ const ShippingInfo = ({ onChange }) => {
   };
 
   const openPostcode = () => {
-    new window.daum.Postcode({
-      oncomplete: function (data) {
-        let addr =
-          data.userSelectedType === "R" ? data.roadAddress : data.jibunAddress;
-        handleChange({ target: { name: "postcode", value: data.zonecode } });
-        handleChange({ target: { name: "basic_address", value: addr } });
-        document.getElementById("sample6_detailAddress").focus();
-      },
-    }).open();
+    if (window.daum && window.daum.Postcode) {
+      new window.daum.Postcode({
+        oncomplete: function (data) {
+          let addr =
+            data.userSelectedType === "R"
+              ? data.roadAddress
+              : data.jibunAddress;
+          handleChange({ target: { name: "postcode", value: data.zonecode } });
+          handleChange({ target: { name: "basic_address", value: addr } });
+          document.getElementById("sample6_detailAddress").focus();
+        },
+      }).open();
+    } else {
+      console.error("Daum Postcode script is not loaded.");
+    }
   };
 
   return (

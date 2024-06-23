@@ -33,7 +33,9 @@ const CartItem = ({ product, isSelected, onToggleSelect, onRemove }) => {
         </div>
         <div className="mybag_info_detailWrap">
           <div className="mybag_info_detail">
-            <div className="mybag_info_detail name">{product.p_name}</div>
+            <div className="mybag_info_detail name">
+              {product.p_name.toLowerCase()}
+            </div>
             <p>{product.p_price.toLocaleString()}원</p>
             <div className="mybag_info_detail_colorSize">
               <a>색상: {product.color_name}</a>

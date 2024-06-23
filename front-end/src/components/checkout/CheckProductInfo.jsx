@@ -16,7 +16,7 @@ const CheckProductInfo = ({ selectedItems }) => {
               </div>
               <div className="checkProduct_detailWrap">
                 <div className="checkProduct_detail">
-                  <div className="checkProduct_detail name">{item.p_name}</div>
+                  <div className="checkProduct_detail name">{item.p_name.toLowerCase()}</div>
                   <div className="checkProduct_detail colorSize">
                     <span>색상: {item.color_name}</span>
                     <span>사이즈: {item.size}</span>

@@ -137,7 +137,7 @@ router.get("/item-quantity", (req, res) => {
 });
 
 // 장바구니에서 여러 항목 삭제
-router.post("/remove-multiple", (req, res) => {
+router.post("/remove-multiple", async (req, res) => {
   if (!req.session.user) {
     return res.status(401).json({ success: false, message: "Unauthorized" });
   }
@@ -148,17 +148,28 @@ router.post("/remove-multiple", (req, res) => {
     return res.status(400).json({ success: false, message: "Invalid request" });
   }
 
-  removeMultipleFromCart(member_id, items, (error, results) => {
-    if (error) {
-      return res
-        .status(500)
-        .json({ success: false, message: "Internal server error" });
-    }
+  console.log(
+    "Remove multiple from cart - member_id:",
+    member_id,
+    "items:",
+    items
+  );
+
+  try {
+    const results = await removeMultipleFromCart(member_id, items);
+    console.log("removeMultipleFromCart success");
     res
       .status(200)
-      .json({ success: true, message: "Selected items removed from cart" });
-  });
+      .json({
+        success: true,
+        message: "선택된 상품이 장바구니에서 삭제되었습니다.",
+      });
+  } catch (error) {
+    console.error("removeMultipleFromCart error:", error);
+    res.status(500).json({ success: false, message: "Internal server error" });
+  }
 });
+
 
 // 장바구니 항목 가져오기
 router.get("/mycart", (req, res) => {

@@ -38,28 +38,39 @@ function removeFromCart(memberId, productId, colorId, sizeId, callback) {
   );
 }
 
-function removeMultipleFromCart(memberId, items, callback) {
-  const query = `
-    DELETE FROM cart
-    WHERE member_id = ? AND (product_id, color_id, size_id) IN (${items
-      .map(() => "(?, ?, ?)")
-      .join(",")})
-  `;
+function removeMultipleFromCart(memberId, items) {
+  return new Promise((resolve, reject) => {
+    console.log("removeMultipleFromCart called with:", memberId, items); 
 
-  const values = items.flatMap(({ product_id, color_id, size_id }) => [
-    memberId,
-    product_id,
-    color_id,
-    size_id,
-  ]);
+    const query = `
+      DELETE FROM cart
+      WHERE member_id = ? AND (product_id, color_id, size_id) IN (${items
+        .map(() => "(?, ?, ?)")
+        .join(",")})
+    `;
 
-  connection.query(query, values, (error, results) => {
-    if (error) {
-      console.error("Database query error:", error);
-      callback(error, null);
-    } else {
-      callback(null, results);
-    }
+    const values = [
+      memberId,
+      ...items.flatMap(({ product_id, color_id, size_id }) => [
+        product_id,
+        color_id,
+        size_id,
+      ]),
+    ];
+
+    console.log("Executing query:", query); // 디버깅 로그 추가
+    console.log("With values:", values); // 디버깅 로그 추가
+
+    connection.query(query, values, (error, results) => {
+      console.log("Query executed. Error:", error); // 디버깅 로그 추가
+      console.log("Query results:", results); // 디버깅 로그 추가
+      if (error) {
+        console.error("Database query error:", error);
+        reject(error);
+      } else {
+        resolve(results);
+      }
+    });
   });
 }
 
@@ -129,13 +140,16 @@ function calculateTotalPrice(memberId, items, callback) {
       .join(",")})
   `;
 
-  const values = items.flatMap(({ product_id, color_id, size_id }) => [
-    product_id,
-    color_id,
-    size_id,
-  ]);
+  const values = [
+    memberId,
+    ...items.flatMap(({ product_id, color_id, size_id }) => [
+      product_id,
+      color_id,
+      size_id,
+    ]),
+  ];
 
-  connection.query(query, [memberId, ...values], (error, results) => {
+  connection.query(query, values, (error, results) => {
     if (error) {
       console.error("Database query error:", error);
       callback(error, null);
