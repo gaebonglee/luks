@@ -26,10 +26,18 @@ const MyCartBtn = ({
     }
   };
 
+  const handleRemoveSelected = () => {
+    if (selectedItems.length === 0) {
+      Swal.fire("삭제할 상품을 선택해주세요.");
+    } else {
+      onRemoveSelected();
+    }
+  };
+
   return (
     <div className="mybag_bottom">
       <div className="mybag_bottom_DeleteBtn">
-        <button onClick={onRemoveSelected}>선택상품 삭제</button>
+        <button onClick={handleRemoveSelected}>선택상품 삭제</button>
       </div>
       <div className="mybag_bottom_BuynowBtn">
         <span>총가격 : {totalPrice.toLocaleString()}원</span>

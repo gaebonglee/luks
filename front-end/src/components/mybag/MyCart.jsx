@@ -74,6 +74,32 @@ const MyCart = () => {
     }
   };
 
+  const handleRemoveSelected = async () => {
+    try {
+      await axios.post(
+        `http://localhost:5000/cart/remove-multiple`,
+        {
+          items: selectedItems.map((item) => {
+            const [product_id, color_id, size_id] = item.split("-");
+            return { product_id, color_id, size_id };
+          }),
+        },
+        { withCredentials: true }
+      );
+      setCart(
+        cart.filter(
+          (item) =>
+            !selectedItems.includes(
+              `${item.product_id}-${item.color_id}-${item.size_id}`
+            )
+        )
+      );
+      setSelectedItems([]);
+    } catch (error) {
+      console.error("There was an error removing the selected items!", error);
+    }
+  };
+
   const handleQuantityChange = async (productId, colorId, sizeId, delta) => {
     try {
       const response = await axios.get(
@@ -139,36 +165,6 @@ const MyCart = () => {
     }
   };
 
-  const handleRemoveSelected = async () => {
-    try {
-      await axios.post(
-        `http://localhost:5000/cart/remove-multiple`,
-        {
-          items: selectedItems.map((item) => {
-            const [product_id, color_id, size_id] = item.split("-");
-            return { product_id, color_id, size_id };
-          }),
-        },
-        { withCredentials: true }
-      );
-
-      setCart(
-        cart.filter(
-          (item) =>
-            !selectedItems.includes(
-              `${item.product_id}-${item.color_id}-${item.size_id}`
-            )
-        )
-      );
-      setSelectedItems([]);
-    } catch (error) {
-      console.error(
-        "There was an error removing the selected items from the cart!",
-        error
-      );
-    }
-  };
-
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -181,7 +177,7 @@ const MyCart = () => {
     if (selectedItems.length === 0) {
       return 0; // 장바구니가 비어 있는 경우 0을 반환
     }
-  
+
     try {
       const response = await axios.post(
         `http://localhost:5000/cart/calculate-total`,
@@ -230,7 +226,9 @@ const MyCart = () => {
         <tbody>
           {cart.length === 0 ? (
             <tr>
-              <td colSpan="4" className="MyCartEmpty">장바구니가 비어 있습니다.</td>
+              <td colSpan="4" className="MyCartEmpty">
+                장바구니가 비어 있습니다.
+              </td>
             </tr>
           ) : (
             cart.map((product) => {
@@ -254,10 +252,10 @@ const MyCart = () => {
         </tbody>
       </table>
       <MyCartBtn
-        onRemoveSelected={handleRemoveSelected}
         calculateTotal={handleCalculateTotal}
         onCheckout={handleCheckout}
-        selectedItems={selectedItems} 
+        onRemoveSelected={handleRemoveSelected}
+        selectedItems={selectedItems}
       />
     </section>
   );
