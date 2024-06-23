@@ -2,10 +2,8 @@ import React from "react";
 import "../../../style/myorder/MyOrderPaymentInfo.scss";
 
 const MyOrderPaymentInfo = ({ order }) => {
-  const totalAmount = order.reduce(
-    (sum, item) => sum + item.price * item.quantity,
-    0
-  );
+
+  const totalAmount = order.reduce((sum, item) => sum + item.price, 0);
   const paymentMethod = order[0].payment_method;
 
   return (
@@ -39,7 +37,7 @@ const MyOrderPaymentInfo = ({ order }) => {
         </ul>
         <ul className="payment_total">
           <li className="pay_total">
-            <div className="left">주문금액</div>
+            <div className="left">총 결제금액</div>
             <div className="right">
               <span className="right num">{totalAmount.toLocaleString()}</span>
               <span>원</span>

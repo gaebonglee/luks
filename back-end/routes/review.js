@@ -9,20 +9,27 @@ const { updateReview, deleteReview } = require("../sql/review/EditReview");
 const router = express.Router();
 
 router.post("/save-review", (req, res) => {
-  const { memberId, productId, rating, reviewText } = req.body;
+  const { memberId, productId, orderId, rating, reviewText } = req.body;
   console.log("save-review body:", req.body);
 
-  saveReview(memberId, productId, rating, reviewText, (error, results) => {
-    if (error) {
-      console.error("Failed to save review", error);
-      return res
-        .status(500)
-        .json({ success: false, message: "Internal server error" });
+  saveReview(
+    memberId,
+    productId,
+    orderId,
+    rating,
+    reviewText,
+    (error, results) => {
+      if (error) {
+        console.error("Failed to save review", error);
+        return res
+          .status(500)
+          .json({ success: false, message: "Internal server error" });
+      }
+      res
+        .status(200)
+        .json({ success: true, message: "Review saved successfully" });
     }
-    res
-      .status(200)
-      .json({ success: true, message: "Review saved successfully" });
-  });
+  );
 });
 
 router.put("/edit-review/:id", (req, res) => {

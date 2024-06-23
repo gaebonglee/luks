@@ -45,6 +45,7 @@ const ReviewModal = ({
     const reviewData = {
       memberId,
       productId: order.product_id,
+      orderId: order.order_id, // orderId 추가
       rating,
       reviewText,
     };
