@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Root from "./pages/Root";
 import Home from "./pages/Home";
 import PrivateRoute from "./components/private/PrivateRoute";
+import ScrollToTop from "./pages/ScrollToTop";
+//컴포넌트
 import Login from "./components/login/Login";
 import KakaoLogin from "./components/login/KakaoLogin";
 import JoinPage from "./pages/JoinPage";
@@ -20,6 +22,7 @@ const App = () => {
 
   return (
     <Router>
+      <ScrollToTop/>
       <Routes>
         <Route
           path="/"
