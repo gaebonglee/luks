@@ -4,6 +4,7 @@ import Root from "./pages/Root";
 import Home from "./pages/Home";
 import PrivateRoute from "./components/private/PrivateRoute";
 import ScrollToTop from "./pages/ScrollToTop";
+import "./style/CustomSwal.scss";
 //컴포넌트
 import Login from "./components/login/Login";
 import KakaoLogin from "./components/login/KakaoLogin";

@@ -180,7 +180,7 @@ const ReviewList = () => {
                     <div className="ReviewItem_info">
                       <img src={review.p_image_url} alt="상품 이미지" />
                       <div>
-                        <p className="ReviewItem_name">{review.p_name}</p>
+                        <p className="ReviewItem_name">{review.p_name.toLowerCase()}</p>
                         <p>
                           색상: {review.color_name}, 사이즈: {review.size}
                         </p>

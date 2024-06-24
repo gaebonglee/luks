@@ -2,8 +2,10 @@ import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../../style/login/login.scss";
 
+
 import axios from "axios";
 import Swal from "sweetalert2";
+
 
 const Login = ({ setIsLoggedIn }) => {
   const navigate = useNavigate();
@@ -35,7 +37,12 @@ const Login = ({ setIsLoggedIn }) => {
           navigate("/");
         });
       } else {
-        Swal.fire("아이디 또는 비밀번호를 다시 확인해주세요.");
+        Swal.fire({
+          title: "아이디 또는 비밀번호를 다시 확인해주세요.",
+          customClass: {
+            popup: "swal2-popup",
+          },
+        });
       }
     } catch (error) {
       console.error("Login error:", error);
