@@ -1,14 +1,32 @@
-// 회원가입 폼 데이터 타입 정의
+// Pages\Join.tsx에서 사용할 전체 폼 데이터 타입 정의
 export interface JoinForm {
   memberId: string;
   memberPw: string;
-  confirmPw: string;
-  name: string;
-  email: string;
-  phonenumber: string;
+  memberPwConfirm: string;
+  memberName: string;
+  memberEmail: string;
+  memberMobileNum: string;
   postcode: string;
-  basic_address: string;
-  detail_address: string;
-  termsAccepted: boolean; // 이용약관 동의
-  privacyPolicyAccepted: boolean; // 개인정보 약관 동의
+  basicAddress: string;
+  detailAddress: string;
+  allAgree: boolean;
+  termsAgree: boolean;
+  privacyAgree: boolean;
 }
+
+export interface JoinValidation {
+  idValid: boolean;
+  pwValid: boolean;
+  pwMatch: boolean;
+  emailValid: boolean;
+  isDuplicate: boolean;
+}
+
+declare global {
+  interface Window {
+    daum: {
+      Postcode: any;
+    };
+  }
+}
+export {};
