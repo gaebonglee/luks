@@ -52,9 +52,9 @@ const Login = ({ setIsLoggedIn }) => {
     }
   };
 
-  const handlerKakaoLogin = () => {
-    window.location.href = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.REACT_APP_KAKAO_API_KEY}&redirect_uri=${process.env.REACT_APP_KAKAO_REDIRECT_URI}&scope=name,account_email,phone_number,shipping_address`;
-  };
+  // const handlerKakaoLogin = () => {
+  //   window.location.href = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.REACT_APP_KAKAO_API_KEY}&redirect_uri=${process.env.REACT_APP_KAKAO_REDIRECT_URI}&scope=name,account_email,phone_number,shipping_address`;
+  // };
 
   return (
     <form

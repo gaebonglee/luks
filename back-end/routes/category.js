@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const { selectAllCategory } = require("../sql/category/selectAllCategory");
-const { selectCategoryList } = require("../sql/category/selectCategoryList");
 const { selectSubcategory } = require("../sql/category/selectSubcategory");
+const { selectCategoryList } = require("../sql/category/selectCategoryList");
 
 // 특정 카테고리의 모든 상품 가져오기
 router.get("/:category", (req, res) => {
