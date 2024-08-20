@@ -7,22 +7,34 @@ import { FaArrowRight } from "react-icons/fa";
 
 const MainSlide: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [animating, setAnimating] = useState<boolean>(false);
+
   const handlePrevSlide = () => {
-    setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
+    if (animating) return;
+    setTimeout(() => {
+      setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
+      setAnimating(false);
+    }, 300);
   };
 
   const handleNextSlide = () => {
-    setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
+    if (animating) return;
+    setTimeout(() => {
+      setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
+      setAnimating(false);
+    }, 300);
   };
   return (
     <section className="slideSection">
       <div className="slider_container">
         <div className="slider_content">
-          <div className="slide_info">
+          <div className={`slide_info ${animating ? "slide-out" : "slide-in"}`}>
             <p>0{slides[currentSlide].id}</p>
             <h3>{slides[currentSlide].title}</h3>
           </div>
-          <div className="slide_image">
+          <div
+            className={`slide_image ${animating ? "slide-out" : "slide-in"}`}
+          >
             <img
               src={slides[currentSlide].imageUrl}
               alt={slides[currentSlide].title}
