@@ -10,11 +10,11 @@ import Swal from "sweetalert2";
 const Login = ({ setIsLoggedIn }) => {
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!window.Kakao.isInitialized()) {
-      window.Kakao.init(process.env.REACT_APP_KAKAO_API_KEY);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (!window.Kakao.isInitialized()) {
+  //     window.Kakao.init(process.env.REACT_APP_KAKAO_API_KEY);
+  //   }
+  // }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
