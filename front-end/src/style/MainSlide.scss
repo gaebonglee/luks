@@ -1,0 +1,89 @@
+.slideSection {
+  padding: 5rem 0;
+}
+.slider_container {
+  height: 80vh;
+  padding: 0 5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.slider_content {
+  height: 80vh;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.slide_info,
+.slide_image,
+.slide_controls {
+  opacity: 1;
+  visibility: inherit;
+}
+
+.slide_image {
+  width: 100%;
+  text-align: center;
+}
+
+.slide_image img {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.slide_info {
+  h3 {
+    padding-left: 2rem;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.slide_controlWrap {
+  height: 80vh;
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+  .slide_controls {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    padding-bottom: 1rem;
+  }
+}
+
+//arrow 버튼
+.arrowLeft,
+.arrowRight {
+  font-size: 1.5rem;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: #333;
+}
+
+.arrowLeft:hover,
+.arrowRight:hover {
+  color: #000;
+}
+
+.arrowLeft {
+  padding-right: 1rem;
+}
+
+.arrowRight {
+  padding-left: 1rem;
+}

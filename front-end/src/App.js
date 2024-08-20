@@ -1,7 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Root from "./pages/Root";
-import Home from "./pages/Home";
+// import Home from "./pages/Home";
+import MainHome from "./pages/MainHome";
 import PrivateRoute from "./components/private/PrivateRoute";
 import ScrollToTop from "./pages/ScrollToTop";
 import "./style/CustomSwal.scss";
@@ -31,7 +32,8 @@ const App = () => {
             <Root isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
           }
         >
-          <Route index element={<Home />} />
+          {/* <Route index element={<Home />} /> */}
+          <Route index element={<MainHome />} />
           <Route
             path="/login"
             element={<Login setIsLoggedIn={setIsLoggedIn} />}

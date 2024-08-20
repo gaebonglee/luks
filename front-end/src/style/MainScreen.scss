@@ -1,9 +1,28 @@
 @import "./common.scss";
 
 .slider_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+
+  .swiper {
+    width: 100%; /* 슬라이더의 너비를 80%로 설정 */
+    max-width: 1200px; /* 최대 너비 제한 */
+    height: 80%; /* 슬라이더 높이를 60%로 설정 */
+  }
+
+  .swiper-slide {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+  }
+
   .swiper-slide img {
     width: 100%;
-
+    height: auto;
+    object-fit: cover;
   }
 
   .swiper-pagination-bullet {
@@ -22,6 +41,7 @@
   justify-content: center;
   align-items: center;
   gap: 100px;
+
   img {
     width: 500px;
   }

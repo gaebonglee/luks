@@ -9,7 +9,7 @@ const Root = ({ isLoggedIn, setIsLoggedIn }) => {
       style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}
     >
       <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-      <div style={{ flexGrow: "1", minHeight: "900px" }}>
+      <div style={{ flexGrow: "1", minHeight: "100vh" }}>
         <Outlet />
       </div>
       <Footer />
