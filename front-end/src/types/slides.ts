@@ -7,27 +7,27 @@ export interface Slide {
 export const slides: Slide[] = [
   {
     id: 1,
-    title: "New",
+    title: "NEW",
     imageUrl: "/images/mainscreen1.jpg",
   },
   {
     id: 2,
-    title: "Best",
+    title: "BEST",
     imageUrl: "/images/mainscreen2.jpg",
   },
   {
     id: 3,
-    title: "Women",
+    title: "WOMEN",
     imageUrl: "/images/mainscreen3.jpg",
   },
   {
     id: 4,
-    title: "Men",
+    title: "MEN",
     imageUrl: "/images/mainscreen4.jpg",
   },
   {
     id: 5,
-    title: "Acc",
+    title: "ACC",
     imageUrl: "/images/mainscreen5.jpg",
   },
 ];

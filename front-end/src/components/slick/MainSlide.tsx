@@ -1,53 +1,45 @@
 import React, { useState } from "react";
 import { slides } from "../../types/slides";
 import "../../style/MainSlide.scss";
-//아이콘
-import { FaArrowLeft } from "react-icons/fa";
-import { FaArrowRight } from "react-icons/fa";
 
 const MainSlide: React.FC = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [animating, setAnimating] = useState<boolean>(false);
+  const [selectedId, setSelectedId] = useState<number>(slides[0].id);
+  const selectedSlide = slides.find((slide) => slide.id === selectedId);
 
-  const handlePrevSlide = () => {
-    if (animating) return;
-    setTimeout(() => {
-      setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
-      setAnimating(false);
-    }, 300);
-  };
-
-  const handleNextSlide = () => {
-    if (animating) return;
-    setTimeout(() => {
-      setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
-      setAnimating(false);
-    }, 300);
-  };
   return (
-    <section className="slideSection">
-      <div className="slider_container">
-        <div className="slider_content">
-          <div className={`slide_info ${animating ? "slide-out" : "slide-in"}`}>
-            <p>0{slides[currentSlide].id}</p>
-            <h3>{slides[currentSlide].title}</h3>
-          </div>
-          <div
-            className={`slide_image ${animating ? "slide-out" : "slide-in"}`}
-          >
-            <img
-              src={slides[currentSlide].imageUrl}
-              alt={slides[currentSlide].title}
-            />
-          </div>
-          <div className="slide_controlWrap">
-            <div className="slide_controls">
-              <button onClick={handlePrevSlide} className="arrowLeft">
-                <FaArrowLeft />
-              </button>
-              <button onClick={handleNextSlide} className="arrowRight">
-                <FaArrowRight />
-              </button>
+    <section className="MainContainer">
+      <div className="mainGrid">
+        <div className="content_grid">
+          <div id="intro_main">
+            <div className="mainMenus">
+              <ul>
+                {slides.map((slide) => (
+                  <li
+                    key={slide.id}
+                    data-id={slide.id}
+                    onClick={() => setSelectedId(slide.id)}
+                    id="category"
+                  >
+                    <a>
+                      <span>{slide.title}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="mainImages">
+              {selectedSlide && (
+                <div
+                  className="main_image"
+                  data-id={selectedSlide.id}
+                  style={{
+                    backgroundImage: `url(${selectedSlide.imageUrl})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    height: "100%",
+                  }}
+                ></div>
+              )}
             </div>
           </div>
         </div>

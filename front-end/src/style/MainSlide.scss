@@ -1,107 +1,38 @@
-.slideSection {
-  padding: 5rem 0;
+@import "./common.scss";
+
+.MainContainer {
+  height: 100vh;
 }
-.slider_container {
-  height: 70vh;
-  padding: 0 5rem;
+.mainGrid {
+  padding-right: 0;
+  padding-left: 0;
+  margin-right: auto;
+  margin-left: auto;
+}
+#intro_main {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
+  min-height: calc(100vh - 0px);
 }
-
-.slider_content {
-  height: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1.5fr 1fr;
-  align-items: center;
-  max-width: 1200px;
-  width: 100%;
+.mainMenus,
+.mainImages {
+  width: 50%;
 }
-
-// 애니메이션 상태에 따라 슬라이드 in/out 애니메이션 설정
-.slide_info,
-.slide_image {
-  transition: transform 0.3s ease, opacity 0.3s ease;
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.slide-out {
-  opacity: 0;
-  transform: translateY(100%); /* 아래로 사라짐 */
-}
-
-.slide-in {
-  opacity: 1;
-  transform: translateY(0); /* 나타나기 */
-}
-
-.slide_info,
-.slide_image,
-.slide_controls {
-  opacity: 1;
-  visibility: inherit;
-}
-
-.slide_image {
-  width: 100%;
-  height: 100%;
-  text-align: center;
-}
-
-.slide_image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 10px;
-}
-
-.slide_info {
-  h3 {
-    padding-left: 2rem;
-    font-size: 2rem;
-    margin-bottom: 1rem;
+.mainMenus {
+  ul {
+    display: block;
+    padding: 3rem;
+    li {
+      color: $black;
+      cursor: pointer;
+      margin-bottom: 1rem;
+      a {
+        font-size: 4rem;
+        line-height: 70px;
+      }
+      &:hover {
+        font-style: italic;
+        color: $mute4;
+      }
+    }
   }
-}
-
-.slide_controlWrap {
-  height: 100%;
-  display: flex;
-  justify-content: flex-end;
-  position: relative;
-  .slide_controls {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    padding-bottom: 1rem;
-  }
-}
-
-//arrow 버튼
-.arrowLeft,
-.arrowRight {
-  font-size: 1.5rem;
-  cursor: pointer;
-  background: none;
-  border: none;
-  color: #333;
-}
-
-.arrowLeft:hover,
-.arrowRight:hover {
-  color: #000;
-}
-
-.arrowLeft {
-  padding-right: 1rem;
-}
-
-.arrowRight {
-  padding-left: 1rem;
 }
