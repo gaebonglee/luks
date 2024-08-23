@@ -1,10 +1,11 @@
-export interface Slide {
+export interface Menu {
   id: number;
   title: string;
   imageUrl: string;
+  subcategories?: string[];
 }
 
-export const slides: Slide[] = [
+export const menus: Menu[] = [
   {
     id: 1,
     title: "NEW",
@@ -19,15 +20,18 @@ export const slides: Slide[] = [
     id: 3,
     title: "WOMEN",
     imageUrl: "/images/mainscreen3.jpg",
+    subcategories: ["OUTER", "TOP", "BOTTOM", "SHOES"],
   },
   {
     id: 4,
     title: "MEN",
     imageUrl: "/images/mainscreen4.jpg",
+    subcategories: ["OUTER", "TOP", "BOTTOM", "SHOES"],
   },
   {
     id: 5,
     title: "ACC",
     imageUrl: "/images/mainscreen5.jpg",
+    subcategories: ["BAG", "HEADWEAR", "INTERIOR"],
   },
 ];

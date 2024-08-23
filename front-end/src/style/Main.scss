@@ -17,22 +17,42 @@
 .mainImages {
   width: 50%;
 }
+
 .mainMenus {
   ul {
     display: block;
     padding: 3rem;
     li {
       color: $black;
-      cursor: pointer;
       margin-bottom: 1rem;
+
       a {
+        cursor: pointer;
         font-size: 4rem;
         line-height: 70px;
       }
+
       &:hover {
         font-style: italic;
         color: $mute4;
       }
+
+      &.selected {
+        // 클릭된 상태에 적용될 스타일
+        font-style: italic;
+        color: $mute4;
+      }
+    }
+  }
+}
+
+.subCategoryContents {
+  ul {
+    padding: 1rem;
+    font-style: normal;
+
+    li {
+      cursor: pointer;
     }
   }
 }
@@ -48,10 +68,12 @@
     width: 100%;
     height: 100%;
     opacity: 0;
-    transition: opacity 0.15s ease-in-out; 
+    transition: opacity 0.5s ease-in-out; // 전환 시간을 더 길게 설정하여 부드러운 전환
+    z-index: 1;
   }
 
   .main_image.active {
-    opacity: 1; 
+    opacity: 1;
+    z-index: 2;
   }
 }
