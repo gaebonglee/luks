@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { slides } from "../../types/slides";
 import "../../style/MainSlide.scss";
 
-const MainSlide: React.FC = () => {
+const Main: React.FC = () => {
   const [selectedId, setSelectedId] = useState<number>(slides[0].id);
   const selectedSlide = slides.find((slide) => slide.id === selectedId);
 
@@ -48,4 +48,4 @@ const MainSlide: React.FC = () => {
   );
 };
 
-export default MainSlide;
+export default Main;

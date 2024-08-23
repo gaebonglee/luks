@@ -27,30 +27,6 @@ const Footer = () => {
                     이용약관
                   </Link>
                 </li>
-                {/*<span />
-                 <li>
-                  <Link to="#" className="notice_page">
-                    공지사항
-                  </Link>
-                </li>
-                <span />
-                <li>
-                  <Link to="#" className="FAQ_page">
-                    자주 묻는 질문
-                  </Link>
-                </li>
-                <span />
-                <li>
-                  <Link to="#" className="inquiry_page">
-                    1:1 문의하기
-                  </Link>
-                </li>
-                <span />
-                <li>
-                  <Link to="#" className="evnet_page">
-                    이벤트
-                  </Link>
-                </li> */}
               </ul>
             </div>
           </div>

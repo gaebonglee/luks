@@ -16,42 +16,32 @@ footer > div {
   color: $black;
 }
 
-.cs_section .top {
-  font-weight: 700;
-  font-size: 20px;
-}
-.cs_section .bottom {
-  color: $darkgray;
-}
-
-.cs_section > p {
-  padding-bottom: 10px;
-}
-
-.menu_list {
+.footer_top {
   display: flex;
-  padding: 5px 0 50px 0;
-  gap: 25px;
-  font-weight: $weight2;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 10px;
+  .cs_section {
+    font-weight: 600;
+  }
+  .documentation {
+    display: flex;
+    gap: 1rem;
+    font-size: 12px;
+    color: $gray;
+  }
 }
 
-.menu_list > span {
-  border: 1px solid $mute2;
-}
-
-.documentation_section {
-  padding: 5px 0 30px 0;
-}
-
-.documentation_section > a {
-  padding-right: 50px;
-}
-.info_section .top,
-.info_section .bottom {
-  padding: 5px 0;
-}
-
-.info_section .top > span,
-.info_section .bottom > span {
-  padding-right: 30px;
+.footer_bottom {
+  font-size: 12px;
+  display: flex;
+  gap: 10px;
+  .infoSection {
+    span {
+      margin-right: 10px; 
+    }
+    span:last-child {
+      margin-right: 0;
+    }
+  }
 }

@@ -1,10 +1,10 @@
 import React from 'react';
-import MainSlide from '../components/slick/MainSlide';
+import Main from '../components/slick/Main';
 
 const MainHome = () => {
     return (
         <div>
-            <MainSlide/>
+            <Main/>
         </div>
     );
 };
