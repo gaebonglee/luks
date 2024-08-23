@@ -49,7 +49,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
         <div className="header_flex">
           <div className="header_logo">
             <Link to="/">
-              <img src="/images/luksLogo.png" alt="mainLogo" />
+              <img src="/images/logo1.png" alt="mainLogo" />
             </Link>
           </div>
           {isLoggedIn ? (

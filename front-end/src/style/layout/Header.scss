@@ -2,11 +2,10 @@
 
 header {
   width: 100%;
-  padding: 30px 50px 10px 50px;
+  padding: 15px 50px;
   line-height: 16px;
   font-size: 16px;
   z-index: 99;
-  height: 130px;
   border-bottom: 1px solid $darkgray;
   background: #fffefc;
   transition: ease 0.25s;
@@ -44,7 +43,7 @@ header {
       text-align: center;
 
       svg {
-        font-size: 26px; // 아이콘 크기 조정
+        font-size: 22px; // 아이콘 크기 조정
       }
 
       p {

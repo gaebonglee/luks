@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Root from "./pages/Root";
+// import Root from "./pages/Root";
+import LayoutRoot from "./pages/LayoutRoot"
 // import Home from "./pages/Home";
 import MainHome from "./pages/MainHome";
 import PrivateRoute from "./components/private/PrivateRoute";
@@ -29,7 +30,7 @@ const App = () => {
         <Route
           path="/"
           element={
-            <Root isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+            <LayoutRoot  isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
           }
         >
           {/* <Route index element={<Home />} /> */}
