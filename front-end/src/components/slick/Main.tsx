@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { slides } from "../../types/slides";
-import "../../style/MainSlide.scss";
+import "../../style/Main.scss";
 
 const Main: React.FC = () => {
   const [selectedId, setSelectedId] = useState<number>(slides[0].id);
@@ -17,7 +17,7 @@ const Main: React.FC = () => {
                   <li
                     key={slide.id}
                     data-id={slide.id}
-                    onClick={() => setSelectedId(slide.id)}
+                    onMouseEnter={() => setSelectedId(slide.id)}
                     id="category"
                   >
                     <a>
@@ -28,18 +28,24 @@ const Main: React.FC = () => {
               </ul>
             </div>
             <div className="mainImages">
-              {selectedSlide && (
+              {slides.map((slide) => (
                 <div
-                  className="main_image"
-                  data-id={selectedSlide.id}
-                  style={{
-                    backgroundImage: `url(${selectedSlide.imageUrl})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    height: "100%",
-                  }}
-                ></div>
-              )}
+                  key={slide.id}
+                  className={`main_image ${
+                    selectedId === slide.id ? "active" : ""
+                  }`}
+                >
+                  <img
+                    src={slide.imageUrl}
+                    alt={slide.title}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                    }}
+                  />
+                </div>
+              ))}
             </div>
           </div>
         </div>
