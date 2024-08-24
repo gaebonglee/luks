@@ -3,9 +3,9 @@ import Main from '../components/slick/Main';
 
 const MainHome = () => {
     return (
-        <div>
+        <>
             <Main/>
-        </div>
+        </>
     );
 };
 
