@@ -1,0 +1,11 @@
+@import "../common.scss";
+
+.header_member,
+.header_like,
+.header_mybag,
+.header_log {
+  &:hover {
+    transition: 0.2s ease-in-out;
+    color: $mute4;
+  }
+}
