@@ -1,73 +1,17 @@
 @import "./common.scss";
 
-.MainContainer {
-  height: 100vh;
-}
-
-.mainGrid {
-  padding-right: 0;
-  padding-left: 0;
-  margin-right: auto;
-  margin-left: auto;
-}
-
-#intro_main {
+.mainContainer {
+  padding: 1rem;
   display: flex;
-  min-height: calc(100vh - 0px);
 }
-
-.mainMenus,
-.mainImages {
+.main-contents {
   width: 50%;
 }
-
-.mainMenus {
-  ul {
-    display: block;
-    padding: 3rem;
-
-    li {
-      color: $black;
-      margin-bottom: 1rem;
-      overflow: hidden;
-
-      a {
-        cursor: pointer;
-        font-size: 4rem;
-        line-height: 70px;
-      }
-
-      &:hover {
-        font-style: italic;
-        color: $mute4;
-      }
-    }
-  }
-}
-
-.mainImages {
-  position: relative;
-  width: 50%;
-
-  .main_image {
-    position: absolute;
-    top: 0;
-    left: 0;
+.main-contents.collections,
+.main-contents.items {
+  img {
     width: 100%;
     height: 100%;
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
-    z-index: 1;
-
-    img {
-      height: 100%;
-      width: 100%;
-      object-fit: cover;
-    }
-  }
-
-  .main_image.active {
-    opacity: 1;
-    z-index: 2;
+    object-fit: cover;
   }
 }

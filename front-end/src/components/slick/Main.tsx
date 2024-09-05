@@ -1,42 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { menus } from "../../types/menus";
 import "animate.css";
 import "../../style/Main.scss";
 
 const Main: React.FC = () => {
-  const [hoveredId, setHoveredId] = useState<number | null>(menus[0].id);
-  const hoveredMenu = menus.find((menu) => menu.id === hoveredId);
-
+  const [randomImgUrl, setRandomImgUrl] = useState<string>("");
+  useEffect(() => {
+    const randomIndex = Math.floor(Math.random() * menus.length);
+    setRandomImgUrl(menus[randomIndex].imageUrl);
+  }, []);
   return (
-    <section className="MainContainer">
-      <div className="mainGrid">
-        <div className="content_grid">
-          <div id="intro_main">
-            <div className="mainMenus">
-              <ul>
-                {menus.map((menu) => (
-                  <li
-                    key={menu.id}
-                    data-id={menu.id}
-                    onMouseEnter={() => setHoveredId(menu.id)}
-                    id="category"
-                  >
-                    <a>{menu.title}</a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* hover된 메뉴에 맞는 이미지 표시 */}
-            <div className="mainImages">
-              {hoveredMenu && (
-                <div className="main_image active">
-                  <img src={hoveredMenu.imageUrl} alt={hoveredMenu.title} />
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
+    <section className="mainContainer">
+      <div className="main-contents collections">
+        <img src="images/collection.jpg" />
+      </div>
+      <div className="main-contents items">
+        <img src={randomImgUrl} alt="Random Menu" />
       </div>
     </section>
   );

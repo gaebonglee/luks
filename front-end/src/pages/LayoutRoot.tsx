@@ -10,7 +10,12 @@ const LayoutRoot: React.FC<{
   return (
     <div>
       <div
-        style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}
+        style={{
+          minHeight: "100vh",
+          display: "flex",
+          flexDirection: "column",
+          padding: "0 1rem",
+        }}
       >
         <MainHeader isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
         <div style={{ flexGrow: "1", minHeight: "100vh" }}>
