@@ -25,30 +25,30 @@ header {
 .header_flex {
   display: flex;
   justify-content: space-between;
+  font-size: 12px;
+  align-items: center;
 
   .header_user {
     display: flex;
     align-items: center;
-    gap: 25px;
-    font-size: $h2;
+    justify-content: center;
+    gap: 15px;
 
     .header_member,
     .header_like,
     .header_mybag,
     .header_log {
-      width: 50px;
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
 
       svg {
-        font-size: 22px; // 아이콘 크기 조정
+        font-size: 15px;
       }
 
       p {
-        font-size: 12px;
-        margin: 0; // 기본 margin 제거
+        margin: 0;
       }
     }
   }

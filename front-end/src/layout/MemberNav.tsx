@@ -11,29 +11,26 @@ interface MemberNavProps {
 
 const MemberNav: React.FC<MemberNavProps> = ({ handleLogout }) => (
   <div className="header_user">
+    <div className="header_log">
+      <a href="#!" onClick={handleLogout}>
+        <p>logout</p>
+      </a>
+    </div>
     <div className="header_member">
       <Link to="/mypage">
-        <FaRegUser />
         <p>my page</p>
-      </Link>
-    </div>
-    <div className="header_like">
-      <Link to="/mypage/mywish">
-        <FaHeart />
-        <p>my wish</p>
       </Link>
     </div>
     <div className="header_mybag">
       <Link to="/mybag">
         <IoBag />
-        <p>my bag</p>
+
       </Link>
     </div>
-    <div className="header_log">
-      <a href="#!" onClick={handleLogout}>
-        <RiLogoutBoxFill />
-        <p>logout</p>
-      </a>
+    <div className="header_like">
+      <Link to="/mypage/mywish">
+        <FaHeart />
+      </Link>
     </div>
   </div>
 );

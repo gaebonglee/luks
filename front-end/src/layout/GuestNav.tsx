@@ -7,28 +7,25 @@ import "../style/layout/Nav.scss";
 
 const GuestNav: React.FC = () => (
   <div className="header_user">
+    <div className="header_log">
+      <Link to="/login">
+        <p>login</p>
+      </Link>
+    </div>
     <div className="header_member">
       <Link to="/login">
-        <FaRegUser />
         <p>my page</p>
+      </Link>
+    </div>
+
+    <div className="header_mybag">
+      <Link to="/login">
+        <IoBag />
       </Link>
     </div>
     <div className="header_like">
       <Link to="/login">
         <FaHeart />
-        <p>my wish</p>
-      </Link>
-    </div>
-    <div className="header_mybag">
-      <Link to="/login">
-        <IoBag />
-        <p>my bag</p>
-      </Link>
-    </div>
-    <div className="header_log">
-      <Link to="/login">
-        <RiLoginBoxFill />
-        <p>login</p>
       </Link>
     </div>
   </div>

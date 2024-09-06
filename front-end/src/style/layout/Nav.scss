@@ -9,3 +9,14 @@
     color: $mute4;
   }
 }
+
+.header-left {
+  .category {
+    .list {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
