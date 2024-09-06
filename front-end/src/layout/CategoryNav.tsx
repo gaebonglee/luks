@@ -1,6 +1,6 @@
 import React from "react";
 // import { menus } from "../types/menus";
-import "../style/layout/Nav.scss";
+
 const CategoryNav: React.FC = () => {
   return (
     <div className="header-left">

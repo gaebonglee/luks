@@ -16,6 +16,18 @@ header {
   flex-direction: column;
   gap: 20px;
 }
+
+.header-left {
+  .category {
+    .list {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+
 .header_logo {
   img {
     width: 6rem;
@@ -42,6 +54,10 @@ header {
       flex-direction: column;
       align-items: center;
       text-align: center;
+      &:hover {
+        transition: 0.2s ease-in-out;
+        color: $mute4;
+      }
 
       svg {
         font-size: 15px;
