@@ -1,2 +1,48 @@
 @import "../common.scss";
 
+.ShopNav_container {
+  margin-top: 73.71px;
+  overflow: hidden;
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: 100%;
+  padding: 0;
+  box-sizing: border-box;
+  transition: 0.5s height ease;
+  .cover {
+    background-color: white;
+    padding: 0 2rem;
+    .shopCategory {
+      padding: 2rem 0;
+      border: 1px solid $black;
+      border-left: none;
+      border-right: none;
+    }
+  }
+}
+
+.sub_category {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  max-width: 1340px;
+  margin: 0 auto;
+  .cate-Area {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    flex-direction: column;
+    row-gap: 50px;
+    width: 50%;
+    .cate_section {
+      font-size: 13px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+  .image-Area {
+    max-width: 300px;
+  }
+}

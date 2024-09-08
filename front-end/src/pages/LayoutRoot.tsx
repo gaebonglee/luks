@@ -8,13 +8,13 @@ const LayoutRoot: React.FC<{
   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
 }> = ({ isLoggedIn, setIsLoggedIn }) => {
   return (
-    <div>
+    <>
       <div
         style={{
           minHeight: "100vh",
           display: "flex",
           flexDirection: "column",
-          padding: "0 1rem",
+          padding: "0 2rem",
         }}
       >
         <MainHeader isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
@@ -23,7 +23,7 @@ const LayoutRoot: React.FC<{
         </div>
         <MainFooter />
       </div>
-    </div>
+    </>
   );
 };
 

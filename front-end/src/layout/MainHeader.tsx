@@ -1,29 +1,28 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import HeaderLeft from "./ShopNav";
+import ShopNav from "./ShopNav";
 import GuestNav from "./GuestNav";
 import MemberNav from "./MemberNav";
 import "../style/layout/Header.scss";
 import Swal from "sweetalert2";
+import { checkSession } from "../types/checkSession";
 
 const MainHeader: React.FC<{
   isLoggedIn: boolean;
   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
 }> = ({ isLoggedIn, setIsLoggedIn }) => {
   const navigate = useNavigate();
+  const [isShopNavVisible, setIsShopNavVisible] = useState(false); 
 
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/check-session", { withCredentials: true })
-      .then((response) => {
-        if (response.data.loggedIn) {
-          setIsLoggedIn(true);
-        }
-      })
-      .catch((error) => {
-        console.error("Session check error:", error);
-      });
+    const checkUserSession = async () => {
+      const loggedIn = await checkSession();
+      if (loggedIn) {
+        setIsLoggedIn(true);
+      }
+    };
+    checkUserSession();
   }, [setIsLoggedIn]);
 
   const handleLogout = async () => {
@@ -55,7 +54,12 @@ const MainHeader: React.FC<{
               <ul className="list">
                 <li>NEW</li>
                 <li>BEST</li>
-                <li>SHOP</li>
+                <li
+                  onMouseEnter={() => setIsShopNavVisible(true)} 
+                  onMouseLeave={() => setIsShopNavVisible(false)} 
+                >
+                  SHOP
+                </li>
                 <li>STYLEING</li>
               </ul>
             </div>
@@ -71,6 +75,7 @@ const MainHeader: React.FC<{
             <GuestNav />
           )}
         </div>
+        {isShopNavVisible && <ShopNav />}
       </div>
     </header>
   );
