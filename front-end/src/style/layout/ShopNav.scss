@@ -9,10 +9,10 @@
   width: 100%;
   padding: 0;
   box-sizing: border-box;
-  transition: height 1s ease-in-out;
+  display: none;
 
   &.visible {
-    height: auto;
+    display: block;
   }
   .cover {
     background-color: white;

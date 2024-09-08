@@ -12,8 +12,10 @@ const MainHeader: React.FC<{
   isLoggedIn: boolean;
   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
 }> = ({ isLoggedIn, setIsLoggedIn }) => {
+  const [isShopNavVisible, setIsShopNavVisible] = useState(false);
+  const [isMouseOverShop, setIsMouseOverShop] = useState(false);
+  const [isMouseOverShopNav, setIsMouseOverShopNav] = useState(false);
   const navigate = useNavigate();
-  const [isShopNavVisible, setIsShopNavVisible] = useState(false); 
 
   useEffect(() => {
     const checkUserSession = async () => {
@@ -24,6 +26,12 @@ const MainHeader: React.FC<{
     };
     checkUserSession();
   }, [setIsLoggedIn]);
+
+  useEffect(() => {
+    if (!isMouseOverShop && !isMouseOverShopNav) {
+      setIsShopNavVisible(false);
+    }
+  }, [isMouseOverShop, isMouseOverShopNav]);
 
   const handleLogout = async () => {
     try {
@@ -55,8 +63,8 @@ const MainHeader: React.FC<{
                 <li>NEW</li>
                 <li>BEST</li>
                 <li
-                  onMouseEnter={() => setIsShopNavVisible(true)} 
-                  onMouseLeave={() => setIsShopNavVisible(false)} 
+                  onMouseEnter={() => setIsShopNavVisible(true)}
+                  onMouseLeave={() => setIsShopNavVisible(false)}
                 >
                   SHOP
                 </li>
@@ -75,7 +83,13 @@ const MainHeader: React.FC<{
             <GuestNav />
           )}
         </div>
-        {isShopNavVisible && <ShopNav className={isShopNavVisible ? 'visible' : ''}  />}
+        {isShopNavVisible && (
+          <ShopNav
+            className={isShopNavVisible ? "visible" : ""}
+            onMouseEnter={() => setIsMouseOverShopNav(true)}
+            onMouseLeave={() => setIsMouseOverShopNav(false)}
+          />
+        )}
       </div>
     </header>
   );

@@ -1,9 +1,17 @@
 import React from "react";
 import "../style/layout/ShopNav.scss";
 
-const ShopNav: React.FC<{ className?: string }> = ({ className }) => {
+const ShopNav: React.FC<{
+  className?: string;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
+}> = ({ className, onMouseEnter, onMouseLeave }) => {
   return (
-    <div className={`ShopNav_container ${className}`}>
+    <div
+      className={`ShopNav_container ${className}`}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
       <div className="cover">
         <div className="shopCategory">
           <div className="sub_category">
