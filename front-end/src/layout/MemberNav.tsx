@@ -8,26 +8,28 @@ interface MemberNavProps {
 }
 
 const MemberNav: React.FC<MemberNavProps> = ({ handleLogout }) => (
-  <div className="header_user">
-    <div className="header_log">
-      <a href="#!" onClick={handleLogout}>
-        <p>logout</p>
-      </a>
-    </div>
-    <div className="header_member">
-      <Link to="/mypage">
-        <p>my page</p>
-      </Link>
-    </div>
-    <div className="header_mybag">
-      <Link to="/mybag">
-        <IoBag />
-      </Link>
-    </div>
-    <div className="header_like">
-      <Link to="/mypage/mywish">
-        <FaHeart />
-      </Link>
+  <div className="header-right">
+    <div className="guest">
+      <ul className="list">
+        <li onClick={handleLogout}>
+          <a>LOGOUT</a>
+        </li>
+        <li>
+          <Link to="/mypage">
+            <a>MY PAGE</a>
+          </Link>
+        </li>
+        <li>
+          <Link to="/mybag">
+            <IoBag />
+          </Link>
+        </li>
+        <li>
+          <Link to="/mypage/mywish">
+            <FaHeart />
+          </Link>
+        </li>
+      </ul>
     </div>
   </div>
 );

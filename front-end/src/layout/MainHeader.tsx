@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import CategoryNav from "./CategoryNav";
+import HeaderLeft from "./ShopNav";
 import GuestNav from "./GuestNav";
 import MemberNav from "./MemberNav";
 import "../style/layout/Header.scss";
@@ -50,7 +50,16 @@ const MainHeader: React.FC<{
     <header id="header">
       <div className="header_container">
         <div className="header_flex">
-          <CategoryNav />
+          <div className="header-left">
+            <div className="category">
+              <ul className="list">
+                <li>NEW</li>
+                <li>BEST</li>
+                <li>SHOP</li>
+                <li>STYLEING</li>
+              </ul>
+            </div>
+          </div>
           <div className="header_logo">
             <Link to="/">
               <img src="/images/logo1.png" alt="mainLogo" />

@@ -17,6 +17,13 @@ header {
   gap: 20px;
 }
 
+.header_flex {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  align-items: center;
+}
+
 .header-left {
   .category {
     .list {
@@ -24,109 +31,63 @@ header {
       gap: 15px;
       align-items: center;
       justify-content: center;
+      li {
+        position: relative;
+        justify-content: center;
+        align-items: center;
+        min-width: 50px;
+        padding: 10px;
+        cursor: pointer;
+        transition: 0.15s ease-in-out;
+        &:hover {
+          color: $mute4;
+        }
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 0;
+          height: 2px;
+          background-color: $mute4;
+          transition: width 0.3s ease-in-out;
+        }
+        &:hover::after {
+          width: 100%;
+        }
+        &:not(:hover)::after {
+          width: 0;
+        }
+      }
     }
   }
 }
 
 .header_logo {
   img {
-    width: 6rem;
+    width: 100px;
   }
 }
 
-.header_flex {
-  display: flex;
-  justify-content: space-between;
-  font-size: 12px;
-  align-items: center;
-
-  .header_user {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-
-    .header_member,
-    .header_like,
-    .header_mybag,
-    .header_log {
+.header-right {
+  .guest {
+    .list {
       display: flex;
-      flex-direction: column;
+      gap: 15px;
       align-items: center;
-      text-align: center;
-      &:hover {
-        transition: 0.2s ease-in-out;
-        color: $mute4;
+      justify-content: center;
+      li {
+        position: relative;
+        justify-content: center;
+        align-items: center;
+        min-width: 30px;
+        padding: 10px;
+        cursor: pointer;
+        transition: 0.15s ease-in-out;
+        &:hover {
+          color: $mute4;
+        }
       }
-
-      svg {
-        font-size: 15px;
-      }
-
-      p {
-        margin: 0;
-      }
-    }
-  }
-}
-
-.header_menu_container {
-  margin: 0 auto;
-  padding-right: 50px;
-}
-
-.header_menu_category {
-  display: flex;
-  justify-content: center;
-}
-
-.menu_category_li {
-  display: inline-block;
-  margin: 0 40px;
-  position: relative;
-  a {
-    cursor: pointer;
-    position: relative;
-    z-index: 88;
-    text-transform: uppercase;
-    font-size: $h4;
-    color: $black;
-    font-weight: $weight3;
-  }
-}
-
-.menu_category_li:hover .subCategory {
-  display: block;
-  max-height: 500px;
-}
-
-.noSubCategory:hover .subCategory {
-  display: none;
-  max-height: 0;
-}
-
-.subCategory {
-  display: none;
-  max-height: 0;
-  overflow: hidden;
-  position: absolute;
-  padding: 20px 0;
-  width: 300px;
-  left: 0;
-  line-height: 22px;
-  z-index: 86;
-  transition: max-height 0.3s ease;
-  li {
-    line-height: 20px;
-    margin: 0 0 3px;
-    a {
-      font-size: 14px;
-      font-weight: 500;
-      text-decoration: none;
-      outline: none;
-      color: #222;
-      display: inline-block;
-      transition: ease 0.5s;
     }
   }
 }
