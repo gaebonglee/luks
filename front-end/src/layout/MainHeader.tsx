@@ -75,7 +75,7 @@ const MainHeader: React.FC<{
             <GuestNav />
           )}
         </div>
-        {isShopNavVisible && <ShopNav />}
+        {isShopNavVisible && <ShopNav className={isShopNavVisible ? 'visible' : ''}  />}
       </div>
     </header>
   );

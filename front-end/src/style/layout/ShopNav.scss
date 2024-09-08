@@ -6,10 +6,15 @@
   position: absolute;
   top: -1px;
   left: 0;
+  height: 0;
   width: 100%;
   padding: 0;
   box-sizing: border-box;
-  transition: 0.5s height ease;
+  transition: height 1s ease-in-out;
+
+  &.visible {
+    height: auto;
+  }
   .cover {
     background-color: white;
     padding: 0 2rem;

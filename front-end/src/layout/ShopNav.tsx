@@ -1,9 +1,9 @@
 import React from "react";
 import "../style/layout/ShopNav.scss";
 
-const ShopNav: React.FC = () => {
+const ShopNav: React.FC<{ className?: string }> = ({ className }) => {
   return (
-    <div className="ShopNav_container">
+    <div className={`ShopNav_container ${className}`}>
       <div className="cover">
         <div className="shopCategory">
           <div className="sub_category">
