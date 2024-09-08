@@ -1,14 +1,15 @@
 import React from "react";
 import "../style/layout/ShopNav.scss";
 
-const ShopNav: React.FC<{
-  className?: string;
-  onMouseEnter?: () => void;
-  onMouseLeave?: () => void;
-}> = ({ className, onMouseEnter, onMouseLeave }) => {
+interface ShopNavProps {
+  onMouseEnter: () => void;
+  onMouseLeave: () => void;
+}
+
+const ShopNav: React.FC<ShopNavProps> = ({ onMouseEnter, onMouseLeave }) => {
   return (
     <div
-      className={`ShopNav_container ${className}`}
+      className="ShopNav_container"
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import ShopNav from "./ShopNav";
@@ -12,10 +12,9 @@ const MainHeader: React.FC<{
   isLoggedIn: boolean;
   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
 }> = ({ isLoggedIn, setIsLoggedIn }) => {
-  const [isShopNavVisible, setIsShopNavVisible] = useState(false);
-  const [isMouseOverShop, setIsMouseOverShop] = useState(false);
-  const [isMouseOverShopNav, setIsMouseOverShopNav] = useState(false);
   const navigate = useNavigate();
+  const [isShopNavVisible, setIsShopNavVisible] = useState(false);
+  const hideTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     const checkUserSession = async () => {
@@ -26,12 +25,6 @@ const MainHeader: React.FC<{
     };
     checkUserSession();
   }, [setIsLoggedIn]);
-
-  useEffect(() => {
-    if (!isMouseOverShop && !isMouseOverShopNav) {
-      setIsShopNavVisible(false);
-    }
-  }, [isMouseOverShop, isMouseOverShopNav]);
 
   const handleLogout = async () => {
     try {
@@ -52,6 +45,19 @@ const MainHeader: React.FC<{
       console.error("Logout error:", error);
     }
   };
+  
+  const handleShopNavEnter = () => {
+    if (hideTimeout.current) {
+      clearTimeout(hideTimeout.current);
+    }
+    setIsShopNavVisible(true);
+  };
+
+  const handleShopNavLeave = () => {
+    hideTimeout.current = setTimeout(() => {
+      setIsShopNavVisible(false);
+    }, 200); // 200ms 정도의 딜레이를 줍니다.
+  };
 
   return (
     <header id="header">
@@ -63,8 +69,8 @@ const MainHeader: React.FC<{
                 <li>NEW</li>
                 <li>BEST</li>
                 <li
-                  onMouseEnter={() => setIsShopNavVisible(true)}
-                  onMouseLeave={() => setIsShopNavVisible(false)}
+                  onMouseEnter={handleShopNavEnter}
+                  onMouseLeave={handleShopNavLeave}
                 >
                   SHOP
                 </li>
@@ -85,9 +91,8 @@ const MainHeader: React.FC<{
         </div>
         {isShopNavVisible && (
           <ShopNav
-            className={isShopNavVisible ? "visible" : ""}
-            onMouseEnter={() => setIsMouseOverShopNav(true)}
-            onMouseLeave={() => setIsMouseOverShopNav(false)}
+            onMouseEnter={handleShopNavEnter}
+            onMouseLeave={handleShopNavLeave}
           />
         )}
       </div>

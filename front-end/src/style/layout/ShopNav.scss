@@ -1,7 +1,6 @@
 @import "../common.scss";
-
 .ShopNav_container {
-  margin-top: 73.71px;
+  margin-top: 70px;
   overflow: hidden;
   position: absolute;
   top: -1px;
@@ -9,11 +8,8 @@
   width: 100%;
   padding: 0;
   box-sizing: border-box;
-  display: none;
+  z-index: 100;
 
-  &.visible {
-    display: block;
-  }
   .cover {
     background-color: white;
     padding: 0 2rem;
