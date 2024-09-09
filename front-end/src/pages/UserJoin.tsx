@@ -4,7 +4,7 @@ import JoinId from "../components/join/JoinId";
 import JoinPw from "../components/join/JoinPw";
 import NameEmailNum from "../components/join/NameEmailNum";
 import JoinAddress from "../components/join/JoinAddress";
-// import Agree from "../components/join/Agree";
+import JoinAgree from "../components/join/JoinAgree";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import "../style/join/UserJoin.scss";
@@ -79,7 +79,6 @@ const UserJoin: React.FC = () => {
       return { ...prevData, basicAddress: value };
     });
   };
-
 
   const handleDetailAddressChange = (
     e: React.ChangeEvent<HTMLInputElement>
@@ -244,14 +243,14 @@ const UserJoin: React.FC = () => {
             </table>
           </div>
         </div>
-        {/* <Agree
+        <JoinAgree
           allAgree={formData.allAgree}
           termsAgree={formData.termsAgree}
           privacyAgree={formData.privacyAgree}
           handleAllAgreeChange={handleAllAgreeChange}
           handleTermsAgreeChange={handleTermsAgreeChange}
           handlePrivacyAgreeChange={handlePrivacyAgreeChange}
-        /> */}
+        />
         <div className="joinBtn">
           <button id="join-button" type="submit" className="btnSubmit sizeM">
             회원가입
