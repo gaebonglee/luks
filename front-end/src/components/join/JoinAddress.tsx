@@ -1,18 +1,12 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
-// Props 타입 정의
 interface JoinAddressProps {
   postcode: string;
   basicAddress: string;
   detailAddress: string;
-  handlePostcodeChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleBasicAddressChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handlePostcodeChange: (postcode: string) => void;
+  handleBasicAddressChange: (basicAddress: string) => void;
   handleDetailAddressChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}
-
-interface AddressFormData {
-  postcode: string;
-  basicAddress: string;
 }
 
 const JoinAddress: React.FC<JoinAddressProps> = ({
@@ -23,12 +17,6 @@ const JoinAddress: React.FC<JoinAddressProps> = ({
   handleBasicAddressChange,
   handleDetailAddressChange,
 }) => {
-  const detailAddressRef = useRef<HTMLInputElement | null>(null);
-  const [formData, setFormData] = useState<AddressFormData>({
-    postcode: "",
-    basicAddress: "",
-  });
-
   useEffect(() => {
     const script = document.createElement("script");
     script.src =
@@ -40,45 +28,20 @@ const JoinAddress: React.FC<JoinAddressProps> = ({
     document.head.appendChild(script);
   }, []);
 
-  // 우편번호 찾기 API 호출 함수
   const openPostcode = () => {
-    if (window.daum && window.daum.Postcode) {
-      new window.daum.Postcode({
+    if ((window as any).daum && (window as any).daum.Postcode) {
+      new (window as any).daum.Postcode({
         oncomplete: function (data: any) {
-          let addr = ""; // 주소 변수
+          let addr =
+            data.userSelectedType === "R"
+              ? data.roadAddress
+              : data.jibunAddress;
 
-          // 사용자가 도로명 주소를 선택했을 때
-          if (data.userSelectedType === "R") {
-            addr = data.roadAddress;
-          } else {
-            addr = data.jibunAddress;
-          }
+          // 여기서 상태를 직접 업데이트
+          handlePostcodeChange(data.zonecode);
+          handleBasicAddressChange(addr);
 
-          // 우편번호와 주소를 부모 컴포넌트로 전달
-          const handlePostcodeChange = (
-            e:
-              | React.ChangeEvent<HTMLInputElement>
-              | { target: { value: string } }
-          ) => {
-            if ("target" in e && e.target instanceof HTMLInputElement) {
-              setFormData({ ...formData, postcode: e.target.value });
-            } else {
-              // Daum API로부터 온 값 처리
-              setFormData({ ...formData, postcode: e.target.value });
-            }
-          };
-          const handleBasicAddressChange = (
-            e:
-              | React.ChangeEvent<HTMLInputElement>
-              | { target: { value: string } }
-          ) => {
-            if ("target" in e && e.target instanceof HTMLInputElement) {
-              setFormData({ ...formData, basicAddress: e.target.value });
-            } else {
-              // Daum API로부터 온 값 처리
-              setFormData({ ...formData, basicAddress: e.target.value });
-            }
-          };
+          document.getElementById("sample6_detailAddress")?.focus();
         },
       }).open();
     } else {

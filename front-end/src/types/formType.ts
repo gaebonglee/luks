@@ -22,11 +22,4 @@ export interface JoinValidation {
   isDuplicate: boolean;
 }
 
-declare global {
-  interface Window {
-    daum: {
-      Postcode: any;
-    };
-  }
-}
 export {};

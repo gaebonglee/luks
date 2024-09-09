@@ -68,13 +68,18 @@ const UserJoin: React.FC = () => {
     setFormData({ ...formData, memberMobileNum: value });
   };
 
-  const handlePostcodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, postcode: e.target.value });
+  const handlePostcodeChange = (value: string) => {
+    setFormData((prevData) => {
+      return { ...prevData, postcode: value };
+    });
   };
 
-  const handleBasicAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, basicAddress: e.target.value });
+  const handleBasicAddressChange = (value: string) => {
+    setFormData((prevData) => {
+      return { ...prevData, basicAddress: value };
+    });
   };
+
 
   const handleDetailAddressChange = (
     e: React.ChangeEvent<HTMLInputElement>
@@ -227,6 +232,7 @@ const UserJoin: React.FC = () => {
                   emailValid={validation.emailValid}
                 />
                 <JoinAddress
+                  key={formData.postcode}
                   postcode={formData.postcode}
                   basicAddress={formData.basicAddress}
                   detailAddress={formData.detailAddress}
