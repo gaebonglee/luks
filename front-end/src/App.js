@@ -10,7 +10,7 @@ import "./style/CustomSwal.scss";
 //컴포넌트
 import Login from "./components/login/Login";
 import KakaoLogin from "./components/login/KakaoLogin";
-import JoinPage from "./pages/JoinPage";
+import UserJoin from "./pages/UserJoin";
 import Mypage from "./pages/Mypage";
 import Category from "./pages/Category";
 import ProductDetail from "./components/product/ProductDetail";
@@ -39,7 +39,7 @@ const App = () => {
             path="/login"
             element={<Login setIsLoggedIn={setIsLoggedIn} />}
           />
-          <Route path="/join" element={<JoinPage />} />
+          <Route path="/join" element={<UserJoin />} />
           <Route
             path="/oauth/kakaologin"
             element={<KakaoLogin setIsLoggedIn={setIsLoggedIn} />}
