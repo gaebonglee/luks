@@ -37,14 +37,13 @@ const MyHeart = () => {
   return (
     <section className="MyHeart_section">
       <div className="MyHeart_title">
-        <h3>MY HEART</h3>
-        <div>
+        <p>MY HEART</p>
+        <div className="listMore">
           <a href="/mypage/mywish">더보기</a>
           <IoIosArrowForward />
         </div>
       </div>
       <div className="MyHeart_artwrap">
-        <h4>Products</h4>
         <ul className="MyHeart_thumbnail">
           {wishList.length === 0 ? (
             <div className="MyHeart_text">

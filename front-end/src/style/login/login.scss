@@ -17,6 +17,7 @@
 .login_wrap {
   display: flex;
   flex-direction: column;
+  font-size: 14px;
 }
 
 .loginPlaceholder {
@@ -37,7 +38,7 @@
 }
 
 .loginBtn_wrap {
-  > button {
+  button {
     width: 350px;
     height: 50px;
     font-size: 16px;
@@ -55,7 +56,7 @@
 }
 
 .login_util {
-  font-size: 14px;
+  font-size: 13px;
   padding: 20px;
   display: flex;
   justify-content: space-between;

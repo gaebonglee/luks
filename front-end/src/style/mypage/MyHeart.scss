@@ -4,27 +4,27 @@
   margin-top: 80px;
 }
 
-.MyHeart_title {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 4px solid $mute4;
-  div {
-    display: flex;
-    align-items: center;
-  }
-}
-
 .MyHeart_section {
   width: 100%;
   position: relative;
 
-  h3 {
-    padding-bottom: 10px;
-    font-weight: 600;
-    font-size: 23px;
-    line-height: 30px;
-    position: relative;
+  .MyHeart_title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 4px solid $mute4;
+    p {
+      padding-bottom: 10px;
+      font-weight: 600;
+      font-size: $h4;
+      line-height: 30px;
+      position: relative;
+    }
+    .listMore {
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+    }
   }
 }
 
@@ -40,6 +40,13 @@
 .MyHeart_thumbnail {
   display: flex;
   flex-wrap: wrap;
+  .MyHeart_text {
+    font-size: $commonfont;
+    width: 100%;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+  }
 
   li {
     flex: none;

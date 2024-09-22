@@ -47,8 +47,8 @@ const RecentOrders = () => {
   return (
     <section className="RecentOrders_section">
       <div className="RecentOrders_title">
-        <h3>최근주문</h3>
-        <div>
+        <p>최근주문</p>
+        <div className="listMore">
           <a href="mypage/my-order/list">더보기</a>
           <IoIosArrowForward />
         </div>

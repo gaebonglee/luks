@@ -15,19 +15,21 @@
   width: 100%;
   position: relative;
 
-  h3 {
+  p {
     padding-bottom: 10px;
     font-weight: 600;
-    font-size: 23px;
+    font-size: $h4;
     line-height: 30px;
     position: relative;
+  }
+  a {
+    font-size: 14px;
   }
 }
 
 .RecentOrders_table {
   width: 100%;
   border-collapse: collapse;
-  text-align: center;
 
   .RecentOrders_thead,
   .RecentOrders_tbody {
@@ -37,6 +39,8 @@
     th,
     td {
       padding: 10px 0;
+      font-size: $commonfont;
+      font-weight: $weight3;
     }
   }
 
@@ -54,7 +58,6 @@
     .history {
       display: flex;
       align-items: center;
-
 
       .img_box {
         display: flex;
