@@ -1,8 +1,9 @@
 import React from "react";
 import axios from "axios";
+import { useAsync } from "../../../types/useAsync";
 import "../../../style/mypage/MyHeart.scss";
 import { IoIosArrowForward } from "react-icons/io";
-import { useAsync } from "../../../types/useAsync";
+
 
 interface Product {
   product_id: number;

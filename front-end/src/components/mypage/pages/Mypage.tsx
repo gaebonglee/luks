@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { checkSession } from "../../../types/checkSession";
 import MyHeart from "../main/MyHeart";
+import RecentOrders from "../main/RecentOrders";
 
 const Mypage: React.FC = () => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
@@ -15,7 +16,7 @@ const Mypage: React.FC = () => {
   return (
     <section className="right_section">
       <div className="MypageMain">
-        {/* <RecentOrders /> */}
+        <RecentOrders />
         <MyHeart />
       </div>
     </section>
